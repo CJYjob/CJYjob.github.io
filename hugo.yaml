@@ -1,0 +1,87 @@
+baseURL: "https://CJYjob.github.io/"
+languageCode: "ko-kr"
+title: "Security Lab & Gallery"
+theme: "PaperMod"
+
+enableRobotsTXT: true
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+enableEmoji: true
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    codeFences: true
+    guessSyntax: true
+    lineNos: true
+    style: monokai
+
+menu:
+  main:
+    - identifier: gallery
+      name: 🖼️ 전시실
+      url: /gallery/
+      weight: 10
+    - identifier: lab
+      name: 🧪 실험실
+      url: /lab/
+      weight: 20
+    - identifier: about
+      name: 📋 About
+      url: /about/
+      weight: 30
+    - identifier: search
+      name: 🔍 검색
+      url: /search/
+      weight: 40
+
+params:
+  env: production
+  title: "Security Lab & Gallery"
+  description: "정보보안 학습 기록과 실험의 공간"
+  keywords: [보안, Security, 취약점, Vulnerability, 개발, Development]
+  author: "CJY"
+  
+  defaultTheme: auto
+  disableThemeToggle: false
+  
+  ShowReadingTime: true
+  ShowShareButtons: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowWordCount: true
+  ShowRssButtonInSectionTermList: true
+  
+  homeInfoParams:
+    Title: "🔐 Security Lab & Gallery"
+    Content: "정보보안을 학습하고 실험하며 기록하는 공간입니다."
+  
+  socialIcons:
+    - name: github
+      url: "https://github.com/CJYjob"
+    - name: youtube
+      url: "https://youtube.com/@it4722"
+  
+  fuseOpts:
+    isCaseSensitive: false
+    shouldSort: true
+    location: 0
+    distance: 1000
+    threshold: 0.4
+    minMatchCharLength: 0
+    keys: ["title", "permalink", "summary", "content"]
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
+taxonomies:
+  category: categories
+  tag: tags
+  series: series

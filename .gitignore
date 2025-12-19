@@ -1,0 +1,16 @@
+# Hugo
+public/
+resources/_gen/
+
+# OS
+Thumbs.db
+desktop.ini
+
+# Editor
+.idea/
+.vscode/
+*.swp
+
+# Environment
+.env
+.env.local
