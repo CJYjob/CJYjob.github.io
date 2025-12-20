@@ -1,0 +1,21 @@
+{{ $image := .Get "image" }}
+{{ $port := .Get "port" | default "80" }}
+{{ $name := .Get "name" | default "security-lab" }}
+{{ $localport := .Get "localport" | default $port }}
+
+<div style="background-color: #1e1e1e; border-radius: 8px; padding: 20px; margin: 20px 0; font-family: 'Consolas', monospace;">
+  <div style="color: #569cd6; margin-bottom: 10px; font-weight: bold;">🐳 Docker 실행 명령어</div>
+  <div style="background-color: #2d2d2d; padding: 15px; border-radius: 4px; overflow-x: auto;">
+    <code style="color: #ce9178;">
+# 이미지 다운로드 및 실행<br>
+docker run -d --name {{ $name }} -p {{ $localport }}:{{ $port }} {{ $image }}<br><br>
+# 브라우저 접속<br>
+# http://localhost:{{ $localport }}<br><br>
+# 실습 종료 후 정리<br>
+docker stop {{ $name }} && docker rm {{ $name }}
+    </code>
+  </div>
+  <div style="margin-top: 15px; padding: 10px; background-color: #3c3c3c; border-radius: 4px; color: #d4d4d4; font-size: 0.9em;">
+    💡 <strong>Tip:</strong> Docker Desktop이 실행 중인지 확인하세요.
+  </div>
+</div>
