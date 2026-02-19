@@ -1,6 +1,6 @@
-baseURL: "https://CJYjob.github.io/"
+baseURL: "https://cjyjob.github.io/"
 languageCode: "ko-kr"
-title: "Security Lab & Gallery"
+title: "최준영의 자람"
 theme: "PaperMod"
 
 enableRobotsTXT: true
@@ -21,29 +21,33 @@ markup:
 
 menu:
   main:
+    - identifier: diary
+      name: 📔 일기장
+      url: /diary/
+      weight: 10
     - identifier: gallery
       name: 🖼️ 전시실
       url: /gallery/
-      weight: 10
+      weight: 20
     - identifier: lab
       name: 🧪 실험실
       url: /lab/
-      weight: 20
+      weight: 30
     - identifier: about
       name: 📋 About
       url: /about/
-      weight: 30
+      weight: 40
     - identifier: search
       name: 🔍 검색
       url: /search/
-      weight: 40
+      weight: 50
 
 params:
   env: production
-  title: "Security Lab & Gallery"
-  description: "정보보안 학습 기록과 실험의 공간"
-  keywords: [보안, Security, 취약점, Vulnerability, 개발, Development]
-  author: "CJY"
+  title: "최준영의 자람"
+  description: "배우고, 경험하고, 성장하는 기록"
+  keywords: [보안, Security, 개발, Development, 성장, 기록]
+  author: "최준영"
   
   defaultTheme: auto
   disableThemeToggle: false
@@ -57,14 +61,12 @@ params:
   ShowRssButtonInSectionTermList: true
   
   homeInfoParams:
-    Title: "🔐 Security Lab & Gallery"
-    Content: "정보보안을 학습하고 실험하며 기록하는 공간입니다."
+    Title: "🌱 최준영의 자람"
+    Content: "배우고, 경험하고, 성장하는 과정을 기록합니다."
   
   socialIcons:
     - name: github
       url: "https://github.com/CJYjob"
-    - name: youtube
-      url: "https://youtube.com/@it4722"
   
   fuseOpts:
     isCaseSensitive: false
