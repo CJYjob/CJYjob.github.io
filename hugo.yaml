@@ -2,6 +2,13 @@ baseURL: "https://cjyjob.github.io/"
 languageCode: "ko-kr"
 title: "최준영의 자람"
 theme: "PaperMod"
+googleAnalytics: "G-5TKCHJG4NQ"    # ← 이 줄 추가 (본인의 측정 ID로 교체)
+enableRobotsTXT: true
+
+baseURL: "https://cjyjob.github.io/"
+languageCode: "ko-kr"
+title: "최준영의 자람"
+theme: "PaperMod"
 
 enableRobotsTXT: true
 buildDrafts: false
