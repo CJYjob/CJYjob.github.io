@@ -5,7 +5,7 @@ description: "블로그 소개 및 메타 정보"
 
 ## 최준영의 자람
 
-경험을 기록하고, 정리하고, 실험하며 성장하는 공간입니다.
+경험을 기록하고, 학습하고, 실험하며 성장하는 공간입니다.
 
 ## 블로그 구성
 
@@ -24,4 +24,5 @@ description: "블로그 소개 및 메타 정보"
 
 ## 연락처
 
+- E-mail: cjyjob1993@gmail.com
 - GitHub: [CJYjob](https://github.com/CJYjob)
