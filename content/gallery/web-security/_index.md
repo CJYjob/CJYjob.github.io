@@ -4,7 +4,6 @@ description: "웹 애플리케이션 보안의 핵심 개념"
 date: 2024-01-15
 categories: ["Gallery", "Web Security"]
 tags: ["OWASP", "XSS", "SQL Injection"]
-weight: 10
 ---
 
 ## 개요
