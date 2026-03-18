@@ -2,9 +2,11 @@
 title: "7회독 공부법"
 description: "7회독 공부법 실천법 정리"
 date: 2026-03-18
+draft: false
 categories: ["diary", "HowToStudy"]
 tags: ["7timesReading"]
 weight: 1
+ShowToc: true
 ---
 
 ## 개요
