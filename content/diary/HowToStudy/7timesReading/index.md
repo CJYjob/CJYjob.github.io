@@ -5,7 +5,6 @@ date: 2026-03-18
 draft: false
 categories: ["diary", "HowToStudy"]
 tags: ["7timesReading"]
-weight: 1
 ShowToc: true
 ---
 
