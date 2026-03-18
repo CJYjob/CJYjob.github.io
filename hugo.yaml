@@ -47,7 +47,7 @@ params:
   env: production
   title: "최준영의 자람"
   description: "배우고, 경험하고, 성장하는 기록"
-  keywords: [보안, Security, 개발, Development, 성장, 기록]
+  keywords: [보안, Security, 개발, Development, AI, RPA, 성장, 기록]
   author: "최준영"
   
   defaultTheme: auto
@@ -60,6 +60,11 @@ params:
   ShowCodeCopyButtons: true
   ShowWordCount: true
   ShowRssButtonInSectionTermList: true
+  
+  mainSections:
+    - diary
+    - gallery
+    - lab
   
   homeInfoParams:
     Title: "🌱 최준영의 자람"
@@ -77,6 +82,9 @@ params:
     threshold: 0.4
     minMatchCharLength: 0
     keys: ["title", "permalink", "summary", "content"]
+
+pagination:
+  pagerSize: 5
 
 outputs:
   home:
