@@ -2,6 +2,7 @@ baseURL: "https://cjyjob.github.io/"
 languageCode: "ko-kr"
 title: "최준영의 자람"
 theme: "PaperMod"
+timeZone: "Asia/Seoul"
 googleAnalytics: "G-5TKCHJG4NQ"
 enableRobotsTXT: true
 
