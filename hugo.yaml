@@ -50,6 +50,12 @@ params:
   description: "배우고, 경험하고, 성장하는 기록"
   keywords: [보안, Security, 개발, Development, AI, RPA, 성장, 기록]
   author: "최준영"
+
+  assets:
+    favicon: "/favicon.ico"
+    favicon16x16: "/favicon-16x16.png"
+    favicon32x32: "/favicon-32x32.png"
+    apple_touch_icon: "/apple-touch-icon.png"
   
   defaultTheme: auto
   disableThemeToggle: false
