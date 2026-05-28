@@ -1,6 +1,6 @@
 ---
-title: "포트폴리오"
-description: "결과물 최종본 업데이트 공간"
+title: "Portfolio"
+description: "완결된 자산을 외부 공개용 산출물로 전시하는 공간"
 date: 2026-03-18
 draft: false
 ---
