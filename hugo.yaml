@@ -53,9 +53,8 @@ params:
   ShowRssButtonInSectionTermList: true
   
   mainSections:
-    - diary
-    - gallery
-    - lab
+    - log
+    - portfolio
   
   homeInfoParams:
     Title: "🌱 최준영의 자람"
