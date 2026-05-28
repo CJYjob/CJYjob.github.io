@@ -3,7 +3,7 @@ title: "{{ replace .Name "-" " " | title }}"
 date: {{ .Date }}
 draft: true
 description: ""
-categories: ["Gallery"]
+categories: ["PortFolio"]
 tags: []
 series: []
 weight: 10
