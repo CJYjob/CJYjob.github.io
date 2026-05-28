@@ -23,26 +23,10 @@ markup:
 
 menu:
   main:
-    - identifier: diary
-      name: 📔 일기장
-      url: /diary/
-      weight: 10
-    - identifier: gallery
-      name: 🖼️ 전시실
-      url: /gallery/
-      weight: 20
-    - identifier: lab
-      name: 🧪 실험실
-      url: /lab/
-      weight: 30
-    - identifier: about
-      name: 📋 About
-      url: /about/
-      weight: 40
-    - identifier: search
-      name: 🔍 검색
-      url: /search/
-      weight: 50
+    - { identifier: log,       name: "📒 Log",       url: /log/,       weight: 10 }
+    - { identifier: portfolio, name: "🗂️ Portfolio", url: /portfolio/, weight: 20 }
+    - { identifier: about,     name: "📋 About",     url: /about/,     weight: 30 }
+    - { identifier: search,    name: "🔍 검색",      url: /search/,    weight: 40 }
 
 params:
   env: production
