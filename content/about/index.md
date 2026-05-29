@@ -26,3 +26,6 @@ description: "블로그 소개 및 메타 정보"
 
 - E-mail: cjyjob1993@gmail.com
 - GitHub: [CJYjob](https://github.com/CJYjob)
+
+
+<!-- TEST: write-permission verification -->
