@@ -1,6 +1,6 @@
 ---
-title: "📝 Log"
-description: "원시 누적 데이터 — 미완결 작업물, 회고, 정형 데이터가 시간순으로 쌓이는 공간"
+title: "📜 Log"
+description: "원시 누적 데이터 — 미완결 작업물, 회고, 정형 데이터 시계열을 쌓아두는 공간"
 ---
 
 완결 이전의 원시 기록이 누적되는 공간입니다.
@@ -11,4 +11,4 @@ description: "원시 누적 데이터 — 미완결 작업물, 회고, 정형 �
 - 일일·주간·월간·분기·반기·연간 회고(Reflection)
 - 활동별 정형 데이터(Data)
 
-완결된 산출물은 [Portfolio](/content/portfolio/)에서 전시합니다.
+완결된 산출물은 [Portfolio](/portfolio/)에서 전시합니다.
