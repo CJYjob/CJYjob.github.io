@@ -5,5 +5,29 @@
       "Quadriceps",
       "Glutes"
     ]
+  },
+  {
+    "exercise": "Dumbbell Incline Bench Press",
+    "target_muscles": [
+      "Pectoralis Major",
+      "Anterior Deltoids",
+      "Triceps"
+    ]
+  },
+  {
+    "exercise": "Dumbbell Incline Bench Row",
+    "target_muscles": [
+      "Latissimus Dorsi",
+      "Rhomboids",
+      "Trapezius",
+      "Posterior Deltoids",
+      "Biceps"
+    ]
+  },
+  {
+    "exercise": "Dumbbell Side Lateral Raise",
+    "target_muscles": [
+      "Lateral Deltoids"
+    ]
   }
 ]
