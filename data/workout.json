@@ -124,5 +124,15 @@
       }
     ],
     "note": "Performed during a 30-minute weight-training block from 19:45 to 20:15."
+  },
+  {
+    "date": "2026-06-01",
+    "type": "cardio",
+    "exercise": "Incline Treadmill Cool-down",
+    "started_at": "2026-06-01T20:15:00+09:00",
+    "ended_at": "2026-06-01T20:35:00+09:00",
+    "duration_min": 20,
+    "speed_kmh": 3.5,
+    "note": "Completed incline treadmill cardio at 14 degrees: 10 min at 3 km/h and 10 min at 4 km/h."
   }
 ]
