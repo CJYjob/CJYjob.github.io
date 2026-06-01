@@ -22,5 +22,107 @@
       }
     ],
     "note": "Completed 1 set of 10 bodyweight squats."
+  },
+  {
+    "date": "2026-06-01",
+    "type": "cardio",
+    "exercise": "Incline Treadmill Warm-up",
+    "started_at": "2026-06-01T19:15:00+09:00",
+    "ended_at": "2026-06-01T19:25:00+09:00",
+    "duration_min": 10,
+    "note": "Arrived at the gym at 19:15 and completed an incline treadmill warm-up."
+  },
+  {
+    "date": "2026-06-01",
+    "type": "mobility",
+    "exercise": "Full-body Stretching",
+    "started_at": "2026-06-01T19:25:00+09:00",
+    "ended_at": "2026-06-01T19:40:00+09:00",
+    "duration_min": 15,
+    "note": "Completed full-body stretching before strength training."
+  },
+  {
+    "date": "2026-06-01",
+    "type": "prehab",
+    "exercise": "Wrist and Knee Strengthening",
+    "started_at": "2026-06-01T19:40:00+09:00",
+    "ended_at": "2026-06-01T19:45:00+09:00",
+    "duration_min": 5,
+    "note": "Completed wrist and knee strengthening before weight training."
+  },
+  {
+    "date": "2026-06-01",
+    "type": "strength",
+    "exercise": "Dumbbell Incline Bench Press",
+    "target_muscles": [
+      "Pectoralis Major",
+      "Anterior Deltoids",
+      "Triceps"
+    ],
+    "sets": [
+      {
+        "weight_kg": 6,
+        "reps": 30
+      },
+      {
+        "weight_kg": 6,
+        "reps": 30
+      },
+      {
+        "weight_kg": 6,
+        "reps": 20
+      }
+    ],
+    "note": "Performed during a 30-minute weight-training block from 19:45 to 20:15."
+  },
+  {
+    "date": "2026-06-01",
+    "type": "strength",
+    "exercise": "Dumbbell Incline Bench Row",
+    "target_muscles": [
+      "Latissimus Dorsi",
+      "Rhomboids",
+      "Trapezius",
+      "Posterior Deltoids",
+      "Biceps"
+    ],
+    "sets": [
+      {
+        "weight_kg": 6,
+        "reps": 30
+      },
+      {
+        "weight_kg": 6,
+        "reps": 30
+      },
+      {
+        "weight_kg": 6,
+        "reps": 20
+      }
+    ],
+    "note": "Performed during a 30-minute weight-training block from 19:45 to 20:15."
+  },
+  {
+    "date": "2026-06-01",
+    "type": "strength",
+    "exercise": "Dumbbell Side Lateral Raise",
+    "target_muscles": [
+      "Lateral Deltoids"
+    ],
+    "sets": [
+      {
+        "weight_kg": 2,
+        "reps": 30
+      },
+      {
+        "weight_kg": 2,
+        "reps": 30
+      },
+      {
+        "weight_kg": 2,
+        "reps": 15
+      }
+    ],
+    "note": "Performed during a 30-minute weight-training block from 19:45 to 20:15."
   }
 ]
