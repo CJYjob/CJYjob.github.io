@@ -1,9 +1,18 @@
 {{- $key := .Get "activity" -}}
+{{- $sortRaw := .Get "sort" -}}
 {{- with index site.Data $key -}}
+  {{- $data := . -}}
+  {{- if $sortRaw -}}
+    {{- $parts := split $sortRaw " " -}}
+    {{- $field := index $parts 0 -}}
+    {{- $order := "asc" -}}
+    {{- if ge (len $parts) 2 -}}{{- $order = index $parts 1 -}}{{- end -}}
+    {{- $data = sort $data $field $order -}}
+  {{- end -}}
 <table>
-  <thead><tr>{{- range $k, $v := (index . 0) }}<th>{{ $k }}</th>{{- end }}</tr></thead>
+  <thead><tr>{{- range $k, $v := (index $data 0) }}<th>{{ $k }}</th>{{- end }}</tr></thead>
   <tbody>
-  {{- range . }}<tr>{{- range $k, $v := . }}<td>{{ $v }}</td>{{- end }}</tr>{{- end }}
+  {{- range $data }}<tr>{{- range $k, $v := . }}<td>{{ $v }}</td>{{- end }}</tr>{{- end }}
   </tbody>
 </table>
 {{- else -}}<p>표시할 데이터가 없습니다: <code>{{ $key }}</code></p>{{- end -}}
