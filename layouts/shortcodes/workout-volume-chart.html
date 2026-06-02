@@ -1,0 +1,52 @@
+{{ $days := .Get "days" | default "30" }}
+<div class="workout-volume-chart-wrapper" style="position:relative;height:400px;margin:1em 0;">
+  <canvas id="workout-volume-chart-{{ .Ordinal }}"></canvas>
+</div>
+<script>
+(function() {
+  const loadChartJs = () => new Promise((resolve, reject) => {
+    if (window.Chart) { resolve(); return; }
+    const s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js';
+    s.onload = resolve;
+    s.onerror = reject;
+    document.head.appendChild(s);
+  });
+
+  const data = {{ site.Data.workout | jsonify }};
+  const days = {{ $days }};
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - days);
+  const cutoffStr = cutoff.toISOString().slice(0, 10);
+
+  const strength = data.filter(r => r.type === 'strength' && r.date >= cutoffStr);
+  const dates = [...new Set(strength.map(r => r.date))].sort();
+  const exercises = [...new Set(strength.map(r => r.exercise))];
+
+  const datasets = exercises.map((ex, i) => {
+    const hue = (i * 360 / exercises.length) | 0;
+    return {
+      label: ex,
+      data: dates.map(d => {
+        const recs = strength.filter(r => r.date === d && r.exercise === ex);
+        return recs.reduce((sum, r) => sum + (r.sets || []).reduce((s, set) => s + (set.volume_kg || 0), 0), 0);
+      }),
+      backgroundColor: `hsl(${hue}, 65%, 55%)`
+    };
+  });
+
+  loadChartJs().then(() => {
+    const ctx = document.getElementById('workout-volume-chart-{{ .Ordinal }}');
+    new Chart(ctx, {
+      type: 'bar',
+      data: { labels: dates, datasets: datasets },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { title: { display: true, text: `Strength Volume (Last ${days} Days)` }, legend: { position: 'bottom' } },
+        scales: { x: { stacked: true, title: { display: true, text: 'Date' } }, y: { stacked: true, title: { display: true, text: 'Volume (kg)' }, beginAtZero: true } }
+      }
+    });
+  });
+})();
+</script>
