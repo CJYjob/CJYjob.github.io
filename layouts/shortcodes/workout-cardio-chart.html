@@ -13,15 +13,13 @@
     document.head.appendChild(s);
   });
 
-  const data = {{ site.Data.workout | jsonify }};
-  const records = Array.isArray(data) ? data : (data && typeof data === 'object' ? Object.values(data) : []);
-  console.log('workout chart debug:', { dataType: typeof data, isArray: Array.isArray(data), recordsLength: records.length, dataSample: data });
+  const data = JSON.parse({{ site.Data.workout | jsonify }});
   const days = {{ $days }};
   const cutoff = new Date();
   cutoff.setDate(cutoff.getDate() - days);
   const cutoffStr = cutoff.toISOString().slice(0, 10);
 
-  const cardio = records.filter(r => r.type === 'cardio' && r.date >= cutoffStr);
+  const cardio = data.filter(r => r.type === 'cardio' && r.date >= cutoffStr);
   const dates = [...new Set(cardio.map(r => r.date))].sort();
   const exercises = [...new Set(cardio.map(r => r.exercise))];
 
