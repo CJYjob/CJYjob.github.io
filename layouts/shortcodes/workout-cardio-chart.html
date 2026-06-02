@@ -1,0 +1,56 @@
+{{ $days := .Get "days" | default "30" }}
+<div class="workout-cardio-chart-wrapper" style="position:relative;height:400px;margin:1em 0;">
+  <canvas id="workout-cardio-chart-{{ .Ordinal }}"></canvas>
+</div>
+<script>
+(function() {
+  const loadChartJs = () => new Promise((resolve, reject) => {
+    if (window.Chart) { resolve(); return; }
+    const s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js';
+    s.onload = resolve;
+    s.onerror = reject;
+    document.head.appendChild(s);
+  });
+
+  const data = {{ site.Data.workout | jsonify }};
+  const days = {{ $days }};
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - days);
+  const cutoffStr = cutoff.toISOString().slice(0, 10);
+
+  const cardio = data.filter(r => r.type === 'cardio' && r.date >= cutoffStr);
+  const dates = [...new Set(cardio.map(r => r.date))].sort();
+  const exercises = [...new Set(cardio.map(r => r.exercise))];
+
+  const datasets = exercises.map((ex, i) => {
+    const hue = (i * 360 / exercises.length) | 0;
+    return {
+      label: ex,
+      data: dates.map(d => {
+        const recs = cardio.filter(r => r.date === d && r.exercise === ex);
+        return recs.reduce((sum, r) => {
+          if (typeof r.distance_km === 'number') return sum + r.distance_km;
+          if (typeof r.speed_kmh === 'number' && typeof r.duration_min === 'number') return sum + r.speed_kmh * r.duration_min / 60;
+          return sum;
+        }, 0);
+      }),
+      backgroundColor: `hsl(${hue}, 65%, 55%)`
+    };
+  });
+
+  loadChartJs().then(() => {
+    const ctx = document.getElementById('workout-cardio-chart-{{ .Ordinal }}');
+    new Chart(ctx, {
+      type: 'bar',
+      data: { labels: dates, datasets: datasets },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { title: { display: true, text: `Cardio Distance (Last ${days} Days)` }, legend: { position: 'bottom' } },
+        scales: { x: { stacked: true, title: { display: true, text: 'Date' } }, y: { stacked: true, title: { display: true, text: 'Distance (km)' }, beginAtZero: true } }
+      }
+    });
+  });
+})();
+</script>
