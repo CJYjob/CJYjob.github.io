@@ -21,6 +21,10 @@ description: "블로그 소개 및 메타 정보"
 - **호스팅**: GitHub Pages
 - **CI/CD**: GitHub Actions
 
+## 외부 도구
+
+본 블로그의 자기관리 시스템 운영에는 외부 시각 API를 활용하며, 시각 데이터는 Time.Now World Time API를 출처로 삼습니다. 무료 공개 API 제공에 감사드립니다.
+
 ## 연락처
 
 - E-mail: cjyjob1993@gmail.com
