@@ -6,7 +6,8 @@
     "started_at": "2026-06-01T19:15:00+09:00",
     "ended_at": "2026-06-01T19:25:00+09:00",
     "duration_min": 10,
-    "note": "Arrived at the gym at 19:15 and completed an incline treadmill warm-up."
+    "note": "Arrived at the gym at 19:15 and completed an incline treadmill warm-up.",
+    "session_id": "2026-06-01-evening"
   },
   {
     "date": "2026-06-01",
@@ -15,7 +16,8 @@
     "started_at": "2026-06-01T19:25:00+09:00",
     "ended_at": "2026-06-01T19:40:00+09:00",
     "duration_min": 15,
-    "note": "Completed full-body stretching before strength training."
+    "note": "Completed full-body stretching before strength training.",
+    "session_id": "2026-06-01-evening"
   },
   {
     "date": "2026-06-01",
@@ -24,7 +26,8 @@
     "started_at": "2026-06-01T19:40:00+09:00",
     "ended_at": "2026-06-01T19:45:00+09:00",
     "duration_min": 5,
-    "note": "Completed wrist and knee strengthening before weight training."
+    "note": "Completed wrist and knee strengthening before weight training.",
+    "session_id": "2026-06-01-evening"
   },
   {
     "date": "2026-06-01",
@@ -38,18 +41,31 @@
     "sets": [
       {
         "weight_kg": 6,
-        "reps": 30
+        "reps": 30,
+        "set_number": 1,
+        "volume_kg": 180,
+        "rest_sec": null
       },
       {
         "weight_kg": 6,
-        "reps": 30
+        "reps": 30,
+        "set_number": 2,
+        "volume_kg": 180,
+        "rest_sec": null
       },
       {
         "weight_kg": 6,
-        "reps": 20
+        "reps": 20,
+        "set_number": 3,
+        "volume_kg": 120,
+        "rest_sec": null
       }
     ],
-    "note": "Performed during a 30-minute weight-training block from 19:45 to 20:15."
+    "note": "Performed during a 30-minute weight-training block from 19:45 to 20:15.",
+    "session_id": "2026-06-01-evening",
+    "started_at": "2026-06-01T19:45:00+09:00",
+    "ended_at": "2026-06-01T19:55:00+09:00",
+    "duration_min": 10
   },
   {
     "date": "2026-06-01",
@@ -65,18 +81,31 @@
     "sets": [
       {
         "weight_kg": 6,
-        "reps": 30
+        "reps": 30,
+        "set_number": 1,
+        "volume_kg": 180,
+        "rest_sec": null
       },
       {
         "weight_kg": 6,
-        "reps": 30
+        "reps": 30,
+        "set_number": 2,
+        "volume_kg": 180,
+        "rest_sec": null
       },
       {
         "weight_kg": 6,
-        "reps": 20
+        "reps": 20,
+        "set_number": 3,
+        "volume_kg": 120,
+        "rest_sec": null
       }
     ],
-    "note": "Performed during a 30-minute weight-training block from 19:45 to 20:15."
+    "note": "Performed during a 30-minute weight-training block from 19:45 to 20:15.",
+    "session_id": "2026-06-01-evening",
+    "started_at": "2026-06-01T19:55:00+09:00",
+    "ended_at": "2026-06-01T20:05:00+09:00",
+    "duration_min": 10
   },
   {
     "date": "2026-06-01",
@@ -88,18 +117,31 @@
     "sets": [
       {
         "weight_kg": 2,
-        "reps": 30
+        "reps": 30,
+        "set_number": 1,
+        "volume_kg": 60,
+        "rest_sec": null
       },
       {
         "weight_kg": 2,
-        "reps": 30
+        "reps": 30,
+        "set_number": 2,
+        "volume_kg": 60,
+        "rest_sec": null
       },
       {
         "weight_kg": 2,
-        "reps": 15
+        "reps": 15,
+        "set_number": 3,
+        "volume_kg": 30,
+        "rest_sec": null
       }
     ],
-    "note": "Performed during a 30-minute weight-training block from 19:45 to 20:15."
+    "note": "Performed during a 30-minute weight-training block from 19:45 to 20:15.",
+    "session_id": "2026-06-01-evening",
+    "started_at": "2026-06-01T20:05:00+09:00",
+    "ended_at": "2026-06-01T20:15:00+09:00",
+    "duration_min": 10
   },
   {
     "date": "2026-06-01",
@@ -109,7 +151,9 @@
     "ended_at": "2026-06-01T20:35:00+09:00",
     "duration_min": 20,
     "speed_kmh": 3.5,
-    "note": "Completed incline treadmill cardio at 14 degrees: 10 min at 3 km/h and 10 min at 4 km/h."
+    "note": "Completed incline treadmill cardio at 14 degrees: 10 min at 3 km/h and 10 min at 4 km/h.",
+    "session_id": "2026-06-01-evening",
+    "distance_km": 1.17
   },
   {
     "date": "2026-06-02",
@@ -120,6 +164,7 @@
     "duration_min": 35,
     "speed_kmh": 3.0,
     "distance_km": 1.75,
-    "note": "Completed incline treadmill cardio at 14 degrees and 3 km/h for 35 minutes."
+    "note": "Completed incline treadmill cardio at 14 degrees and 3 km/h for 35 minutes.",
+    "session_id": "2026-06-02-morning"
   }
 ]
