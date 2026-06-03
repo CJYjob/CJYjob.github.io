@@ -22,5 +22,33 @@
     "target_muscles": [
       "Lateral Deltoids"
     ]
+  },
+  {
+    "exercise": "Barbell Row",
+    "target_muscles": [
+      "Latissimus Dorsi",
+      "Rhomboids",
+      "Trapezius",
+      "Posterior Deltoids",
+      "Biceps"
+    ]
+  },
+  {
+    "exercise": "Seated Row",
+    "target_muscles": [
+      "Latissimus Dorsi",
+      "Rhomboids",
+      "Trapezius",
+      "Posterior Deltoids",
+      "Biceps"
+    ]
+  },
+  {
+    "exercise": "Dumbbell Bench Press",
+    "target_muscles": [
+      "Pectoralis Major",
+      "Anterior Deltoids",
+      "Triceps"
+    ]
   }
 ]
