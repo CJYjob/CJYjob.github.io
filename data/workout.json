@@ -404,5 +404,15 @@
     "distance_km": 0.67,
     "note": "Completed incline treadmill warm-up at incline 14 and 4 km/h for 10 minutes.",
     "session_id": "2026-06-04-morning"
+  },
+  {
+    "date": "2026-06-04",
+    "type": "mobility",
+    "exercise": "Full-body Stretching",
+    "started_at": "2026-06-04T04:58:14+09:00",
+    "ended_at": "2026-06-04T05:18:20+09:00",
+    "duration_min": 20.1,
+    "note": "Completed full-body stretching after incline treadmill warm-up.",
+    "session_id": "2026-06-04-morning"
   }
 ]
