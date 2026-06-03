@@ -223,7 +223,7 @@
     "started_at": "2026-06-03T15:11:29+09:00",
     "ended_at": "2026-06-03T15:22:49+09:00",
     "duration_min": 11.33,
-    "note": "Completed sequential strength training. Original weights: 60 lb x 12, 90 lb x 12, 110 lb x 12, 90 lb x 12. Pound values converted to kg.",
+    "note": "Completed sequential strength training.\nOriginal weights: 60 lb x 12, 90 lb x 12, 110 lb x 12, 90 lb x 12.\nPound values converted to kg.",
     "session_id": "2026-06-03-afternoon"
   },
   {
@@ -270,7 +270,7 @@
     "started_at": "2026-06-03T15:22:49+09:00",
     "ended_at": "2026-06-03T15:34:09+09:00",
     "duration_min": 11.33,
-    "note": "Completed sequential strength training. Original weights: 50 lb x 12, 70 lb x 12, 90 lb x 12, 80 lb x 11. Pound values converted to kg.",
+    "note": "Completed sequential strength training.\nOriginal weights: 50 lb x 12, 70 lb x 12, 90 lb x 12, 80 lb x 11.\nPound values converted to kg.",
     "session_id": "2026-06-03-afternoon"
   },
   {
@@ -423,6 +423,18 @@
     "ended_at": "2026-06-04T05:22:55+09:00",
     "duration_min": 4.58,
     "note": "Completed knee functional exercise after full-body stretching.",
+    "session_id": "2026-06-04-morning"
+  },
+  {
+    "date": "2026-06-04",
+    "type": "cardio",
+    "exercise": "Incline Treadmill",
+    "started_at": "2026-06-04T05:21:50+09:00",
+    "ended_at": "2026-06-04T05:46:50+09:00",
+    "duration_min": 25,
+    "speed_kmh": 3.0,
+    "distance_km": 1.25,
+    "note": "Completed incline treadmill cardio at incline 14 and 3 km/h for 25 minutes.",
     "session_id": "2026-06-04-morning"
   }
 ]
