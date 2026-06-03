@@ -414,5 +414,15 @@
     "duration_min": 20.1,
     "note": "Completed full-body stretching after incline treadmill warm-up.",
     "session_id": "2026-06-04-morning"
+  },
+  {
+    "date": "2026-06-04",
+    "type": "prehab",
+    "exercise": "Knee Functional Exercise",
+    "started_at": "2026-06-04T05:18:20+09:00",
+    "ended_at": "2026-06-04T05:22:55+09:00",
+    "duration_min": 4.58,
+    "note": "Completed knee functional exercise after full-body stretching.",
+    "session_id": "2026-06-04-morning"
   }
 ]
