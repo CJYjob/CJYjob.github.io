@@ -392,5 +392,17 @@
     "duration_min": 20,
     "note": "Completed full-body stretching after cardio and strength training.",
     "session_id": "2026-06-03-afternoon"
+  },
+  {
+    "date": "2026-06-04",
+    "type": "cardio",
+    "exercise": "Incline Treadmill Warm-up",
+    "started_at": "2026-06-04T04:48:14+09:00",
+    "ended_at": "2026-06-04T04:58:14+09:00",
+    "duration_min": 10,
+    "speed_kmh": 4.0,
+    "distance_km": 0.67,
+    "note": "Completed incline treadmill warm-up at incline 14 and 4 km/h for 10 minutes.",
+    "session_id": "2026-06-04-morning"
   }
 ]
