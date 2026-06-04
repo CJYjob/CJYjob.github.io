@@ -34,9 +34,7 @@
     "type": "strength",
     "exercise": "Dumbbell Incline Bench Press",
     "target_muscles": [
-      "Pectoralis Major",
-      "Anterior Deltoids",
-      "Triceps"
+      "Upper Pectoralis Major"
     ],
     "sets": [
       {
@@ -72,11 +70,7 @@
     "type": "strength",
     "exercise": "Dumbbell Incline Bench Row",
     "target_muscles": [
-      "Latissimus Dorsi",
-      "Rhomboids",
-      "Trapezius",
-      "Posterior Deltoids",
-      "Biceps"
+      "Middle Trapezius"
     ],
     "sets": [
       {
@@ -182,13 +176,9 @@
   {
     "date": "2026-06-03",
     "type": "strength",
-    "exercise": "Barbell Row",
+    "exercise": "Lat Pulldown",
     "target_muscles": [
-      "Latissimus Dorsi",
-      "Rhomboids",
-      "Trapezius",
-      "Posterior Deltoids",
-      "Biceps"
+      "Latissimus Dorsi"
     ],
     "sets": [
       {
@@ -223,7 +213,7 @@
     "started_at": "2026-06-03T15:11:29+09:00",
     "ended_at": "2026-06-03T15:22:49+09:00",
     "duration_min": 11.33,
-    "note": "Completed sequential strength training.\nOriginal weights: 60 lb x 12, 90 lb x 12, 110 lb x 12, 90 lb x 12.\nPound values converted to kg.",
+    "note": "Completed sequential strength training. Corrected exercise from Barbell Row to Lat Pulldown based on user report.\nOriginal weights: 60 lb x 12, 90 lb x 12, 110 lb x 12, 90 lb x 12.\nPound values converted to kg.",
     "session_id": "2026-06-03-afternoon"
   },
   {
@@ -231,11 +221,7 @@
     "type": "strength",
     "exercise": "Seated Row",
     "target_muscles": [
-      "Latissimus Dorsi",
-      "Rhomboids",
-      "Trapezius",
-      "Posterior Deltoids",
-      "Biceps"
+      "Middle Trapezius"
     ],
     "sets": [
       {
@@ -276,11 +262,9 @@
   {
     "date": "2026-06-03",
     "type": "strength",
-    "exercise": "Dumbbell Bench Press",
+    "exercise": "Dumbbell Incline Bench Press",
     "target_muscles": [
-      "Pectoralis Major",
-      "Anterior Deltoids",
-      "Triceps"
+      "Upper Pectoralis Major"
     ],
     "sets": [
       {
@@ -315,7 +299,7 @@
     "started_at": "2026-06-03T15:34:09+09:00",
     "ended_at": "2026-06-03T15:45:29+09:00",
     "duration_min": 11.33,
-    "note": "Completed 4 sets of 20 reps with 6 kg dumbbells during sequential strength training.",
+    "note": "Completed 4 sets of 20 reps with 6 kg dumbbells during sequential strength training. Exercise consolidated from Dumbbell Bench Press to Dumbbell Incline Bench Press based on user report.",
     "session_id": "2026-06-03-afternoon"
   },
   {
