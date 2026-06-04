@@ -47,8 +47,14 @@
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        plugins: { title: { display: true, text: `Cardio Distance (Last ${days} Days)` }, legend: { position: 'bottom' } },
-        scales: { x: { stacked: true, title: { display: true, text: 'Date' } }, y: { stacked: true, title: { display: true, text: 'Distance (km)' }, beginAtZero: true } }
+        plugins: {
+          title: { display: true, text: `유산소 (최근 ${days}일)` },
+          legend: { position: 'bottom' }
+        },
+        scales: {
+          x: { stacked: true, title: { display: true, text: 'Date' } },
+          y: { stacked: true, title: { display: true, text: 'Distance (km)' }, beginAtZero: true }
+        }
       }
     });
   });
