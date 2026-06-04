@@ -21,17 +21,65 @@
 
   const strength = data.filter(r => r.type === 'strength' && r.date >= cutoffStr);
   const dates = [...new Set(strength.map(r => r.date))].sort();
-  const exercises = [...new Set(strength.map(r => r.exercise))];
 
-  const datasets = exercises.map((ex, i) => {
-    const hue = (i * 360 / exercises.length) | 0;
+  const muscleOrder = [
+    'Upper Pectoralis Major',
+    'Middle Trapezius',
+    'Latissimus Dorsi',
+    'Lateral Deltoids'
+  ];
+
+  const muscleHue = {
+    'Upper Pectoralis Major': 0,
+    'Middle Trapezius': 210,
+    'Latissimus Dorsi': 135,
+    'Lateral Deltoids': 285,
+    'Other': 35
+  };
+
+  const primaryMuscleByExercise = new Map();
+  strength.forEach(r => {
+    if (!primaryMuscleByExercise.has(r.exercise)) {
+      const muscles = Array.isArray(r.target_muscles) ? r.target_muscles : [];
+      primaryMuscleByExercise.set(r.exercise, muscles[0] || 'Other');
+    }
+  });
+
+  const muscleRank = muscle => {
+    const idx = muscleOrder.indexOf(muscle);
+    return idx === -1 ? muscleOrder.length : idx;
+  };
+
+  const exercises = [...new Set(strength.map(r => r.exercise))].sort((a, b) => {
+    const muscleA = primaryMuscleByExercise.get(a) || 'Other';
+    const muscleB = primaryMuscleByExercise.get(b) || 'Other';
+    const rankDiff = muscleRank(muscleA) - muscleRank(muscleB);
+    if (rankDiff !== 0) return rankDiff;
+    return a.localeCompare(b);
+  });
+
+  const exerciseIndexInMuscle = new Map();
+  const muscleCounts = {};
+  exercises.forEach(ex => {
+    const muscle = primaryMuscleByExercise.get(ex) || 'Other';
+    const idx = muscleCounts[muscle] || 0;
+    exerciseIndexInMuscle.set(ex, idx);
+    muscleCounts[muscle] = idx + 1;
+  });
+
+  const datasets = exercises.map(ex => {
+    const muscle = primaryMuscleByExercise.get(ex) || 'Other';
+    const hue = muscleHue[muscle] ?? muscleHue.Other;
+    const indexInMuscle = exerciseIndexInMuscle.get(ex) || 0;
+    const saturation = Math.min(85, 45 + indexInMuscle * 12);
+
     return {
       label: ex,
       data: dates.map(d => {
         const recs = strength.filter(r => r.date === d && r.exercise === ex);
         return recs.reduce((sum, r) => sum + (r.sets || []).reduce((s, set) => s + (set.volume_kg || 0), 0), 0);
       }),
-      backgroundColor: `hsl(${hue}, 65%, 55%)`
+      backgroundColor: `hsl(${hue}, ${saturation}%, 55%)`
     };
   });
 
@@ -43,8 +91,23 @@
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        plugins: { title: { display: true, text: `Strength Volume (Last ${days} Days)` }, legend: { position: 'bottom' } },
-        scales: { x: { stacked: true, title: { display: true, text: 'Date' } }, y: { stacked: true, title: { display: true, text: 'Volume (kg)' }, beginAtZero: true } }
+        plugins: {
+          title: { display: true, text: `웨이트 (최근 ${days}일)` },
+          legend: { position: 'bottom' },
+          tooltip: {
+            callbacks: {
+              afterLabel: function(context) {
+                const exercise = context.dataset.label;
+                const muscle = primaryMuscleByExercise.get(exercise) || 'Other';
+                return `Target: ${muscle}`;
+              }
+            }
+          }
+        },
+        scales: {
+          x: { stacked: true, title: { display: true, text: 'Date' } },
+          y: { stacked: true, title: { display: true, text: 'Volume (kg)' }, beginAtZero: true }
+        }
       }
     });
   });
