@@ -2,19 +2,13 @@
   {
     "exercise": "Dumbbell Incline Bench Press",
     "target_muscles": [
-      "Pectoralis Major",
-      "Anterior Deltoids",
-      "Triceps"
+      "Upper Pectoralis Major"
     ]
   },
   {
     "exercise": "Dumbbell Incline Bench Row",
     "target_muscles": [
-      "Latissimus Dorsi",
-      "Rhomboids",
-      "Trapezius",
-      "Posterior Deltoids",
-      "Biceps"
+      "Middle Trapezius"
     ]
   },
   {
@@ -24,31 +18,15 @@
     ]
   },
   {
-    "exercise": "Barbell Row",
+    "exercise": "Lat Pulldown",
     "target_muscles": [
-      "Latissimus Dorsi",
-      "Rhomboids",
-      "Trapezius",
-      "Posterior Deltoids",
-      "Biceps"
+      "Latissimus Dorsi"
     ]
   },
   {
     "exercise": "Seated Row",
     "target_muscles": [
-      "Latissimus Dorsi",
-      "Rhomboids",
-      "Trapezius",
-      "Posterior Deltoids",
-      "Biceps"
-    ]
-  },
-  {
-    "exercise": "Dumbbell Bench Press",
-    "target_muscles": [
-      "Pectoralis Major",
-      "Anterior Deltoids",
-      "Triceps"
+      "Middle Trapezius"
     ]
   }
 ]
