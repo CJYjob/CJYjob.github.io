@@ -2,11 +2,11 @@
   {
     "date": "2026-06-01",
     "type": "cardio",
-    "exercise": "Incline Treadmill Warm-up",
+    "exercise": "Incline Treadmill",
     "started_at": "2026-06-01T19:15:00+09:00",
     "ended_at": "2026-06-01T19:25:00+09:00",
     "duration_min": 10,
-    "note": "Arrived at the gym at 19:15 and completed an incline treadmill warm-up.",
+    "note": "Completed incline treadmill cardio after arriving at the gym.",
     "session_id": "2026-06-01-evening"
   },
   {
@@ -146,12 +146,12 @@
   {
     "date": "2026-06-01",
     "type": "cardio",
-    "exercise": "Incline Treadmill Cool-down",
+    "exercise": "Incline Treadmill",
     "started_at": "2026-06-01T20:15:00+09:00",
     "ended_at": "2026-06-01T20:35:00+09:00",
     "duration_min": 20,
     "speed_kmh": 3.5,
-    "note": "Completed incline treadmill cardio at 14 degrees: 10 min at 3 km/h and 10 min at 4 km/h.",
+    "note": "Completed incline treadmill cardio at incline 14: 10 min at 3 km/h and 10 min at 4 km/h.",
     "session_id": "2026-06-01-evening",
     "distance_km": 1.17
   },
@@ -396,13 +396,13 @@
   {
     "date": "2026-06-04",
     "type": "cardio",
-    "exercise": "Incline Treadmill Warm-up",
+    "exercise": "Incline Treadmill",
     "started_at": "2026-06-04T04:48:14+09:00",
     "ended_at": "2026-06-04T04:58:14+09:00",
     "duration_min": 10,
     "speed_kmh": 4.0,
     "distance_km": 0.67,
-    "note": "Completed incline treadmill warm-up at incline 14 and 4 km/h for 10 minutes.",
+    "note": "Completed incline treadmill cardio at incline 14 and 4 km/h for 10 minutes.",
     "session_id": "2026-06-04-morning"
   },
   {
@@ -412,7 +412,7 @@
     "started_at": "2026-06-04T04:58:14+09:00",
     "ended_at": "2026-06-04T05:18:20+09:00",
     "duration_min": 20.1,
-    "note": "Completed full-body stretching after incline treadmill warm-up.",
+    "note": "Completed full-body stretching after incline treadmill cardio.",
     "session_id": "2026-06-04-morning"
   },
   {
