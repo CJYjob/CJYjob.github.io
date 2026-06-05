@@ -34,10 +34,6 @@ TocOpen: true
 - [1부 시장 구조와 자산배분](./part-01-market-structure/)
 - [2부 투자상품과 절세 계좌](./part-02-products-and-accounts/)
 
-현재 Hugo 구조에서는 `investment-foundations/index.md`가 leaf bundle로 처리되어 하위 챕터 경로가 직접 생성되지 않는다. 따라서 링크는 실제로 생성되는 기존 챕터 페이지를 가리킨다.
-
-정식 위계 구조로 전환하려면 상위 인덱스 파일을 `index.md`가 아니라 `_index.md`로 바꾸어 branch bundle로 만들어야 한다.
-
 ## 현재 진행 상태
 
 현재 1부와 2부를 완료했고, 다음 학습은 3부 회계 입문이다.
