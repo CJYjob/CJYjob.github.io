@@ -7,6 +7,16 @@ categories: ["Portfolio", "Investment"]
 tags: ["Investment", "Foundations"]
 ShowToc: true
 TocOpen: true
+cascade:
+  - weight: 10
+    target:
+      path: "{/portfolio/investment-foundations/part-01-market-structure,/portfolio/investment-foundations/part-01-market-structure/**}"
+  - weight: 20
+    target:
+      path: "{/portfolio/investment-foundations/part-02-products-and-accounts,/portfolio/investment-foundations/part-02-products-and-accounts/**}"
+  - weight: 30
+    target:
+      path: "{/portfolio/investment-foundations/part-03-financial-statements,/portfolio/investment-foundations/part-03-financial-statements/**}"
 ---
 
 ## 개요
@@ -32,12 +42,6 @@ TocOpen: true
 6부는 시스템 매매 기초를 다룰 예정이다. 감정 개입을 줄이기 위한 규칙 기반 투자, 진입 조건, 청산 조건, 포지션 크기, 백테스트, 과최적화 위험, 자동화 구조를 학습한다.
 
 7부는 투자 시뮬레이션을 다룰 예정이다. 모의 투자, 매수·매도 이유 작성, 결과 분석, 원인 분석, 체크리스트 수정, 규칙 보완을 통해 실제 투자 전 검증 구조를 만든다.
-
-## 중간 산출물
-
-- [1부 경제와 금융시장의 기초](./part-01-market-structure/)
-- [2부 금융상품과 투자 계좌](./part-02-products-and-accounts/)
-- [3부 재무제표 읽기의 시작](./part-03-financial-statements/)
 
 ## 현재 진행 상태
 
