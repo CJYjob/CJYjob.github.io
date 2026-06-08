@@ -46,7 +46,7 @@ params:
   
   ShowReadingTime: true
   ShowShareButtons: true
-  ShowPostNavLinks: true
+  ShowPostNavLinks: false
   ShowBreadCrumbs: true
   ShowCodeCopyButtons: true
   ShowWordCount: true
@@ -58,7 +58,7 @@ params:
   
   homeInfoParams:
     Title: "🌱 최준영의 자람"
-    Content: "배우고, 경험하고, 성장하는 과정을 기록합니다."
+    Content: "배우고, 겼험하고, 성장하는 과정을 기록핉는다."
   
   socialIcons:
     - name: github
