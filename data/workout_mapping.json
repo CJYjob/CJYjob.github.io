@@ -28,5 +28,11 @@
     "target_muscles": [
       "Middle Trapezius"
     ]
+  },
+  {
+    "exercise": "Straight-Arm Pulldown",
+    "target_muscles": [
+      "Latissimus Dorsi"
+    ]
   }
 ]
