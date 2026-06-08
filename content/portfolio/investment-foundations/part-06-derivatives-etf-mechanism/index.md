@@ -3,6 +3,8 @@ title: "투자 기초 ⑥ 파생·선물과 ETF 메커니즘"
 date: 2026-06-08
 draft: false
 description: "ETF의 NAV, 괴리율, AP와 LP, 선물과 베이시스, 롤오버, 인버스 ETF, 비용과 세금 구조를 정리한다."
+summary: "선물, 베이시스, 롤오버, ETF NAV, 괴리율, AP·LP, 인버스 ETF 구조를 정리한다."
+weight: 60
 categories: ["Investment"]
 tags: ["Investment", "Basics", "ETF", "Derivatives"]
 ---
@@ -154,3 +156,17 @@ ETF는 시장 가격과 NAV를 구분해야 한다.
 `상품 구조와 비용 구조를 함께 이해해야 한다.`
 
 이 구조를 알아야 ⑦부의 투자 판단 구조 만들기로 넘어갈 수 있다.
+
+---
+
+## 투자 기초 시리즈 전체 링크
+
+1. [투자 기초 ① 시장 구조와 자산배분](/portfolio/investment-foundations/part-01-market-structure/)
+2. [투자 기초 ② 투자상품과 절세 계좌](/portfolio/investment-foundations/part-02-products-and-accounts/)
+3. [투자 기초 ③ 재무제표 읽기의 시작](/portfolio/investment-foundations/part-03-financial-statements/)
+4. [투자 기초 ④ 기업 분석의 기초](/portfolio/investment-foundations/part-04-company-analysis/)
+5. [투자 기초 ⑤ 기술적 지표](/portfolio/investment-foundations/part-05-technical-indicators/)
+6. [투자 기초 ⑥ 파생·선물과 ETF 메커니즘](/portfolio/investment-foundations/part-06-derivatives-etf-mechanism/)
+7. [투자 기초 ⑦ 투자 판단 구조 만들기](/portfolio/investment-foundations/part-07-investment-judgment-structure/)
+8. [투자 기초 ⑧ 규칙 기반 투자](/portfolio/investment-foundations/part-08-rule-based-investing/)
+9. [투자 기초 ⑨ 모의투자와 복기](/portfolio/investment-foundations/part-09-mock-investment/)
