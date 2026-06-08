@@ -3,6 +3,8 @@ title: "투자 기초 ⑦ 투자 판단 구조 만들기"
 date: 2026-06-05
 draft: false
 description: "투자 아이디어를 매매 판단으로 바로 연결하지 않고, 관찰·가설·검증·체크리스트·투자 일지·복기 구조로 전환하는 과정을 정리한다."
+summary: "관찰, 아이디어, 가설, 검증, 체크리스트, 판단, 기록, 복기로 이어지는 투자 판단 구조를 정리한다."
+weight: 70
 categories: ["Investment"]
 tags: ["Investment", "Basics", "Investment Judgment"]
 ---
@@ -47,7 +49,7 @@ tags: ["Investment", "Basics", "Investment Judgment"]
 
 `나는 [관찰한 변화] 때문에 [산업 또는 기업]에 [영향]이 생길 수 있다고 본다.`
 
-이 문장은 아직 매수 판단이 아니다. 다음 단계인 투자 가설로 넘어가기 위한 재료다.
+이 문장은 아직 매수 판단이 아니다. 다음 단계인 투자 가설로 넘어가기 위할 재료다.
 
 ---
 
@@ -176,3 +178,17 @@ tags: ["Investment", "Basics", "Investment Judgment"]
 `개선할 수 없는 매매는 시스템이 될 수 없다.`
 
 이 구조를 갖춰야 ⑧부의 규칙 기반 투자로 넘어갈 수 있다.
+
+---
+
+## 투자 기초 시리즈 전체 링크
+
+1. [투자 기초 ① 시장 구조와 자산배분](/portfolio/investment-foundations/part-01-market-structure/)
+2. [투자 기초 ② 투자상품과 절세 계좌](/portfolio/investment-foundations/part-02-products-and-accounts/)
+3. [투자 기초 ③ 재무제표 읽기의 시작](/portfolio/investment-foundations/part-03-financial-statements/)
+4. [투자 기초 ④ 기업 분석의 기초](/portfolio/investment-foundations/part-04-company-analysis/)
+5. [투자 기초 ⑤ 기술적 지표](/portfolio/investment-foundations/part-05-technical-indicators/)
+6. [투자 기초 ⑥ 파생·선물과 ETF 메커니즘](/portfolio/investment-foundations/part-06-derivatives-etf-mechanism/)
+7. [투자 기초 ⑦ 투자 판단 구조 만들기](/portfolio/investment-foundations/part-07-investment-judgment-structure/)
+8. [투자 기초 ⑧ 규칙 기반 투자](/portfolio/investment-foundations/part-08-rule-based-investing/)
+9. [투자 기초 ⑨ 모의투자와 복기](/portfolio/investment-foundations/part-09-mock-investment/)
