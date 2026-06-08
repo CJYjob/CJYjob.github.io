@@ -3,6 +3,8 @@ title: "투자 기초 ② 투자상품과 절세 계좌"
 date: 2026-06-05
 draft: false
 description: "ETF의 구조와 투자 계좌의 역할, ISA·연금저축·IRP 같은 절세 계좌의 의미를 정리한다."
+summary: "예금, 채권, 펀드, ETF, ISA, 연금저축, IRP 등 투자상품과 절세 계좌를 정리한다."
+weight: 20
 categories: ["Investment"]
 tags: ["Investment", "Basics"]
 ---
@@ -257,3 +259,17 @@ CMA는 이러한 대기자금을 보관하면서 일정 수준의 이자를 받�
 투자의 목적보다는 현금 관리의 목적이 강하다.
 
 따라서 투자 체계에서 CMA는 투자상품이나 절세계좌와 같은 핵심 구조가 아니라, 투자 대기자금을 관리하기 위한 보조 수단으로 이해하면 된다.
+
+---
+
+## 투자 기초 시리즈 전체 링크
+
+1. [투자 기초 ① 시장 구조와 자산배분](/portfolio/investment-foundations/part-01-market-structure/)
+2. [투자 기초 ② 투자상품과 절세 계좌](/portfolio/investment-foundations/part-02-products-and-accounts/)
+3. [투자 기초 ③ 재무제표 읽기의 시작](/portfolio/investment-foundations/part-03-financial-statements/)
+4. [투자 기초 ④ 기업 분석의 기초](/portfolio/investment-foundations/part-04-company-analysis/)
+5. [투자 기초 ⑤ 기술적 지표](/portfolio/investment-foundations/part-05-technical-indicators/)
+6. [투자 기초 ⑥ 파생·선물과 ETF 메커니즘](/portfolio/investment-foundations/part-06-derivatives-etf-mechanism/)
+7. [투자 기초 ⑦ 투자 판단 구조 만들기](/portfolio/investment-foundations/part-07-investment-judgment-structure/)
+8. [투자 기초 ⑧ 규칙 기반 투자](/portfolio/investment-foundations/part-08-rule-based-investing/)
+9. [투자 기초 ⑨ 모의투자와 복기](/portfolio/investment-foundations/part-09-mock-investment/)
