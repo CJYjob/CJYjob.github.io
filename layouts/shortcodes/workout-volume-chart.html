@@ -26,21 +26,42 @@
     'Upper Pectoralis Major',
     'Middle Trapezius',
     'Latissimus Dorsi',
-    'Lateral Deltoids'
+    'Rear Deltoids',
+    'Lateral Deltoids',
+    'Biceps Brachii',
+    'Other'
   ];
 
-  const muscleHue = {
-    'Upper Pectoralis Major': 0,
-    'Middle Trapezius': 210,
-    'Latissimus Dorsi': 135,
-    'Lateral Deltoids': 285,
-    'Other': 35
+  const muscleColor = {
+    'Upper Pectoralis Major': 'hsl(0, 65%, 55%)',
+    'Middle Trapezius': 'hsl(210, 65%, 55%)',
+    'Latissimus Dorsi': 'hsl(135, 65%, 55%)',
+    'Rear Deltoids': 'hsl(260, 65%, 55%)',
+    'Lateral Deltoids': 'hsl(285, 65%, 55%)',
+    'Biceps Brachii': 'hsl(35, 65%, 55%)',
+    'Other': 'hsl(60, 45%, 55%)'
   };
 
+  const fallbackMuscleColor = muscle => {
+    let hash = 0;
+    for (let i = 0; i < muscle.length; i++) {
+      hash = ((hash << 5) - hash) + muscle.charCodeAt(i);
+      hash |= 0;
+    }
+    const hue = Math.abs(hash) % 360;
+    return `hsl(${hue}, 55%, 55%)`;
+  };
+
+  const colorForMuscle = muscle => muscleColor[muscle] || fallbackMuscleColor(muscle);
+
+  const targetMusclesByExercise = new Map();
   const primaryMuscleByExercise = new Map();
   strength.forEach(r => {
     if (!primaryMuscleByExercise.has(r.exercise)) {
-      const muscles = Array.isArray(r.target_muscles) ? r.target_muscles : [];
+      const muscles = Array.isArray(r.target_muscles) && r.target_muscles.length > 0
+        ? r.target_muscles
+        : ['Other'];
+      targetMusclesByExercise.set(r.exercise, muscles);
       primaryMuscleByExercise.set(r.exercise, muscles[0] || 'Other');
     }
   });
@@ -58,20 +79,8 @@
     return a.localeCompare(b);
   });
 
-  const exerciseIndexInMuscle = new Map();
-  const muscleCounts = {};
-  exercises.forEach(ex => {
-    const muscle = primaryMuscleByExercise.get(ex) || 'Other';
-    const idx = muscleCounts[muscle] || 0;
-    exerciseIndexInMuscle.set(ex, idx);
-    muscleCounts[muscle] = idx + 1;
-  });
-
   const datasets = exercises.map(ex => {
     const muscle = primaryMuscleByExercise.get(ex) || 'Other';
-    const hue = muscleHue[muscle] ?? muscleHue.Other;
-    const indexInMuscle = exerciseIndexInMuscle.get(ex) || 0;
-    const saturation = Math.min(85, 45 + indexInMuscle * 12);
 
     return {
       label: ex,
@@ -79,7 +88,7 @@
         const recs = strength.filter(r => r.date === d && r.exercise === ex);
         return recs.reduce((sum, r) => sum + (r.sets || []).reduce((s, set) => s + (set.volume_kg || 0), 0), 0);
       }),
-      backgroundColor: `hsl(${hue}, ${saturation}%, 55%)`
+      backgroundColor: colorForMuscle(muscle)
     };
   });
 
@@ -92,14 +101,14 @@
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-          title: { display: true, text: `웨이트 (최근 ${days}일)` },
+          title: { display: true, text: `웨이트 (${days}일)` },
           legend: { position: 'bottom' },
           tooltip: {
             callbacks: {
               afterLabel: function(context) {
                 const exercise = context.dataset.label;
-                const muscle = primaryMuscleByExercise.get(exercise) || 'Other';
-                return `Target: ${muscle}`;
+                const muscles = targetMusclesByExercise.get(exercise) || ['Other'];
+                return `Targets: ${muscles.join(', ')}`;
               }
             }
           }
