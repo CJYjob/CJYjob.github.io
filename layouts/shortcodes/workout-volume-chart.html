@@ -24,6 +24,8 @@
 
   const muscleOrder = [
     'Upper Pectoralis Major',
+    'Pectoralis Major',
+    'Lower Pectoralis Major',
     'Middle Trapezius',
     'Latissimus Dorsi',
     'Rear Deltoids',
@@ -33,7 +35,9 @@
   ];
 
   const muscleColor = {
-    'Upper Pectoralis Major': 'hsl(0, 65%, 55%)',
+    'Upper Pectoralis Major': 'hsl(0, 75%, 55%)',
+    'Pectoralis Major': 'hsl(0, 60%, 55%)',
+    'Lower Pectoralis Major': 'hsl(0, 45%, 55%)',
     'Middle Trapezius': 'hsl(210, 65%, 55%)',
     'Latissimus Dorsi': 'hsl(135, 65%, 55%)',
     'Rear Deltoids': 'hsl(260, 65%, 55%)',
@@ -101,7 +105,7 @@
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-          title: { display: true, text: `웨이트 (${days}일)` },
+          title: { display: true, text: `웨이트 볼륨 (${days}일)` },
           legend: { position: 'bottom' },
           tooltip: {
             callbacks: {
