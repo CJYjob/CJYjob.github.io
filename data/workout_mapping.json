@@ -34,5 +34,23 @@
     "target_muscles": [
       "Latissimus Dorsi"
     ]
+  },
+  {
+    "exercise": "Barbell Incline Bench Press",
+    "target_muscles": [
+      "Upper Pectoralis Major"
+    ]
+  },
+  {
+    "exercise": "Chest Press Machine",
+    "target_muscles": [
+      "Pectoralis Major"
+    ]
+  },
+  {
+    "exercise": "Pec Deck Fly",
+    "target_muscles": [
+      "Pectoralis Major"
+    ]
   }
 ]
