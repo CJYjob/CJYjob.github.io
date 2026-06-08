@@ -3,6 +3,8 @@ title: "투자 기초 ⑧ 규칙 기반 투자"
 date: 2026-06-08
 draft: false
 description: "감정 개입을 줄이기 위해 투자 판단을 규칙으로 만들고, 규칙 설계, 백테스트, 자동화 구조를 정리한다."
+summary: "감정이 아니라 규칙이 판단하도록 규칙 설계, 백테스트, 자동화 구조를 정리한다."
+weight: 80
 categories: ["Investment"]
 tags: ["Investment", "Basics", "Rule Based Investing"]
 ---
@@ -39,7 +41,6 @@ tags: ["Investment", "Basics", "Rule Based Investing"]
 
 명확하지 않은 규칙은 실행할 수 없다. 반복 불가능한 규칙은 시스템이 될 수 없다. 검증할 수 없는 규칙은 신뢰할 수 없다.
 
-
 ---
 
 ## 규칙 설계
@@ -74,7 +75,6 @@ tags: ["Investment", "Basics", "Rule Based Investing"]
 
 규칙 설계의 핵심은 언제 들어갈지보다, 언제 들어가지 않을지를 먼저 정하는 것이다.
 
-
 ---
 
 ## 백테스트
@@ -100,7 +100,6 @@ tags: ["Investment", "Basics", "Rule Based Investing"]
 `과최적화 = 과거 데이터에 너무 딱 맞게 규칙을 조정해서 미래에는 잘 작동하지 않는 상태`
 
 좋은 전략은 조건이 단순하고 왜 작동해야 하는지 설명할 수 있어야 한다.
-
 
 ---
 
@@ -183,3 +182,17 @@ tags: ["Investment", "Basics", "Rule Based Investing"]
 `기록 없는 자동화는 하지 않는다.`
 
 이 구조를 갖춰야 ⑨부의 모의투자와 복기로 넘어갈 수 있다.
+
+---
+
+## 투자 기초 시리즈 전체 링크
+
+1. [투자 기초 ① 시장 구조와 자산배분](/portfolio/investment-foundations/part-01-market-structure/)
+2. [투자 기초 ② 투자상품과 절세 계좌](/portfolio/investment-foundations/part-02-products-and-accounts/)
+3. [투자 기초 ③ 재무제표 읽기의 시작](/portfolio/investment-foundations/part-03-financial-statements/)
+4. [투자 기초 ④ 기업 분석의 기초](/portfolio/investment-foundations/part-04-company-analysis/)
+5. [투자 기초 ⑤ 기술적 지표](/portfolio/investment-foundations/part-05-technical-indicators/)
+6. [투자 기초 ⑥ 파생·선물과 ETF 메커니즘](/portfolio/investment-foundations/part-06-derivatives-etf-mechanism/)
+7. [투자 기초 ⑦ 투자 판단 구조 만들기](/portfolio/investment-foundations/part-07-investment-judgment-structure/)
+8. [투자 기초 ⑧ 규칙 기반 투자](/portfolio/investment-foundations/part-08-rule-based-investing/)
+9. [투자 기초 ⑨ 모의투자와 복기](/portfolio/investment-foundations/part-09-mock-investment/)
