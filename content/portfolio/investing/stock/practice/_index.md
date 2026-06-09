@@ -45,6 +45,12 @@ cascade:
   - weight: 120
     summary: "모의·실전 매매와 복기 기록(/log 연결)."
     target: { path: "{/portfolio/investing/stock/practice/part-12-live-and-review,/portfolio/investing/stock/practice/part-12-live-and-review/**}" }
+  - weight: 130
+    summary: "ETF·지표·선물 용어 풀이(어원 포함)."
+    target: { path: "{/portfolio/investing/stock/practice/appendix-glossary,/portfolio/investing/stock/practice/appendix-glossary/**}" }
+  - weight: 140
+    summary: "전략 전체를 한 장으로 줄인 핵심 요약."
+    target: { path: "{/portfolio/investing/stock/practice/appendix-summary,/portfolio/investing/stock/practice/appendix-summary/**}" }
 ---
 
 ## 개요
