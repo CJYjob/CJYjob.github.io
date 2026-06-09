@@ -13,4 +13,4 @@ desktop.ini
 
 # Environment
 .env
-.env.local
+.env.localmigrate_investing_stock.sh
