@@ -1,5 +1,5 @@
 ---
-title: "투자 실습 · 부록 A 용어 풀이"
+title: "투자 전략 · 부록 A 용어 풀이"
 date: 2026-06-09
 draft: false
 description: "ETF·지표·선물 전략에 나오는 영어 용어를 어원과 함께 정리한다."

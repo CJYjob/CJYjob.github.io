@@ -9,13 +9,13 @@ tags: ["Investment", "ETF"]
 
 ## 백테스트 엔진 — 손익·비용·검증 (셀 5~8)
 
-[구현 편](/portfolio/investing/stock/practice/part-09-implementation/)이 9단계 절차의 **1·3·4**(데이터 조립·국면 분류·포지션 매핑)였다면, 이 장은 남은 **2(미래참조 차단)·5(비용)·6(손익·벤치마크)·7(성과지표)·8(임계값 검증)** 을 코드로 채운다. 백테스트·과적합의 *개념*은 [투자 기초 ⑥](/portfolio/investing/stock/theory/part-06-derivatives-etf-mechanism/)에서, 위험조정 지표는 [성과 지표 편](/portfolio/investing/stock/practice/part-06-position-and-metrics/)에서 이미 다뤘으므로 여기서는 이 전략에 맞춘 *집행*에 집중한다.
+[구현 편](/portfolio/investing/stock/practice/part-09-implementation/)이 9단계 절차의 **1·3·4**(데이터 조립·국면 분류·포지션 매핑)였다면, 이 장은 남은 **2(미래참조 차단)·5(비용)·6(손익·벤치마크)·7(성과지표)·8(임계값 검증)** 을 코드로 채운다. 백테스트·과적합의 *개념*은 [투자 기초 ⑥](/portfolio/investing/stock/theory/part-06-derivatives-etf-mechanism/)에서, 위험조정 지표는 [성과 지표 편](/portfolio/investing/stock/strategy/part-06-position-and-metrics/)에서 이미 다뤘으므로 여기서는 이 전략에 맞춘 *집행*에 집중한다.
 
 설계의 핵심 두 가지를 코드로 못박는다.
 
 첫째, **미래참조(look-ahead) 차단**이다. 종가에 체결하는 포지션은 그 시점에 *이미 확정된* 정보만 써야 한다. 가격 신호는 전일(t−1) 기준으로 당일(t) 종가에 집행하고(`exec_lag=1`), 수급은 장 마감 후(KRX 기준 15:35·18:00)에 공시되므로 지표 계산 전에 하루 더 지연시킨다(`flow_lag=1`). 셀 4의 라벨은 *같은 날* 데이터로 만든 설명용이라, 손익 검증에서는 이 두 지연을 적용해 다시 라벨링한다.
 
-둘째, **손익은 실제 ETF 가격으로** 계산한다. 인버스는 현물 지수가 아니라 F-지수(선물)를 추종하고 일일 −1배 리밸런싱의 decay가 끼므로, 지수에 −1배를 곱하면 맞지 않는다([메커니즘 편](/portfolio/investing/stock/practice/part-05-etf-futures-cost/)). 신호는 지수로 만들되 손익은 4개 ETF의 실제 가격으로 계산한다.
+둘째, **손익은 실제 ETF 가격으로** 계산한다. 인버스는 현물 지수가 아니라 F-지수(선물)를 추종하고 일일 −1배 리밸런싱의 decay가 끼므로, 지수에 −1배를 곱하면 맞지 않는다([메커니즘 편](/portfolio/investing/stock/strategy/part-05-etf-futures-cost/)). 신호는 지수로 만들되 손익은 4개 ETF의 실제 가격으로 계산한다.
 
 ### 셀 5 — 실제 ETF 일봉 수집 (손익 검증용)
 
@@ -51,7 +51,7 @@ for idxname,(lname,iname) in ETF.items():
 
 ### 셀 6 — 백테스트 엔진 (미래참조 차단·비용·세금)
 
-비용·세금 모델은 [메커니즘 편](/portfolio/investing/stock/practice/part-05-etf-futures-cost/)의 비대칭을 그대로 반영한다. 거래된 금액에 수수료+슬리피지를 양변으로 물리고, **인버스 다리를 줄일 때(매도) 실현이익에만** 15.4%를 매긴다(정방향은 비과세라 거래비용만). 리밸런싱은 국면이 바뀌거나 어느 다리든 비중 이탈이 밴드(기본 5%)를 넘을 때만 일어난다 — A 모드(추세)에서는 목표가 안정적이라 거의 거래하지 않고, 횡보(B 모드)에서는 출렁임에 따라 밴드를 넘나들며 변동성 수확이 자연히 일어난다.
+비용·세금 모델은 [메커니즘 편](/portfolio/investing/stock/strategy/part-05-etf-futures-cost/)의 비대칭을 그대로 반영한다. 거래된 금액에 수수료+슬리피지를 양변으로 물리고, **인버스 다리를 줄일 때(매도) 실현이익에만** 15.4%를 매긴다(정방향은 비과세라 거래비용만). 리밸런싱은 국면이 바뀌거나 어느 다리든 비중 이탈이 밴드(기본 5%)를 넘을 때만 일어난다 — A 모드(추세)에서는 목표가 안정적이라 거의 거래하지 않고, 횡보(B 모드)에서는 출렁임에 따라 밴드를 넘나들며 변동성 수확이 자연히 일어난다.
 
 ```python
 # ===== 셀 6: 백테스트 엔진 (미래참조 차단·비용·세금·리밸런싱 밴드) =====
@@ -112,7 +112,7 @@ def relabel_safe(index_name, params):
 
 ### 셀 7 — 지수별 실행 + 벤치마크 비교
 
-신호는 지수로 만든 라벨, 손익은 ETF 가격. 단순보유(정방향)·정적 50:50·전액 현금과 나란히 둔다. [성과 지표 편](/portfolio/investing/stock/practice/part-06-position-and-metrics/)에서 강조했듯 수익률 한 줄이 아니라 MDD·샤프 같은 위험조정 지표를 함께 본다.
+신호는 지수로 만든 라벨, 손익은 ETF 가격. 단순보유(정방향)·정적 50:50·전액 현금과 나란히 둔다. [성과 지표 편](/portfolio/investing/stock/strategy/part-06-position-and-metrics/)에서 강조했듯 수익률 한 줄이 아니라 MDD·샤프 같은 위험조정 지표를 함께 본다.
 
 ```python
 # ===== 셀 7: 지수별 백테스트 실행 + 벤치마크 비교 =====
@@ -183,5 +183,5 @@ print("→ 학습·검증 둘 다 안정적으로 양호한 구간을 고른다(
 ### 남은 단계
 
 - **9단계(지수별 별도)** 는 `PARAMS`로 이미 분리되어 있다. 다음은 학습/검증으로 KOSPI200·KOSDAQ150 임계값 표를 각각 *데이터로* 확정하는 일이다.
-- **정교화:** 비차익 수급 분리([수급 편](/portfolio/investing/stock/practice/part-04-supply-demand/)), 베이시스·차익잔고·만기 플래그([메커니즘 편](/portfolio/investing/stock/practice/part-05-etf-futures-cost/))를 국면 전이 *조기경보* 로 얹는다 — 단, 규칙이 늘면 과적합 위험도 늘므로 "최소 작동 모델 → 확장" 순서를 지킨다.
+- **정교화:** 비차익 수급 분리([수급 편](/portfolio/investing/stock/strategy/part-04-supply-demand/)), 베이시스·차익잔고·만기 플래그([메커니즘 편](/portfolio/investing/stock/strategy/part-05-etf-futures-cost/))를 국면 전이 *조기경보* 로 얹는다 — 단, 규칙이 늘면 과적합 위험도 늘므로 "최소 작동 모델 → 확장" 순서를 지킨다.
 - **자동매매([자동매매 편](/portfolio/investing/stock/practice/part-11-automation/))로 연결:** 동일한 신호 계산을 매일 돌려 종가 무렵 목표비중대로 주문하면 된다. 일 1회 종가·비중 리밸런싱이라 키움 REST API로 충분하다.

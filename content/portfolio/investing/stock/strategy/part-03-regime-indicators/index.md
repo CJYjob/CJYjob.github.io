@@ -1,5 +1,5 @@
 ---
-title: "투자 실습 ③ 국면 판별 지표"
+title: "투자 전략 ③ 국면 판별 지표"
 date: 2026-06-09
 draft: false
 description: "지표 6분류와 국면 라벨링에 쓰는 4개(SMA·ADX·BB %B·수급 z-score)의 원리·계산을 정리한다."

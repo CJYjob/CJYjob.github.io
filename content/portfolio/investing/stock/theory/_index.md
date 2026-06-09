@@ -44,4 +44,4 @@ cascade:
 
 `경제·시장 → 금융상품 → 재무제표 → 기업분석 → 기술적 지표 → 파생·ETF 메커니즘 → 판단 구조 → 규칙 기반 투자 → 모의투자`
 
-여기서 익힌 구조는 [투자 실습](/portfolio/investing/stock/practice/part-01-foundation-and-edge/) 트랙에서 코스피200·코스닥150 양방향 ETF 전략으로 구현된다.
+여기서 익힌 구조는 [투자 실습](/portfolio/investing/stock/strategy/part-01-foundation-and-edge/) 트랙에서 코스피200·코스닥150 양방향 ETF 전략으로 구현된다.

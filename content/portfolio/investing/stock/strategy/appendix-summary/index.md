@@ -1,5 +1,5 @@
 ---
-title: "투자 실습 · 부록 B 핵심 요약"
+title: "투자 전략 · 부록 B 핵심 요약"
 date: 2026-06-09
 draft: false
 description: "양방향 ETF 전략 전체를 한 장으로 줄인 핵심 요약."
