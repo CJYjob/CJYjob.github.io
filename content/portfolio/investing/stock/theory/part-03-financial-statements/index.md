@@ -3,7 +3,7 @@ title: "투자 기초 ③ 재무제표 읽기의 시작"
 date: 2026-06-05
 draft: false
 description: "재무상태표, 손익계산서, 현금흐름표와 부채비율, 영업이익률, ROE, ROA, PER, PBR의 의미를 이해하고 기업을 바라보는 기본적인 분석 틀을 정리한다."
-summary: "재무상태표, 손익계산서, 현금흐름표와 기본 투자 지표
+summary: "재무상태표, 손익계산서, 현금흐름표와 기본 투자 지표"
 weight: 30
 categories: ["Investment"]
 tags: ["Investment", "Basics", "Accounting"]
