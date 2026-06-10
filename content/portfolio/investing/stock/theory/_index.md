@@ -2,7 +2,7 @@
 title: "주식 투자 이론"
 date: 2026-06-08
 draft: false
-description: "절세계좌, 시장 구조와 금융상품, 재무제표, 기업 분석, 기술적 지표, 파생·ETF 메커니즘, 투자 판단 구조, 규칙 기반 투자, 모의투자까지 주식 투자의 이론적 토대를 정리한다."
+description: ""
 categories: ["Portfolio", "Investment"]
 tags: ["Investment", "Foundations"]
 weight: 10
