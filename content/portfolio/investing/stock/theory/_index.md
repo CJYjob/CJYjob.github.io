@@ -2,7 +2,7 @@
 title: "투자 이론"
 date: 2026-06-08
 draft: false
-description: "절세 계좌 → 경제·시장·금융상품 → 재무제표 → 기업분석 → 기술적 지표 → 파생·ETF 메커니즘 → 판단 구조 → 규칙 기반 투자 → 모의투자"
+description: "주식 투자에 대해 `절세 계좌 → 경제·시장·금융상품 → 재무제표 → 기업분석 → 기술적 지표 → 파생·ETF 메커니즘 → 판단 구조 → 규칙 기반 투자 → 모의투자` 순으로 공부한다."
 summary: "주식 투자의 이론적 토대 (1부 ~ 9부)"
 categories: ["Portfolio", "Investment"]
 tags: ["Investment", "Foundations"]
@@ -13,7 +13,6 @@ cascade:
   - weight: 10
     target: { path: "{/portfolio/investing/stock/theory/part-01-products-and-accounts,/portfolio/investing/stock/theory/part-01-products-and-accounts/**}" }
   - weight: 20
-    summary: "시장 구조와 기본적인 금융 상품(예금, 채권, 펀드, ETF) 및 자산배분의 기본 개념을 정리한다."
     target: { path: "{/portfolio/investing/stock/theory/part-02-market-structure,/portfolio/investing/stock/theory/part-02-market-structure/**}" }
   - weight: 30
     summary: "재무상태표, 손익계산서, 현금흐름표와 기본 투자 지표를 정리한다."
@@ -38,4 +37,4 @@ cascade:
     target: { path: "{/portfolio/investing/stock/theory/part-09-mock-investment,/portfolio/investing/stock/theory/part-09-mock-investment/**}" }
 ---
 
-여기서 익힌 이론은 [투자 전략](/portfolio/investing/stock/strategy/) 트랙에서 전략 수립의 바탕이 된다.
+여기서 익힌 이론은 [투자 전략](/portfolio/investing/stock/strategy/) 트랙에서 전략 수립의 바탕이 됩니다.
