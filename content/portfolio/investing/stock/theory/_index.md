@@ -2,7 +2,7 @@
 title: "투자 이론"
 date: 2026-06-08
 draft: false
-description: "시장 구조, 금융상품·절세계좌, 재무제표, 기업 분석, 기술적 지표, 파생·ETF 메커니즘, 투자 판단 구조, 규칙 기반 투자, 모의투자까지 투자의 이론적 토대를 정리한다."
+description: "절세계좌, 시장 구조와 금융상품, 재무제표, 기업 분석, 기술적 지표, 파생·ETF 메커니즘, 투자 판단 구조, 규칙 기반 투자, 모의투자까지 투자의 이론적 토대를 정리한다."
 categories: ["Portfolio", "Investment"]
 tags: ["Investment", "Foundations"]
 weight: 10
@@ -10,11 +10,11 @@ ShowToc: true
 TocOpen: true
 cascade:
   - weight: 10
-    summary: "시장 구조와 자산배분의 기본 개념을 정리한다."
-    target: { path: "{/portfolio/investing/stock/theory/part-01-market-structure,/portfolio/investing/stock/theory/part-01-market-structure/**}" }
+    summary: "ISA, 연금저축, IRP 등 투자상품과 절세 계좌를 정리한다."
+    target: { path: "{/portfolio/investing/stock/theory/part-01-products-and-accounts,/portfolio/investing/stock/theory/part-01-products-and-accounts/**}" }
   - weight: 20
-    summary: "예금, 채권, 펀드, ETF, ISA, 연금저축, IRP 등 투자상품과 절세 계좌를 정리한다."
-    target: { path: "{/portfolio/investing/stock/theory/part-02-products-and-accounts,/portfolio/investing/stock/theory/part-02-products-and-accounts/**}" }
+    summary: "시장 구조와 기본적인 금융 상품(예금, 채권, 펀드, ETF) 및 자산배분의 기본 개념을 정리한다."
+    target: { path: "{/portfolio/investing/stock/theory/part-02-market-structure,/portfolio/investing/stock/theory/part-02-market-structure/**}" }
   - weight: 30
     summary: "재무상태표, 손익계산서, 현금흐름표와 기본 투자 지표를 정리한다."
     target: { path: "{/portfolio/investing/stock/theory/part-03-financial-statements,/portfolio/investing/stock/theory/part-03-financial-statements/**}" }
@@ -42,6 +42,6 @@ cascade:
 
 이 트랙은 투자 판단의 이론적 토대를 1부부터 9부까지 정리한다.
 
-`경제·시장 → 금융상품 → 재무제표 → 기업분석 → 기술적 지표 → 파생·ETF 메커니즘 → 판단 구조 → 규칙 기반 투자 → 모의투자`
+`절세 계좌 → 경제·시장·금융상품 → 재무제표 → 기업분석 → 기술적 지표 → 파생·ETF 메커니즘 → 판단 구조 → 규칙 기반 투자 → 모의투자`
 
-여기서 익힌 구조는 [투자 실습](/portfolio/investing/stock/strategy/part-01-foundation-and-edge/) 트랙에서 코스피200·코스닥150 양방향 ETF 전략으로 구현된다.
+여기서 익힌 이론은 [투자 실습](/portfolio/investing/stock/strategy/) 트랙에서 투자 전략 기획의 바탕이 된다.

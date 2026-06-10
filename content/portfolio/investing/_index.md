@@ -2,7 +2,7 @@
 title: "투자"
 date: 2026-06-09
 draft: false
-description: "자산군별 투자 학습. 현재는 주식(코스피200·코스닥150)을 이론과 실습으로 정리한다."
+description: "자산군별 투자 학습."
 categories: ["Portfolio", "Investment"]
 tags: ["Investment"]
 ShowToc: false
@@ -10,6 +10,7 @@ ShowToc: false
 
 ## 개요
 
-자산군별로 투자 학습을 정리한다. 현재 트랙은 다음과 같다.
+자산군별로 투자 학습을 정리한다. 
+각 자산군은 이론 > 전략 > 실습 순으로 진행한다.
 
-- **[주식](/portfolio/investing/stock/)** — 코스피200·코스닥150 중심. 이론과 실습으로 나뉜다.
+- **[주식](/portfolio/investing/stock/)** 
