@@ -2,10 +2,9 @@
 title: "투자"
 date: 2026-06-09
 draft: false
-description: ""
+description: "주식, 채권, 부동산, 현물(금) 자산군별 투자에 대해 공부합니다."
+summary: "자산군별 투자 공부"
 categories: ["Portfolio", "Investment"]
 tags: ["Investment"]
 ShowToc: false
 ---
-
-자산군별 투자를 '이론 학습 → 전략 수립 → 실습 및 기록'으로 진행한다.

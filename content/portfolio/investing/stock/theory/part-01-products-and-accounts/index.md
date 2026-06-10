@@ -1,9 +1,9 @@
 ---
-title: "투자 기초 ② 투자상품과 절세 계좌"
+title: "투자 기초 ① 절세 계좌"
 date: 2026-06-05
 draft: false
 description: "ETF의 구조와 투자 계좌의 역할, ISA·연금저축·IRP 같은 절세 계좌의 의미를 정리한다."
-summary: "예금, 채권, 펀드, ETF, ISA, 연금저축, IRP 등 투자상품과 절세 계좌를 정리한다."
+summary: "ISA, 연금저축, IRP 등 투자상품과 절세 계좌를 정리한다."
 weight: 20
 categories: ["Investment"]
 tags: ["Investment", "Basics"]
