@@ -13,5 +13,6 @@ desktop.ini
 
 # Environment
 .env
-.env.localmigrate_investing_stock.sh
+.env.local
+migrate_investing_stock.sh
 *:Zone.Identifier
