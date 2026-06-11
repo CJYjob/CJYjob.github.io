@@ -14,3 +14,4 @@ desktop.ini
 # Environment
 .env
 .env.localmigrate_investing_stock.sh
+*:Zone.Identifier
