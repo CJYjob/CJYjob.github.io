@@ -1,40 +1,34 @@
 ---
-title: "Workout Log"
+title: "운동 기록"
 date: 2026-05-28
 draft: false
-description: "Workout data, strength, cardio, and conditioning log."
+description: "운동 기록 공개 페이지"
 ---
 
-# Workout Log
+# 운동 기록
 
-## Strength volume, last 30 days
+## 웨이트 (최근 30일)
 
 {{< workout-volume-chart days="30" >}}
 
-## Cardio, last 30 days
+## 유산소 (최근 30일)
 
 {{< workout-cardio-chart days="30" >}}
 
-## Analysis
+## 분석
 
-Workout data has been merged through the 2026-06-10 morning session.
+현재 운동 기록은 2026-06-10 아침 세션까지 병합되었습니다.
 
-Current totals:
-- Records: 41
-- Sessions: 8
-- Total duration: about 458.31 min
-- Cardio distance: about 10.20 km
-- Strength volume: about 15,836.37 kg
+- 누적 기록: 41건
+- 세션: 8회
+- 총 운동 시간: 약 458.31분
+- 유산소 거리: 약 10.20km
+- 누적 웨이트 볼륨: 약 15,836.37kg
 
-The 2026-06-10 morning session was adjusted because left shoulder discomfort was still present. Upper-body strength work was skipped. The session kept the fitness base with incline treadmill work, upper-body joint warm-up, and light knee functional exercise.
+2026-06-10 아침 세션은 왼쪽 어깨 불편감이 지속되어 상체 웨이트를 제외하고 진행했습니다. 인클라인 트레드밀은 총 22분, 약 1.18km 수행했고, 상체 관절 풀기 3분과 무릎 기능 운동 약 4.65분을 기록했습니다.
 
-2026-06-10 session summary:
-- Incline treadmill: 22 min, about 1.18 km
-- Upper-body joint warm-up: 3 min
-- Knee functional exercise: about 4.65 min
+다음 상체 웨이트는 벤치프레스나 숄더프레스가 아니라, 통증 확인용 저강도 테스트로만 재진입합니다. 우선순위는 가벼운 로우, 외회전, 견갑 안정화입니다. 일상 동작에서 불편감이 줄지 않거나 운동 중 불편감이 증가하면 상체 웨이트 재진입은 연기합니다.
 
-Upper-body strength should restart only as a low-intensity shoulder check. The first movements should be light rows, external rotation, and scapular stability work instead of bench press or shoulder press.
-
-## Workout records
+## 운동 기록 (일자 내림차순)
 
 {{< datatable activity="workout" sort="date desc" >}}
