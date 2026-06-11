@@ -29,7 +29,7 @@ tags: ["Investment", "ETF"]
 
 ### KOSPI vs KOSDAQ — 규모 차이가 만드는 것
 
-(두 시장의 기본 정의·상장 기준은 [투자 기초 ①](/portfolio/investing/stock/theory/part-01-market-structure/) 참조. 여기서는 전략에 영향을 주는 *행태 차이*만 본다.)
+(두 시장의 기본 정의·상장 기준은 [투자 기초 ②](/portfolio/investing/stock/theory/part-02-market-structure/) 참조. 여기서는 전략에 영향을 주는 *행태 차이*만 본다.)
 
 | 항목 | KOSPI 200 | KOSDAQ 150 |
 |---|---|---|
