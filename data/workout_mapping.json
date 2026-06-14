@@ -58,5 +58,24 @@
     "target_muscles": [
       "Pectoralis Major"
     ]
+  },
+  {
+    "exercise": "Adductor Machine",
+    "target_muscles": [
+      "Hip Adductors"
+    ]
+  },
+  {
+    "exercise": "Abductor Machine",
+    "target_muscles": [
+      "Gluteus Medius"
+    ]
+  },
+  {
+    "exercise": "Squat",
+    "target_muscles": [
+      "Quadriceps",
+      "Hamstrings"
+    ]
   }
 ]
