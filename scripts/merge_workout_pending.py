@@ -2,173 +2,176 @@
 from __future__ import annotations
 
 import json
-import re
 from datetime import datetime
 from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
-WORKOUT_PATH = ROOT / "data" / "workout.json"
-PAGE_PATH = ROOT / "content" / "portfolio" / "workout" / "index.md"
-PENDING_PATTERN = "workout_pending_*.json"
+DATA = ROOT / "data"
+WORKOUT = DATA / "workout.json"
+PAGE = ROOT / "content" / "portfolio" / "workout" / "index.md"
 
-def read_json(path: Path) -> list[dict[str, Any]]:
+
+def load(path: Path) -> list[dict[str, Any]]:
     data = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(data, list):
-        raise ValueError(f"{path} must contain a JSON array.")
-    for idx, item in enumerate(data):
-        if not isinstance(item, dict):
-            raise ValueError(f"{path} item {idx} must be an object.")
+    if not isinstance(data, list) or not all(isinstance(x, dict) for x in data):
+        raise ValueError(f"{path} must be a JSON array of objects")
     return data
 
-def write_json(path: Path, data: list[dict[str, Any]]) -> None:
+
+def save(path: Path, data: list[dict[str, Any]]) -> None:
     path.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
 
-def record_key(record: dict[str, Any]) -> tuple[Any, ...]:
-    return (
-        record.get("date"),
-        record.get("session_id"),
-        record.get("type"),
-        record.get("exercise"),
-        record.get("started_at"),
-        record.get("ended_at"),
-    )
 
-def validate_record(record: dict[str, Any], index: int) -> None:
-    required = ["date", "session_id", "type", "exercise", "started_at", "ended_at", "duration_min", "note"]
-    for field in required:
-        if field not in record:
-            raise ValueError(f"record {index} missing required field: {field}")
-    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(record["date"])):
-        raise ValueError(f"record {index} has invalid date: {record['date']}")
-    started = datetime.fromisoformat(str(record["started_at"]))
-    ended = datetime.fromisoformat(str(record["ended_at"]))
-    duration = float(record["duration_min"])
-    actual = (ended - started).total_seconds() / 60
-    if abs(actual - duration) > 0.08:
-        raise ValueError(f"record {index} duration mismatch: duration_min={duration}, actual={actual:.2f}")
-    if record["type"] in {"strength", "prehab"} and "sets" in record:
-        if not isinstance(record["sets"], list):
-            raise ValueError(f"record {index} sets must be a list.")
-        for set_idx, item in enumerate(record["sets"]):
-            for field in ["set_number", "weight_kg", "reps", "volume_kg", "rest_sec"]:
-                if field not in item:
-                    raise ValueError(f"record {index} set {set_idx} missing field: {field}")
-            expected = round(float(item["weight_kg"]) * int(item["reps"]), 2)
-            actual_volume = round(float(item["volume_kg"]), 2)
-            if abs(expected - actual_volume) > 0.02:
-                raise ValueError(f"record {index} set {set_idx} volume mismatch: expected={expected}, actual={actual_volume}")
-    if record["type"] == "cardio" and "distance_km" in record and float(record["distance_km"]) < 0:
-        raise ValueError(f"record {index} has negative distance_km.")
+def key(r: dict[str, Any]) -> tuple[Any, ...]:
+    return (r.get("date"), r.get("session_id"), r.get("type"), r.get("exercise"), r.get("started_at"), r.get("ended_at"))
 
-def validate_all(records: list[dict[str, Any]]) -> None:
+
+def validate(records: list[dict[str, Any]]) -> None:
+    required = {"date", "session_id", "type", "exercise", "started_at", "ended_at", "duration_min", "note"}
     seen = set()
-    for idx, record in enumerate(records):
-        validate_record(record, idx)
-        key = record_key(record)
-        if key in seen:
-            raise ValueError(f"duplicate workout record detected: {key}")
-        seen.add(key)
+    for i, r in enumerate(records):
+        missing = required - set(r)
+        if missing:
+            raise ValueError(f"record {i} missing {sorted(missing)}")
+        started = datetime.fromisoformat(str(r["started_at"]))
+        ended = datetime.fromisoformat(str(r["ended_at"]))
+        actual = (ended - started).total_seconds() / 60
+        if abs(actual - float(r["duration_min"])) > 0.08:
+            raise ValueError(f"record {i} duration mismatch")
+        for s in r.get("sets", []):
+            expected = round(float(s["weight_kg"]) * int(s["reps"]), 2)
+            if abs(expected - round(float(s["volume_kg"]), 2)) > 0.02:
+                raise ValueError(f"record {i} volume mismatch")
+        k = key(r)
+        if k in seen:
+            raise ValueError(f"duplicate record {k}")
+        seen.add(k)
 
-def merge_records(workout_records: list[dict[str, Any]], pending_records: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], int]:
-    existing = {record_key(record) for record in workout_records}
+
+def correct(records: list[dict[str, Any]]) -> int:
+    changed = 0
+    for r in records:
+        if (
+            r.get("date") == "2026-06-08"
+            and r.get("session_id") == "2026-06-08-evening"
+            and r.get("exercise") == "Machine Arm Curl"
+            and r.get("started_at") == "2026-06-08T20:16:31+09:00"
+            and r.get("ended_at") == "2026-06-08T20:21:11+09:00"
+        ):
+            r["exercise"] = "Straight-Arm Pulldown"
+            r["target_muscles"] = ["Latissimus Dorsi"]
+            note = str(r.get("note", ""))
+            marker = "Corrected from Machine Arm Curl / Biceps Brachii to Straight-Arm Pulldown / Latissimus Dorsi."
+            if marker not in note:
+                r["note"] = note + ("\n" if note else "") + marker
+            changed += 1
+
+        if (
+            r.get("date") == "2026-06-14"
+            and r.get("session_id") == "2026-06-14-afternoon"
+            and r.get("exercise") == "Squat"
+            and r.get("target_muscles") != ["Lower Body Muscles"]
+        ):
+            r["target_muscles"] = ["Lower Body Muscles"]
+            note = str(r.get("note", ""))
+            marker = "Target muscle corrected to Lower Body Muscles."
+            if marker not in note:
+                r["note"] = note + ("\n" if note else "") + marker
+            changed += 1
+    return changed
+
+
+def merge(records: list[dict[str, Any]], pending: list[dict[str, Any]]) -> int:
+    seen = {key(r) for r in records}
     added = 0
-    for record in pending_records:
-        key = record_key(record)
-        if key not in existing:
-            workout_records.append(record)
-            existing.add(key)
-            added += 1
-    workout_records.sort(key=lambda item: (item.get("date", ""), item.get("ended_at", "")))
-    return workout_records, added
-
-def calculate_stats(records: list[dict[str, Any]]) -> dict[str, float | int | str]:
-    sessions = {record["session_id"] for record in records}
-    total_duration = sum(float(record.get("duration_min", 0)) for record in records)
-    cardio_distance = sum(float(record.get("distance_km", 0)) for record in records if record.get("type") == "cardio")
-    volume = 0.0
-    for record in records:
-        if record.get("type") != "strength":
+    for r in pending:
+        if key(r) in seen:
             continue
-        for item in record.get("sets", []):
-            volume += float(item.get("volume_kg", 0))
-    latest_date = max((str(record["date"]) for record in records), default="")
+        records.append(r)
+        seen.add(key(r))
+        added += 1
+    records.sort(key=lambda r: (r.get("date", ""), r.get("ended_at", "")))
+    return added
+
+
+def stats(records: list[dict[str, Any]]) -> dict[str, Any]:
+    latest = max((str(r["date"]) for r in records), default="")
     return {
+        "latest": latest,
         "count": len(records),
-        "sessions": len(sessions),
-        "total_duration": round(total_duration, 2),
-        "cardio_distance": round(cardio_distance, 2),
-        "strength_volume": round(volume, 2),
-        "latest_date": latest_date,
+        "sessions": len({r["session_id"] for r in records}),
+        "duration": round(sum(float(r.get("duration_min", 0)) for r in records), 2),
+        "distance": round(sum(float(r.get("distance_km", 0)) for r in records if r.get("type") == "cardio"), 2),
+        "volume": round(sum(float(s.get("volume_kg", 0)) for r in records if r.get("type") == "strength" for s in r.get("sets", [])), 2),
     }
 
-def render_page(records: list[dict[str, Any]], stats: dict[str, float | int | str]) -> str:
-    latest_records = [r for r in records if r["date"] == stats["latest_date"]]
-    latest_cardio_min = sum(float(r.get("duration_min", 0)) for r in latest_records if r.get("type") == "cardio")
-    latest_cardio_km = sum(float(r.get("distance_km", 0)) for r in latest_records if r.get("type") == "cardio")
-    latest_mobility = sum(float(r.get("duration_min", 0)) for r in latest_records if r.get("type") == "mobility")
-    latest_prehab = sum(float(r.get("duration_min", 0)) for r in latest_records if r.get("type") == "prehab")
-    shoulder_note = ""
-    if any("shoulder discomfort" in str(r.get("note", "")).lower() for r in latest_records):
-        shoulder_note = (
-            "\n\n최근 세션에서는 왼쪽 어깨 불편감이 지속되어 상체 웨이트를 제외하고, "
-            "유산소·관절 풀기·무릎 기능 운동으로 세션을 전환했습니다. "
-            "다음 상체 웨이트는 통증 확인용 저강도 테스트로만 재진입합니다."
-        )
-    return f'''---
+
+def render(records: list[dict[str, Any]]) -> str:
+    s = stats(records)
+    latest = [r for r in records if r["date"] == s["latest"]]
+    cardio_min = sum(float(r.get("duration_min", 0)) for r in latest if r.get("type") == "cardio")
+    cardio_km = sum(float(r.get("distance_km", 0)) for r in latest if r.get("type") == "cardio")
+    mobility = sum(float(r.get("duration_min", 0)) for r in latest if r.get("type") == "mobility")
+    prehab = sum(float(r.get("duration_min", 0)) for r in latest if r.get("type") == "prehab")
+    return f"""---
 title: "운동 기록"
 date: 2026-05-28
 draft: false
-description: "정형 데이터, 근력, 유산소, 체력 운동 기록 공개 페이지"
+description: "정형 데이터, 근력, 유산소와 체력 운동 기록 공개 페이지"
 ---
 
 # 운동 기록
 
-## 웨이트 (최근 30일, strength)
+## 웨이트 ({s["latest"]} 기준 최근 30일, strength)
 
 {{{{< workout-volume-chart days="30" >}}}}
 
-## 유산소 (최근 30일, cardio)
+## 유산소 ({s["latest"]} 기준 최근 30일, cardio)
 
 {{{{< workout-cardio-chart days="30" >}}}}
 
 ## 분석
 
-현재 누적 기준으로 운동 기록은 {stats["latest_date"]} 세션까지 병합되어 있습니다. 누적 기록은 총 {stats["count"]}건, 세션 {stats["sessions"]}회, 총 운동 시간 약 {stats["total_duration"]}분, 유산소 거리 약 {stats["cardio_distance"]}km, 누적 웨이트 볼륨 약 {stats["strength_volume"]}kg입니다.
+현재 누적 기준으로 운동 기록은 총 {s["count"]}건, 세션 {s["sessions"]}회, 총 운동 시간 약 {s["duration"]}분, 유산소 거리 약 {s["distance"]}km, 누적 웨이트 볼륨 약 {s["volume"]}kg입니다.
 
-최근 세션 기준으로 유산소는 약 {latest_cardio_min:.0f}분, 약 {latest_cardio_km:.2f}km 수행되었습니다. 관절 풀기와 회복성 움직임은 약 {latest_mobility:.2f}분, 무릎 기능 운동은 약 {latest_prehab:.2f}분 기록되었습닄.{shoulder_note}
+최근 세션 기준으로 유산소는 약 {cardio_min:.0f}분, 약 {cardio_km:.2f}km 수행되었습니다. 관절 품질과 회복성, 움직임 준비는 약 {mobility:.2f}분, 무릎 기능 운동은 약 {prehab:.2f}분 기록되었습니다.
 
-현재 운동 패턴은 인클라인 트레드밀을 기본 유산소 축으로 두고, 상체 웨이트는 어깨 상태에 따라 조절합니다. `Dumbbell Incline Bench Press`는 상부 대흉근, `Dumbbell Incline Bench Row`와 `Seated Row`는 중부 승모근, `Side Lateral Raise`는 측면 삼각근, `Lat Pulldown`, `Straight-Arm Pulldown`, `Assisted Chin-Up`은 광배근 기준으로 정리합니다.
+현재 운동 패턴은 일관된 트레드밀을 기본 유산소 축으로 두고, 상체 웨이트는 어깨 상태에 따라 조정됩니다. 웨이트 그래프는 운동 종류가 아니라 타겟 근육별 누적 볼륨으로 표시됩니다.
 
 ## 운동 기록 (일자 내림차순)
 
 {{{{< datatable activity="workout" sort="date desc" >}}}}
-'''
+"""
+
 
 def main() -> None:
-    if not WORKOUT_PATH.exists():
-        raise FileNotFoundError(WORKOUT_PATH)
-    pending_paths = sorted((ROOT / "data").glob(PENDING_PATTERN))
-    if not pending_paths:
-        print("No pending workout files found. Nothing to merge.")
-        return
-    workout_records = read_json(WORKOUT_PATH)
-    pending_records: list[dict[str, Any]] = []
-    for path in pending_paths:
-        pending_records.extend(read_json(path))
-    validate_all(workout_records)
-    validate_all(pending_records)
-    merged_records, added = merge_records(workout_records, pending_records)
-    validate_all(merged_records)
-    if added:
-        write_json(WORKOUT_PATH, merged_records)
-        PAGE_PATH.write_text(render_page(merged_records, calculate_stats(merged_records)), encoding="utf-8")
-        print(f"Merged {added} workout records.")
+    records = load(WORKOUT)
+    corrections = correct(records)
+
+    pending_paths = sorted(DATA.glob("workout_pending_*.json"))
+    pending: list[dict[str, Any]] = []
+    for p in pending_paths:
+        pending.extend(load(p))
+
+    validate(records)
+    if pending:
+        validate(pending)
+
+    added = merge(records, pending) if pending else 0
+    validate(records)
+
+    if corrections or added:
+        save(WORKOUT, records)
+        PAGE.write_text(render(records), encoding="utf-8")
+        print(f"Applied {corrections} corrections and merged {added} records.")
     else:
-        print("Pending records were already present in workout.json.")
-    for path in pending_paths:
-        path.unlink()
-        print(f"Removed pending file: {path.relative_to(ROOT)}")
+        print("No pending workout files or workout corrections found. Nothing to merge.")
+
+    for p in pending_paths:
+        p.unlink()
+        print(f"Removed pending file: {p.relative_to(ROOT)}")
+
 
 if __name__ == "__main__":
     main()
