@@ -77,5 +77,23 @@
       "Quadriceps",
       "Hamstrings"
     ]
+  },
+  {
+    "exercise": "Vertical Row",
+    "target_muscles": [
+      "Middle Trapezius"
+    ]
+  },
+  {
+    "exercise": "Reverse Pec Deck",
+    "target_muscles": [
+      "Posterior Deltoids"
+    ]
+  },
+  {
+    "exercise": "Face Pull",
+    "target_muscles": [
+      "Posterior Deltoids"
+    ]
   }
 ]
