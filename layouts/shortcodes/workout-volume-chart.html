@@ -14,6 +14,7 @@
   });
 
   const data = JSON.parse({{ site.Data.workout | jsonify }});
+  const mapping = JSON.parse({{ site.Data.workout_mapping | jsonify }});
   const days = {{ $days }};
   const cutoff = new Date();
   cutoff.setDate(cutoff.getDate() - days);
@@ -26,11 +27,17 @@
     'Upper Pectoralis Major',
     'Pectoralis Major',
     'Lower Pectoralis Major',
-    'Middle Trapezius',
     'Latissimus Dorsi',
+    'Middle Trapezius',
+    'Posterior Deltoids',
     'Rear Deltoids',
     'Lateral Deltoids',
     'Biceps Brachii',
+    'Hip Adductors',
+    'Gluteus Medius',
+    'Lower Body Muscles',
+    'Quadriceps',
+    'Hamstrings',
     'Other'
   ];
 
@@ -38,11 +45,17 @@
     'Upper Pectoralis Major': 'hsl(0, 75%, 55%)',
     'Pectoralis Major': 'hsl(0, 60%, 55%)',
     'Lower Pectoralis Major': 'hsl(0, 45%, 55%)',
-    'Middle Trapezius': 'hsl(210, 65%, 55%)',
     'Latissimus Dorsi': 'hsl(135, 65%, 55%)',
-    'Rear Deltoids': 'hsl(260, 65%, 55%)',
+    'Middle Trapezius': 'hsl(210, 65%, 55%)',
+    'Posterior Deltoids': 'hsl(260, 65%, 55%)',
+    'Rear Deltoids': 'hsl(260, 55%, 55%)',
     'Lateral Deltoids': 'hsl(285, 65%, 55%)',
     'Biceps Brachii': 'hsl(35, 65%, 55%)',
+    'Hip Adductors': 'hsl(315, 45%, 55%)',
+    'Gluteus Medius': 'hsl(110, 45%, 50%)',
+    'Lower Body Muscles': 'hsl(45, 65%, 50%)',
+    'Quadriceps': 'hsl(45, 70%, 52%)',
+    'Hamstrings': 'hsl(25, 60%, 50%)',
     'Other': 'hsl(60, 45%, 55%)'
   };
 
@@ -58,43 +71,70 @@
 
   const colorForMuscle = muscle => muscleColor[muscle] || fallbackMuscleColor(muscle);
 
-  const targetMusclesByExercise = new Map();
-  const primaryMuscleByExercise = new Map();
-  strength.forEach(r => {
-    if (!primaryMuscleByExercise.has(r.exercise)) {
-      const muscles = Array.isArray(r.target_muscles) && r.target_muscles.length > 0
-        ? r.target_muscles
-        : ['Other'];
-      targetMusclesByExercise.set(r.exercise, muscles);
-      primaryMuscleByExercise.set(r.exercise, muscles[0] || 'Other');
+  const mappingByExercise = new Map();
+  const multiTargetMappings = [];
+
+  mapping.forEach(item => {
+    if (!item || !item.exercise) return;
+    const muscles = Array.isArray(item.target_muscles) && item.target_muscles.length > 0
+      ? item.target_muscles
+      : ['Other'];
+
+    mappingByExercise.set(item.exercise, muscles);
+
+    if (muscles.length > 1) {
+      multiTargetMappings.push(`${item.exercise}: ${muscles.join(', ')}`);
     }
   });
 
-  const muscleRank = muscle => {
-    const idx = muscleOrder.indexOf(muscle);
-    return idx === -1 ? muscleOrder.length : idx;
+  if (multiTargetMappings.length > 0) {
+    console.warn(
+      '[workout-volume-chart] Multi-target mappings found. The chart uses the first target muscle as the primary target for aggregation:',
+      multiTargetMappings
+    );
+  }
+
+  const primaryTargetForRecord = record => {
+    const mapped = mappingByExercise.get(record.exercise);
+    if (mapped && mapped.length > 0) return mapped[0];
+
+    const recordMuscles = Array.isArray(record.target_muscles) && record.target_muscles.length > 0
+      ? record.target_muscles
+      : ['Other'];
+
+    return recordMuscles[0] || 'Other';
   };
 
-  const exercises = [...new Set(strength.map(r => r.exercise))].sort((a, b) => {
-    const muscleA = primaryMuscleByExercise.get(a) || 'Other';
-    const muscleB = primaryMuscleByExercise.get(b) || 'Other';
-    const rankDiff = muscleRank(muscleA) - muscleRank(muscleB);
-    if (rankDiff !== 0) return rankDiff;
+  const volumeByDateAndMuscle = new Map();
+  const exercisesByDateAndMuscle = new Map();
+
+  strength.forEach(record => {
+    const muscle = primaryTargetForRecord(record);
+    const volume = (record.sets || []).reduce((sum, set) => sum + (Number(set.volume_kg) || 0), 0);
+    const key = `${record.date}||${muscle}`;
+
+    volumeByDateAndMuscle.set(key, (volumeByDateAndMuscle.get(key) || 0) + volume);
+
+    if (!exercisesByDateAndMuscle.has(key)) {
+      exercisesByDateAndMuscle.set(key, new Set());
+    }
+    exercisesByDateAndMuscle.get(key).add(record.exercise);
+  });
+
+  const muscles = [...new Set(strength.map(primaryTargetForRecord))].sort((a, b) => {
+    const rankA = muscleOrder.indexOf(a);
+    const rankB = muscleOrder.indexOf(b);
+    const safeRankA = rankA === -1 ? muscleOrder.length : rankA;
+    const safeRankB = rankB === -1 ? muscleOrder.length : rankB;
+    if (safeRankA !== safeRankB) return safeRankA - safeRankB;
     return a.localeCompare(b);
   });
 
-  const datasets = exercises.map(ex => {
-    const muscle = primaryMuscleByExercise.get(ex) || 'Other';
-
-    return {
-      label: ex,
-      data: dates.map(d => {
-        const recs = strength.filter(r => r.date === d && r.exercise === ex);
-        return recs.reduce((sum, r) => sum + (r.sets || []).reduce((s, set) => s + (set.volume_kg || 0), 0), 0);
-      }),
-      backgroundColor: colorForMuscle(muscle)
-    };
-  });
+  const datasets = muscles.map(muscle => ({
+    label: muscle,
+    data: dates.map(date => volumeByDateAndMuscle.get(`${date}||${muscle}`) || 0),
+    backgroundColor: colorForMuscle(muscle)
+  }));
 
   loadChartJs().then(() => {
     const ctx = document.getElementById('workout-volume-chart-{{ .Ordinal }}');
@@ -105,14 +145,16 @@
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-          title: { display: true, text: `웨이트 볼륨 (${days}일)` },
+          title: { display: true, text: `웨이트 볼륨 - 타게 근유별, (${days}일)` },
           legend: { position: 'bottom' },
           tooltip: {
             callbacks: {
               afterLabel: function(context) {
-                const exercise = context.dataset.label;
-                const muscles = targetMusclesByExercise.get(exercise) || ['Other'];
-                return `Targets: ${muscles.join(', ')}`;
+                const muscle = context.dataset.label;
+                const date = context.label;
+                const exercises = exercisesByDateAndMuscle.get(`${date}||${muscle}`);
+                if (!exercises || exercises.size === 0) return '';
+                return `Exercises: ${[...exercises].join(', ')}`;
               }
             }
           }
