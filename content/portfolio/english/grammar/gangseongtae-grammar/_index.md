@@ -1,6 +1,6 @@
 ---
 title: "강성태 영문법 필수편"
-date: 2026-06-05
+date: 2026-06-17
 draft: false
 description: "직업적 영어 운용 능력 확보를 위한 강성태 영문법 완결산출물 인덱스"
 categories:
@@ -31,3 +31,4 @@ TocOpen: true
 ## 현재 완료 범위
 
 - Chapter 1. 문장의 형식
+- Chapter 2. 시제
