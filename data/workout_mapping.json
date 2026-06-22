@@ -94,5 +94,17 @@
     "target_muscles": [
       "Posterior Deltoids"
     ]
+  },
+  {
+    "exercise": "Assisted Pull-Up",
+    "target_muscles": [
+      "Latissimus Dorsi"
+    ]
+  },
+  {
+    "exercise": "Assisted Chin-Up",
+    "target_muscles": [
+      "Latissimus Dorsi"
+    ]
   }
 ]
