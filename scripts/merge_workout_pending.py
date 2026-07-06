@@ -81,6 +81,12 @@ def validate(records: list[dict[str, Any]]) -> None:
 
 
 def correct(records: list[dict[str, Any]]) -> int:
+    """Apply narrowly scoped historical data corrections before rendering.
+
+    New workout-session details should be stored in pending workout JSON files,
+    not hard-coded here. Keep this function limited to already-approved
+    historical corrections that repair old records.
+    """
     changed = 0
 
     for r in records:
@@ -121,18 +127,6 @@ def correct(records: list[dict[str, Any]]) -> int:
             marker = (
                 "Target muscle corrected to Latissimus Dorsi only "
                 "based on user approval."
-            )
-            if append_note_once(r, marker):
-                changed += 1
-
-        if (
-            r.get("date") == "2026-07-06"
-            and r.get("session_id") == "2026-07-06-evening"
-            and r.get("exercise") == "Walk to Gym"
-        ):
-            marker = (
-                "Planned stretching and knee functional exercise were not performed; "
-                "the back-focused strength session proceeded after walking only."
             )
             if append_note_once(r, marker):
                 changed += 1
@@ -214,7 +208,7 @@ def render(records: list[dict[str, Any]]) -> str:
 title: "운동 기록"
 date: 2026-05-28
 draft: false
-description: "정형 데이터, 그래프, 유산소와 체력 운동 기록 공개 페이지"
+description: "정형 데이터, 그래프, 유산소와 철봉 운동 기록 공개 페이지"
 ---
 
 # 운동 기록
@@ -229,7 +223,7 @@ description: "정형 데이터, 그래프, 유산소와 체력 운동 기록 공
 
 현재 누적 기준으로 운동 기록은 총 {s["count"]}건, 세션 {s["sessions"]}회, 총 운동 시간 약 {s["duration"]}분, 유산소 거리 약 {s["distance"]}km, 누적 웨이트 볼륨 약 {s["volume"]}kg입니다.
 
-최근 세션 기준으로 유산소는 약 {cardio_min:.0f}분, 약 {cardio_km:.2f}km 수행되었습니다. 관절 품질과 회복성, 웜업 준비를 위한 스트레칭/모빌리티는 약 {mobility:.2f}분, 무릎 기능 운동은 약 {prehab:.2f}분 기록되었습니다.
+최근 세션 기준으로 유산소는 약 {cardio_min:.0f}분, 약 {cardio_km:.2f}km 수행되었습니다. 관절 품질과 회복성, 워업 준비를 위한 스트레칭·모빌리티는 약 {mobility:.2f}분, 무릎 기능 운동은 약 {prehab:.2f}분 기록되었습니다.
 
 현재 운동 패턴은 일관된 트래킹을 기반으로 근력과 유산소 축을 함께 누적하는 구조입니다. 웨이트 그래프는 운동 종류가 아니라 타깃 근육별 누적 볼륨으로 표시됩니다.
 
