@@ -37,6 +37,14 @@ def key(r: dict[str, Any]) -> tuple[Any, ...]:
     )
 
 
+def append_note_once(record: dict[str, Any], marker: str) -> bool:
+    note = str(record.get("note", ""))
+    if marker in note:
+        return False
+    record["note"] = note + ("\n" if note else "") + marker
+    return True
+
+
 def validate(records: list[dict[str, Any]]) -> None:
     required = {
         "date",
@@ -48,7 +56,7 @@ def validate(records: list[dict[str, Any]]) -> None:
         "duration_min",
         "note",
     }
-    seen = set()
+    seen: set[tuple[Any, ...]] = set()
 
     for i, r in enumerate(records):
         missing = required - set(r)
@@ -85,14 +93,12 @@ def correct(records: list[dict[str, Any]]) -> int:
         ):
             r["exercise"] = "Straight-Arm Pulldown"
             r["target_muscles"] = ["Latissimus Dorsi"]
-            note = str(r.get("note", ""))
             marker = (
                 "Corrected from Machine Arm Curl / Biceps Brachii to "
                 "Straight-Arm Pulldown / Latissimus Dorsi."
             )
-            if marker not in note:
-                r["note"] = note + ("\n" if note else "") + marker
-            changed += 1
+            if append_note_once(r, marker):
+                changed += 1
 
         if (
             r.get("date") == "2026-06-14"
@@ -101,11 +107,9 @@ def correct(records: list[dict[str, Any]]) -> int:
             and r.get("target_muscles") != ["Lower Body Muscles"]
         ):
             r["target_muscles"] = ["Lower Body Muscles"]
-            note = str(r.get("note", ""))
             marker = "Target muscle corrected to Lower Body Muscles."
-            if marker not in note:
-                r["note"] = note + ("\n" if note else "") + marker
-            changed += 1
+            if append_note_once(r, marker):
+                changed += 1
 
         if (
             r.get("date") == "2026-06-23"
@@ -114,14 +118,24 @@ def correct(records: list[dict[str, Any]]) -> int:
             and r.get("target_muscles") != ["Latissimus Dorsi"]
         ):
             r["target_muscles"] = ["Latissimus Dorsi"]
-            note = str(r.get("note", ""))
             marker = (
                 "Target muscle corrected to Latissimus Dorsi only "
                 "based on user approval."
             )
-            if marker not in note:
-                r["note"] = note + ("\n" if note else "") + marker
-            changed += 1
+            if append_note_once(r, marker):
+                changed += 1
+
+        if (
+            r.get("date") == "2026-07-06"
+            and r.get("session_id") == "2026-07-06-evening"
+            and r.get("exercise") == "Walk to Gym"
+        ):
+            marker = (
+                "Planned stretching and knee functional exercise were not performed; "
+                "the back-focused strength session proceeded after walking only."
+            )
+            if append_note_once(r, marker):
+                changed += 1
 
     return changed
 
@@ -196,36 +210,34 @@ def render(records: list[dict[str, Any]]) -> str:
         if r.get("type") == "prehab"
     )
 
-    return f"""---
+    return f'''---
 title: "운동 기록"
 date: 2026-05-28
 draft: false
-description: "정형 데이터, 근력, 유산소와 체력 운동 기록 공개 페이지"
+description: "정형 데이터, 그래프, 유산소와 체력 운동 기록 공개 페이지"
 ---
 
 # 운동 기록
 
 ## 웨이트 ({s["latest"]} 기준 최근 30일, strength)
-
 {{{{< workout-volume-chart days="30" >}}}}
 
 ## 유산소 ({s["latest"]} 기준 최근 30일, cardio)
-
 {{{{< workout-cardio-chart days="30" >}}}}
 
 ## 분석
 
 현재 누적 기준으로 운동 기록은 총 {s["count"]}건, 세션 {s["sessions"]}회, 총 운동 시간 약 {s["duration"]}분, 유산소 거리 약 {s["distance"]}km, 누적 웨이트 볼륨 약 {s["volume"]}kg입니다.
 
-최근 세션 기준으로 유산소는 약 {cardio_min:.0f}분, 약 {cardio_km:.2f}km 수행되었습니다. 관절 품질과 회복성, 움직임 준비를 위한 웜업/모빌리티는 약 {mobility:.2f}분, 무릎 기능 운동은 약 {prehab:.2f}분 기록되었습니다.
+최근 세션 기준으로 유산소는 약 {cardio_min:.0f}분, 약 {cardio_km:.2f}km 수행되었습니다. 관절 품질과 회복성, 웜업 준비를 위한 스트레칭/모빌리티는 약 {mobility:.2f}분, 무릎 기능 운동은 약 {prehab:.2f}분 기록되었습니다.
 
-현재 운동 패턴은 일관된 트래킹을 기반으로 근력과 유산소 축을 함께 누적하는 구조입니다. 웨이트 그래프는 운동 종류가 아니라 타겟 근육별 누적 볼륨으로 표시됩니다.
+현재 운동 패턴은 일관된 트래킹을 기반으로 근력과 유산소 축을 함께 누적하는 구조입니다. 웨이트 그래프는 운동 종류가 아니라 타깃 근육별 누적 볼륨으로 표시됩니다.
 
 ## 운동 기록
 (일자 내림차순)
 
 {{{{< datatable activity="workout" sort="date desc" >}}}}
-"""
+'''
 
 
 def main() -> None:
