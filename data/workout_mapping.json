@@ -106,5 +106,11 @@
     "target_muscles": [
       "Latissimus Dorsi"
     ]
+  },
+  {
+    "exercise": "Leg Press",
+    "target_muscles": [
+      "Lower Body Muscles"
+    ]
   }
 ]
