@@ -1,0 +1,251 @@
+[
+  {
+    "date": "2026-07-07",
+    "session_id": "2026-07-07-morning",
+    "type": "mobility",
+    "exercise": "Stretching",
+    "started_at": "2026-07-07T04:21:49+09:00",
+    "ended_at": "2026-07-07T04:45:09+09:00",
+    "duration_min": 23.33,
+    "note": "General stretching after arriving at the gym. Light forearm strengthening was included, but no separate sets or volume were reported."
+  },
+  {
+    "date": "2026-07-07",
+    "session_id": "2026-07-07-morning",
+    "type": "prehab",
+    "exercise": "Bodyweight Knee Strengthening",
+    "started_at": "2026-07-07T04:45:09+09:00",
+    "ended_at": "2026-07-07T04:51:44+09:00",
+    "duration_min": 6.58,
+    "note": "Bodyweight knee strengthening: drill 1 x 20 reps; drills 2 and 3 paired, 5 reps each x 4 sets."
+  },
+  {
+    "date": "2026-07-07",
+    "session_id": "2026-07-07-morning",
+    "type": "strength",
+    "exercise": "Leg Press",
+    "started_at": "2026-07-07T04:51:44+09:00",
+    "ended_at": "2026-07-07T05:03:03+09:00",
+    "duration_min": 11.32,
+    "note": "Machine weight was reported in pounds and converted to kilograms.",
+    "target_muscles": [
+      "Lower Body Muscles"
+    ],
+    "sets": [
+      {
+        "set_number": 1,
+        "weight_kg": 31.7515,
+        "reps": 12,
+        "volume_kg": 381.02,
+        "rest_sec": null
+      },
+      {
+        "set_number": 2,
+        "weight_kg": 40.8233,
+        "reps": 12,
+        "volume_kg": 489.88,
+        "rest_sec": null
+      },
+      {
+        "set_number": 3,
+        "weight_kg": 54.4311,
+        "reps": 12,
+        "volume_kg": 653.17,
+        "rest_sec": null
+      },
+      {
+        "set_number": 4,
+        "weight_kg": 58.967,
+        "reps": 12,
+        "volume_kg": 707.6,
+        "rest_sec": null
+      },
+      {
+        "set_number": 5,
+        "weight_kg": 58.967,
+        "reps": 12,
+        "volume_kg": 707.6,
+        "rest_sec": null
+      },
+      {
+        "set_number": 6,
+        "weight_kg": 58.967,
+        "reps": 12,
+        "volume_kg": 707.6,
+        "rest_sec": null
+      }
+    ]
+  },
+  {
+    "date": "2026-07-07",
+    "session_id": "2026-07-07-morning",
+    "type": "strength",
+    "exercise": "Seated Leg Curl",
+    "started_at": "2026-07-07T05:03:03+09:00",
+    "ended_at": "2026-07-07T05:10:19+09:00",
+    "duration_min": 7.27,
+    "note": "Felt easy, about 75% effort. Machine weight was reported in pounds and converted to kilograms.",
+    "target_muscles": [
+      "Hamstrings"
+    ],
+    "sets": [
+      {
+        "set_number": 1,
+        "weight_kg": 22.6796,
+        "reps": 12,
+        "volume_kg": 272.16,
+        "rest_sec": null
+      },
+      {
+        "set_number": 2,
+        "weight_kg": 22.6796,
+        "reps": 12,
+        "volume_kg": 272.16,
+        "rest_sec": null
+      },
+      {
+        "set_number": 3,
+        "weight_kg": 22.6796,
+        "reps": 12,
+        "volume_kg": 272.16,
+        "rest_sec": null
+      },
+      {
+        "set_number": 4,
+        "weight_kg": 22.6796,
+        "reps": 12,
+        "volume_kg": 272.16,
+        "rest_sec": null
+      }
+    ]
+  },
+  {
+    "date": "2026-07-07",
+    "session_id": "2026-07-07-morning",
+    "type": "strength",
+    "exercise": "Leg Extension",
+    "started_at": "2026-07-07T05:10:19+09:00",
+    "ended_at": "2026-07-07T05:18:44+09:00",
+    "duration_min": 8.42,
+    "note": "First 50 lb set felt too heavy after knee strengthening, about 115% effort, and felt too knee-dominant. Cue changed to pressing the floor with the heel. Second set was reduced to 40 lb. Later 50 lb sets felt closer to about 105% effort and acceptable. Machine weight was reported in pounds and converted to kilograms.",
+    "target_muscles": [
+      "Quadriceps"
+    ],
+    "sets": [
+      {
+        "set_number": 1,
+        "weight_kg": 22.6796,
+        "reps": 12,
+        "volume_kg": 272.16,
+        "rest_sec": null
+      },
+      {
+        "set_number": 2,
+        "weight_kg": 18.1437,
+        "reps": 12,
+        "volume_kg": 217.72,
+        "rest_sec": null
+      },
+      {
+        "set_number": 3,
+        "weight_kg": 22.6796,
+        "reps": 12,
+        "volume_kg": 272.16,
+        "rest_sec": null
+      },
+      {
+        "set_number": 4,
+        "weight_kg": 22.6796,
+        "reps": 12,
+        "volume_kg": 272.16,
+        "rest_sec": null
+      }
+    ]
+  },
+  {
+    "date": "2026-07-07",
+    "session_id": "2026-07-07-morning",
+    "type": "strength",
+    "exercise": "Adductor Machine",
+    "started_at": "2026-07-07T05:18:44+09:00",
+    "ended_at": "2026-07-07T05:24:07+09:00",
+    "duration_min": 5.38,
+    "note": "Performed in a paired block with Abductor Machine. Set 3 reached about 85% range of motion. Set 4 moved only about 30-40% of full range of motion. Machine weight was reported in pounds and converted to kilograms.",
+    "target_muscles": [
+      "Hip Adductors"
+    ],
+    "sets": [
+      {
+        "set_number": 1,
+        "weight_kg": 27.2155,
+        "reps": 12,
+        "volume_kg": 326.59,
+        "rest_sec": null
+      },
+      {
+        "set_number": 2,
+        "weight_kg": 27.2155,
+        "reps": 12,
+        "volume_kg": 326.59,
+        "rest_sec": null
+      },
+      {
+        "set_number": 3,
+        "weight_kg": 27.2155,
+        "reps": 12,
+        "volume_kg": 326.59,
+        "rest_sec": null
+      },
+      {
+        "set_number": 4,
+        "weight_kg": 27.2155,
+        "reps": 12,
+        "volume_kg": 326.59,
+        "rest_sec": null
+      }
+    ]
+  },
+  {
+    "date": "2026-07-07",
+    "session_id": "2026-07-07-morning",
+    "type": "strength",
+    "exercise": "Abductor Machine",
+    "started_at": "2026-07-07T05:24:07+09:00",
+    "ended_at": "2026-07-07T05:29:30+09:00",
+    "duration_min": 5.38,
+    "note": "Performed in a paired block with Adductor Machine. Felt easy and light. Machine weight was reported in pounds and converted to kilograms.",
+    "target_muscles": [
+      "Gluteus Medius"
+    ],
+    "sets": [
+      {
+        "set_number": 1,
+        "weight_kg": 27.2155,
+        "reps": 12,
+        "volume_kg": 326.59,
+        "rest_sec": null
+      },
+      {
+        "set_number": 2,
+        "weight_kg": 27.2155,
+        "reps": 12,
+        "volume_kg": 326.59,
+        "rest_sec": null
+      },
+      {
+        "set_number": 3,
+        "weight_kg": 27.2155,
+        "reps": 12,
+        "volume_kg": 326.59,
+        "rest_sec": null
+      },
+      {
+        "set_number": 4,
+        "weight_kg": 27.2155,
+        "reps": 12,
+        "volume_kg": 326.59,
+        "rest_sec": null
+      }
+    ]
+  }
+]
