@@ -67,7 +67,7 @@
     "date": "2026-07-16",
     "session_id": "2026-07-16-evening",
     "type": "strength",
-    "exercise": "Lat Pulldown",
+    "exercise": "Lat Puldown",
     "started_at": "2026-07-16T21:21:55+09:00",
     "ended_at": "2026-07-16T21:28:50+09:00",
     "duration_min": 6.9167,
@@ -140,7 +140,7 @@
     ],
     "sets": [
       {
-        "set_number": 1,
+        "set_nuber": 1,
         "weight_kg": 18.14,
         "reps": 12,
         "volume_kg": 217.68,
@@ -183,7 +183,7 @@
     ],
     "sets": [
       {
-        "set_number": 1,
+        "set_nuber": 1,
         "weight_kg": 27.22,
         "reps": 12,
         "volume_kg": 326.64,
@@ -201,14 +201,14 @@
         "weight_kg": 31.75,
         "reps": 12,
         "volume_kg": 381.0,
-        "rest_sec": null
+      "rest_sec": null
       },
       {
         "set_number": 4,
         "weight_kg": 31.75,
         "reps": 12,
         "volume_kg": 381.0,
-        "rest_sec": null
+      "rest_sec": null
       }
     ],
     "note": "Paired with pec deck fly."
@@ -329,7 +329,7 @@
         "set_number": 3,
         "weight_kg": 11.33,
         "reps": 12,
-        "volume_kg": 136,
+        "volume_kg": 135.96,
         "rest_sec": null
       },
       {
@@ -413,7 +413,7 @@
       },
       {
         "set_number": 3,
-        "weight_kg": 22.68,
+         "weight_kg": 22.68,
         "reps": 12,
         "volume_kg": 272.16,
         "rest_sec": null
@@ -459,7 +459,7 @@
         "weight_kg": 31.75,
         "reps": 12,
         "volume_kg": 381.0,
-        "rest_sec": null
+      "rest_sec": null
       },
       {
         "set_number": 4,
