@@ -1,0 +1,231 @@
+[
+  {
+    "date": "2026-07-20",
+    "session_id": "2026-07-20-morning",
+    "type": "strength",
+    "exercise": "Leg Press",
+    "started_at": "2026-07-20T03:56:00+09:00",
+    "ended_at": "2026-07-20T04:26:00+09:00",
+    "duration_min": 30.0,
+    "note": "Machine leg press. Session-wide perceived effort: heaviest or hardest sets about 95%; remaining sets about 80% with reserve.",
+    "target_muscles": [
+      "Lower Body Muscles"
+    ],
+    "sets": [
+      {
+        "set_number": 1,
+        "weight_kg": 31.75,
+        "reps": 12,
+        "volume_kg": 381.0,
+        "rest_sec": 90
+      },
+      {
+        "set_number": 2,
+        "weight_kg": 40.82,
+        "reps": 12,
+        "volume_kg": 489.84,
+        "rest_sec": 90
+      },
+      {
+        "set_number": 3,
+        "weight_kg": 63.5,
+        "reps": 12,
+        "volume_kg": 762.0,
+        "rest_sec": 90
+      },
+      {
+        "set_number": 4,
+        "weight_kg": 72.57,
+        "reps": 12,
+        "volume_kg": 870.84,
+        "rest_sec": 90
+      },
+      {
+        "set_number": 5,
+        "weight_kg": 72.57,
+        "reps": 12,
+        "volume_kg": 870.84,
+        "rest_sec": 90
+      },
+      {
+        "set_number": 6,
+        "weight_kg": 72.57,
+        "reps": 12,
+        "volume_kg": 870.84,
+        "rest_sec": null
+      }
+    ]
+  },
+  {
+    "date": "2026-07-20",
+    "session_id": "2026-07-20-morning",
+    "type": "strength",
+    "exercise": "Adductor Machine",
+    "started_at": "2026-07-20T04:26:00+09:00",
+    "ended_at": "2026-07-20T04:31:30+09:00",
+    "duration_min": 5.5,
+    "note": "Paired with Abductor Machine in four antagonistic rounds; 60 seconds rest between rounds.",
+    "target_muscles": [
+      "Hip Adductors"
+    ],
+    "sets": [
+      {
+        "set_number": 1,
+        "weight_kg": 22.68,
+        "reps": 12,
+        "volume_kg": 272.16,
+        "rest_sec": 60
+      },
+      {
+        "set_number": 2,
+        "weight_kg": 27.22,
+        "reps": 12,
+        "volume_kg": 326.64,
+        "rest_sec": 60
+      },
+      {
+        "set_number": 3,
+        "weight_kg": 27.22,
+        "reps": 12,
+        "volume_kg": 326.64,
+        "rest_sec": 60
+      },
+      {
+        "set_number": 4,
+        "weight_kg": 27.22,
+        "reps": 13,
+        "volume_kg": 353.86,
+        "rest_sec": null
+      }
+    ]
+  },
+  {
+    "date": "2026-07-20",
+    "session_id": "2026-07-20-morning",
+    "type": "strength",
+    "exercise": "Abductor Machine",
+    "started_at": "2026-07-20T04:31:30+09:00",
+    "ended_at": "2026-07-20T04:37:00+09:00",
+    "duration_min": 5.5,
+    "note": "Paired with Adductor Machine in four antagonistic rounds; 60 seconds rest between rounds.",
+    "target_muscles": [
+      "Gluteus Medius"
+    ],
+    "sets": [
+      {
+        "set_number": 1,
+        "weight_kg": 36.29,
+        "reps": 12,
+        "volume_kg": 435.48,
+        "rest_sec": 60
+      },
+      {
+        "set_number": 2,
+        "weight_kg": 40.82,
+        "reps": 12,
+        "volume_kg": 489.84,
+        "rest_sec": 60
+      },
+      {
+        "set_number": 3,
+        "weight_kg": 40.82,
+        "reps": 12,
+        "volume_kg": 489.84,
+        "rest_sec": 60
+      },
+      {
+        "set_number": 4,
+        "weight_kg": 36.29,
+        "reps": 12,
+        "volume_kg": 435.48,
+        "rest_sec": null
+      }
+    ]
+  },
+  {
+    "date": "2026-07-20",
+    "session_id": "2026-07-20-morning",
+    "type": "strength",
+    "exercise": "Seated Leg Curl",
+    "started_at": "2026-07-20T04:37:00+09:00",
+    "ended_at": "2026-07-20T04:45:32+09:00",
+    "duration_min": 8.533333333333333,
+    "note": "Paired with Leg Extension in four antagonistic rounds; 60 seconds rest between rounds.",
+    "target_muscles": [
+      "Hamstrings"
+    ],
+    "sets": [
+      {
+        "set_number": 1,
+        "weight_kg": 27.22,
+        "reps": 12,
+        "volume_kg": 326.64,
+        "rest_sec": 60
+      },
+      {
+        "set_number": 2,
+        "weight_kg": 31.75,
+        "reps": 12,
+        "volume_kg": 381.0,
+        "rest_sec": 60
+      },
+      {
+        "set_number": 3,
+        "weight_kg": 31.75,
+        "reps": 12,
+        "volume_kg": 381.0,
+        "rest_sec": 60
+      },
+      {
+        "set_number": 4,
+        "weight_kg": 27.22,
+        "reps": 12,
+        "volume_kg": 326.64,
+        "rest_sec": null
+      }
+    ]
+  },
+  {
+    "date": "2026-07-20",
+    "session_id": "2026-07-20-morning",
+    "type": "strength",
+    "exercise": "Leg Extension",
+    "started_at": "2026-07-20T04:45:32+09:00",
+    "ended_at": "2026-07-20T04:54:04+09:00",
+    "duration_min": 8.533333333333333,
+    "note": "Paired with Seated Leg Curl in four antagonistic rounds; 60 seconds rest between rounds.",
+    "target_muscles": [
+      "Quadriceps"
+    ],
+    "sets": [
+      {
+        "set_number": 1,
+        "weight_kg": 18.14,
+        "reps": 12,
+        "volume_kg": 217.68,
+        "rest_sec": 60
+      },
+      {
+        "set_number": 2,
+        "weight_kg": 22.68,
+        "reps": 12,
+        "volume_kg": 272.16,
+        "rest_sec": 60
+      },
+      {
+        "set_number": 3,
+        "weight_kg": 22.68,
+        "reps": 12,
+        "volume_kg": 272.16,
+        "rest_sec": 60
+      },
+      {
+        "set_number": 4,
+        "weight_kg": 18.14,
+        "reps": 12,
+        "volume_kg": 217.68,
+        "rest_sec": null
+      }
+    ]
+  }
+]
