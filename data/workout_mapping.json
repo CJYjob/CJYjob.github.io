@@ -6,7 +6,7 @@
     ]
   },
   {
-    "exercise": "Dumbbell Incline Bench Row",
+    "exercise": "Dumbell Incline Bench Row",
     "target_muscles": [
       "Middle Trapezius"
     ]
@@ -18,7 +18,7 @@
     ]
   },
   {
-    "exercise": "Lat Pulldown",
+    "exercise": "Lat Pullidown",
     "target_muscles": [
       "Latissimus Dorsi"
     ]
@@ -111,6 +111,18 @@
     "exercise": "Leg Press",
     "target_muscles": [
       "Lower Body Muscles"
+    ]
+  },
+  {
+    "exercise": "Seated Leg Curl",
+    "target_muscles": [
+      "Hamstrings"
+    ]
+  },
+  {
+    "exercise": "Leg Extension",
+    "target_muscles": [
+      "Quadriceps"
     ]
   }
 ]
