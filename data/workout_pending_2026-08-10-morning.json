@@ -1,0 +1,171 @@
+[
+  {
+    "date": "2026-08-10",
+    "session_id": "2026-08-10-morning",
+    "type": "cardio",
+    "exercise": "Walking",
+    "started_at": "2026-08-10T04:29:00+09:00",
+    "ended_at": "2026-08-10T04:39:00+09:00",
+    "duration_min": 10.0,
+    "note": "Walked to the gym for 10 minutes as the session warm-up."
+  },
+  {
+    "date": "2026-08-10",
+    "session_id": "2026-08-10-morning",
+    "type": "mobility",
+    "exercise": "Full-body Stretching",
+    "started_at": "2026-08-10T04:39:00+09:00",
+    "ended_at": "2026-08-10T05:08:00+09:00",
+    "duration_min": 29.0,
+    "note": "Completed full-body stretching before strength training. Timing uses gym-arrival and completion-report boundaries."
+  },
+  {
+    "date": "2026-08-10",
+    "session_id": "2026-08-10-morning",
+    "type": "strength",
+    "exercise": "Chest Press Machine",
+    "started_at": "2026-08-10T05:08:00+09:00",
+    "ended_at": "2026-08-10T05:14:17+09:00",
+    "duration_min": 6.283333333333333,
+    "target_muscles": [
+      "Pectoralis Major"
+    ],
+    "sets": [
+      {
+        "set_number": 1,
+        "weight_kg": 22.6796,
+        "reps": 12,
+        "volume_kg": 272.16,
+        "rest_sec": null
+      },
+      {
+        "set_number": 2,
+        "weight_kg": 27.2155,
+        "reps": 12,
+        "volume_kg": 326.59,
+        "rest_sec": null
+      },
+      {
+        "set_number": 3,
+        "weight_kg": 31.7515,
+        "reps": 12,
+        "volume_kg": 381.02,
+        "rest_sec": null
+      },
+      {
+        "set_number": 4,
+        "weight_kg": 36.2874,
+        "reps": 12,
+        "volume_kg": 435.45,
+        "rest_sec": null
+      },
+      {
+        "set_number": 5,
+        "weight_kg": 40.8233,
+        "reps": 12,
+        "volume_kg": 489.88,
+        "rest_sec": null
+      }
+    ],
+    "note": "Return-to-training full-body session. Original machine loads: 50, 60, 70, 80, 90 lb; all completed for 12 reps. User reported early rounds felt light and later work remained manageable. Pound values converted to kg."
+  },
+  {
+    "date": "2026-08-10",
+    "session_id": "2026-08-10-morning",
+    "type": "strength",
+    "exercise": "Lat Pulldown",
+    "started_at": "2026-08-10T05:14:17+09:00",
+    "ended_at": "2026-08-10T05:20:34+09:00",
+    "duration_min": 6.283333333333333,
+    "target_muscles": [
+      "Latissimus Dorsi"
+    ],
+    "sets": [
+      {
+        "set_number": 1,
+        "weight_kg": 22.6796,
+        "reps": 12,
+        "volume_kg": 272.16,
+        "rest_sec": null
+      },
+      {
+        "set_number": 2,
+        "weight_kg": 27.2155,
+        "reps": 12,
+        "volume_kg": 326.59,
+        "rest_sec": null
+      },
+      {
+        "set_number": 3,
+        "weight_kg": 31.7515,
+        "reps": 12,
+        "volume_kg": 381.02,
+        "rest_sec": null
+      },
+      {
+        "set_number": 4,
+        "weight_kg": 36.2874,
+        "reps": 12,
+        "volume_kg": 435.45,
+        "rest_sec": null
+      },
+      {
+        "set_number": 5,
+        "weight_kg": 36.2874,
+        "reps": 12,
+        "volume_kg": 435.45,
+        "rest_sec": null
+      }
+    ],
+    "note": "Return-to-training full-body session. Original machine loads: 50, 60, 70, 80, 80 lb; all completed for 12 reps. User chose 80 lb rather than increasing the final set further. Pound values converted to kg."
+  },
+  {
+    "date": "2026-08-10",
+    "session_id": "2026-08-10-morning",
+    "type": "strength",
+    "exercise": "Leg Press",
+    "started_at": "2026-08-10T05:20:34+09:00",
+    "ended_at": "2026-08-10T05:26:51+09:00",
+    "duration_min": 6.283333333333333,
+    "target_muscles": [
+      "Lower Body Muscles"
+    ],
+    "sets": [
+      {
+        "set_number": 1,
+        "weight_kg": 40.8233,
+        "reps": 12,
+        "volume_kg": 489.88,
+        "rest_sec": null
+      },
+      {
+        "set_number": 2,
+        "weight_kg": 45.3592,
+        "reps": 12,
+        "volume_kg": 544.31,
+        "rest_sec": null
+      },
+      {
+        "set_number": 3,
+        "weight_kg": 49.8952,
+        "reps": 12,
+        "volume_kg": 598.74,
+        "rest_sec": null
+      }
+    ],
+    "note": "Original machine loads: 90, 100, 110 lb; all completed for 12 reps. Planned 120 lb set was not performed because the machine became occupied; lower-body work continued with Smith-machine squat practice. Pound values converted to kg."
+  },
+  {
+    "date": "2026-08-10",
+    "session_id": "2026-08-10-morning",
+    "type": "prehab",
+    "exercise": "Squat",
+    "started_at": "2026-08-10T05:26:51+09:00",
+    "ended_at": "2026-08-10T05:33:07+09:00",
+    "duration_min": 6.266666666666667,
+    "target_muscles": [
+      "Lower Body Muscles"
+    ],
+    "note": "Smith-machine squat movement practice: 2 sets x 12 reps with the empty machine bar. Exact effective bar load was not reported, so no weight or volume was estimated. After the first set, the user reported excessive use around the left knee and aimed to shift effort toward the glutes and thighs. After the second set, the user suspected an overly upright torso may have made the movement too knee-dominant and ended the workout."
+  }
+]
