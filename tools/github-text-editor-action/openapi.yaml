@@ -1,0 +1,134 @@
+openapi: 3.1.0
+info:
+  title: GitHub Text File Editor Action
+  version: 1.0.0
+  description: Safe UTF-8 text-file editing over the GitHub Contents API. The service performs Base64 and GitHub write operations server-side.
+servers:
+  - url: https://YOUR-ACTION-SERVER.example.com
+components:
+  securitySchemes:
+    ActionApiKey:
+      type: apiKey
+      in: header
+      name: X-Action-Key
+  schemas:
+    Replacement:
+      type: object
+      required: [old, new]
+      properties:
+        old: {type: string}
+        new: {type: string}
+        expected_occurrences: {type: integer, minimum: 0, default: 1}
+    CreateRequest:
+      type: object
+      required: [owner, repo, path, content_utf8, commit_message]
+      properties:
+        owner: {type: string}
+        repo: {type: string}
+        branch: {type: string, default: main}
+        path: {type: string}
+        content_utf8: {type: string}
+        commit_message: {type: string}
+    UpdateRequest:
+      type: object
+      required: [owner, repo, path, expected_sha, commit_message]
+      properties:
+        owner: {type: string}
+        repo: {type: string}
+        branch: {type: string, default: main}
+        path: {type: string}
+        expected_sha: {type: string}
+        commit_message: {type: string}
+        front_matter_patch: {type: object, additionalProperties: true}
+        remove_front_matter_keys: {type: array, items: {type: string}}
+        replacements: {type: array, items: {$ref: '#/components/schemas/Replacement'}}
+    MoveRequest:
+      type: object
+      required: [owner, repo, source_path, destination_path, expected_source_sha, commit_message]
+      properties:
+        owner: {type: string}
+        repo: {type: string}
+        branch: {type: string, default: main}
+        source_path: {type: string}
+        destination_path: {type: string}
+        expected_source_sha: {type: string}
+        commit_message: {type: string}
+        front_matter_patch: {type: object, additionalProperties: true}
+        remove_front_matter_keys: {type: array, items: {type: string}}
+        replacements: {type: array, items: {$ref: '#/components/schemas/Replacement'}}
+        delete_source: {type: boolean, default: false}
+        delete_commit_message: {type: string}
+    DeleteRequest:
+      type: object
+      required: [owner, repo, path, expected_sha, commit_message]
+      properties:
+        owner: {type: string}
+        repo: {type: string}
+        branch: {type: string, default: main}
+        path: {type: string}
+        expected_sha: {type: string}
+        commit_message: {type: string}
+security:
+  - ActionApiKey: []
+paths:
+  /v1/files/read:
+    get:
+      operationId: readTextFile
+      summary: Read a UTF-8 text file and current SHA.
+      parameters:
+        - {name: owner, in: query, required: true, schema: {type: string}}
+        - {name: repo, in: query, required: true, schema: {type: string}}
+        - {name: path, in: query, required: true, schema: {type: string}}
+        - {name: ref, in: query, required: false, schema: {type: string, default: main}}
+      responses:
+        '200': {description: File content and metadata}
+  /v1/files/create:
+    post:
+      operationId: createTextFile
+      summary: Create UTF-8 text; server handles Base64.
+      x-openai-isConsequential: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/CreateRequest'}
+      responses:
+        '200': {description: Created and re-read file}
+  /v1/files/update:
+    post:
+      operationId: updateTextFile
+      summary: Update by front matter patch and exact replacements.
+      x-openai-isConsequential: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/UpdateRequest'}
+      responses:
+        '200': {description: Updated and re-read file}
+        '409': {description: SHA or replacement occurrence mismatch}
+  /v1/files/move:
+    post:
+      operationId: moveTextFile
+      summary: Copy or move an existing file and apply edits server-side.
+      x-openai-isConsequential: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/MoveRequest'}
+      responses:
+        '200': {description: Destination created and verified}
+  /v1/files/delete:
+    post:
+      operationId: deleteTextFile
+      summary: Delete only after verifying current SHA.
+      x-openai-isConsequential: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/DeleteRequest'}
+      responses:
+        '200': {description: Delete commit}
+        '409': {description: SHA mismatch}
