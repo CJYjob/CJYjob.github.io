@@ -1,0 +1,26 @@
+---
+title: "투자 전략 · 부록 B 핵심 요약"
+date: 2026-06-09
+draft: false
+description: "양방향 ETF 전략 전체를 한 장으로 줄인 핵심 요약."
+categories:
+  - "Investment"
+series:
+  - "Investment Strategy"
+tags:
+  - "Investment"
+  - "ETF"
+  - "Summary"
+weight: 100
+aliases:
+  - /portfolio/investing/stock/strategy/appendix-summary/
+---
+
+## 핵심 한 줄 요약
+
+- 양방향을 겹쳐 드는 *헤지 자체는 비용*. 수익은 **방향(A)** 또는 **변동성 수확(B)** 에서 나온다.
+- **전환 = 추세인지 횡보인지 판별**. 추세장 = 현금 + 주력 한 방향(A), 횡보장 = 양방향 + 리밸런싱(B).
+- 판별 4지표: **SMA 배열 · ADX · BB %B · 수급 z-점수**. 모멘텀·차익/비차익·베이시스는 *나중에* 필요한 만큼만 추가(과적합 경계).
+- 인버스는 *과세·선물지수 추종·decay* → 회전 최소화, 백테스트는 *실제 ETF 가격*으로.
+- 국면 분포·임계값은 *가정 말고 백테스트로*, KOSPI·KOSDAQ 따로.
+- **검증되지 않은 방향 판단 + 레버리지 = 가장 빠르게 깨지는 조합.** 모의투자·백테스트로 "동전 던지기보다 나은지" 먼저 증명.
