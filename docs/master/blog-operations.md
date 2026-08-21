@@ -43,213 +43,247 @@ The menu structure separates assets by *completeness*: *incomplete → log*, *co
 
 ## 1.3 Technology Stack Summary
 
-| Component | Technology | Role |
-|-----------|------------|------|
-| Static Site Generator | Hugo Extended | Markdown → HTML build |
-| Theme | PaperMod | Layout and styling |
-| Hosting | GitHub Pages | Static site hosting |
-| CI/CD | GitHub Actions | Build and deploy on push |
-| Search | PaperMod Fuse.js | Client-side post search |
-| Analytics | Google Analytics | Traffic analytics |
-| Search Indexing | Google Search Console | Indexing and SEO monitoring |
-| Diagrams | Mermaid.js | Flowcharts, sequence diagrams, mind maps |
-| Charts | Chart.js | Structured-data visualization |
-| Data | Hugo Site.Data | JSON data loading at build time |
-
-## 1.4 System Architecture
-
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                         Development PC                          │
-│            Hugo + Git + VS Code + Markdown                     │
-└──────────────────────────────┬──────────────────────────────────┘
-                               │ git push
-                               ↓
+│                        User Browser                              │
+│                    https://cjyjob.github.io                      │
+└─────────────────────────────────────────────────────────────────┘
+                                 ↑
+                                 │ HTTPS (Free SSL)
+                                 ↓
+┌─────────────────────────────────────────────────────────────────┐
+│                   GitHub Pages (Static Hosting)                  │
+│                    Serves HTML/CSS/JS files                      │
+└─────────────────────────────────────────────────────────────────┘
+                                 ↑
+                                 │ Automatic Deployment (CD)
+                                 ↓
+┌─────────────────────────────────────────────────────────────────┐
+│                   GitHub Actions (CI/CD)                         │
+│              Auto Hugo build and deploy on Commit                │
+└─────────────────────────────────────────────────────────────────┘
+                                 ↑
+                                 │ Commit (GitHub Web / Git / GPT Coach Action)
+                                 ↓
 ┌─────────────────────────────────────────────────────────────────┐
 │                      Content Repository (GitHub)                 │
 │        Markdown + JSON Data + Hugo config + Theme      │
 └─────────────────────────────────────────────────────────────────┘
-                               │ GitHub Actions
-                               ↓
-┌─────────────────────────────────────────────────────────────────┐
-│                       Hugo Build Pipeline                        │
-│             Markdown/Data → HTML/CSS/JS                         │
-└──────────────────────────────┬──────────────────────────────────┘
-                               │ Deploy
-                               ↓
-┌─────────────────────────────────────────────────────────────────┐
-│                         GitHub Pages                             │
-│                  https://cjyjob.github.io                       │
-└──────────────────────────────┬──────────────────────────────────┘
-                               │
-                  ┌────────────┴────────────┐
-                  ↓                         ↓
-        Google Search Console       Google Analytics
 ```
+
+## 1.4 Version Information (As of June 2026)
+
+### Core Tools
+
+| Tool | Version | Purpose | Notes |
+|------|---------|---------|-------|
+| Hugo | 0.152.2 Extended | Static site generator | Extended version required |
+| PaperMod | Latest (Git Submodule) | Hugo theme | Requires Hugo 0.146.0+ |
+| Git | Latest | Version control | Required for local work |
+
+### GitHub Actions Environment
+
+| Item | Version/Setting |
+|------|-----------------|
+| Runner | ubuntu-latest |
+| Hugo | 0.152.2 (specified in workflow) |
+| Node.js | Auto-installed |
+
+### External Services
+
+| Service | Purpose | Status |
+|---------|---------|--------|
+| GitHub Pages | Free hosting | ✅ Active |
+| Google Search Console | SEO, search registration | ✅ Registered |
+| Google Analytics | Visitor analytics | ✅ Connected |
+
+### CDN Libraries
+
+| Library | Purpose | Load Method |
+|---------|---------|-------------|
+| Mermaid.js | Diagrams/Mindmaps | jsdelivr CDN (latest) |
+
+### Docker Images (For Security Practice)
+
+| Image | Purpose | Default Port |
+|-------|---------|--------------|
+| vulnerables/web-dvwa | Web vulnerability practice | 80 |
+| bkimminich/juice-shop | OWASP Top 10 practice | 3000 |
+| webgoat/webgoat | Web security learning | 8080, 9090 |
 
 ---
 
-# Part 2: Initial Setup
+# Part 2: Blog Setup Guide (Step-by-Step)
 
-## 2.1 GitHub Repository Creation
+This section is a reference guide for building the same blog from scratch.
 
-### Repository Settings
+## 2.1 Prerequisites
 
-```
-Repository name: CJYjob.github.io
-Visibility: Public
-Initialize: README (optional)
-```
+### Required Accounts
 
-GitHub Pages user site repositories must follow the naming convention:
+| Service | URL | Purpose |
+|---------|-----|---------|
+| GitHub | https://github.com | Repository, hosting |
+| Google | https://google.com | Search Console, Analytics |
 
-```
-{username}.github.io
-```
+### Local Development Environment (Optional)
 
-For this project:
+The current operator manages content through the **GitHub web interface** and **coach GPT Actions**. A local environment is optional; install the following tools if needed.
 
-```
-CJYjob.github.io
-```
-
-## 2.2 Local Development Environment
-
-### Required Tools
-
-- Git
-- Hugo Extended
-- VS Code
-- Web browser
-
-### Verify Git
-
-```bash
-git --version
-```
-
-Expected example:
-
-```text
-git version 2.x.x
-```
-
-### Install Hugo Extended
-
-Windows (Chocolatey):
+#### Windows Installation (Using Winget)
 
 ```powershell
-choco install hugo-extended
-```
-
-Windows (Winget):
-
-```powershell
+# Install Hugo Extended
 winget install Hugo.Hugo.Extended
-```
 
-macOS:
+# Install Git
+winget install Git.Git
 
-```bash
-brew install hugo
-```
+# Install Docker Desktop (for security practice)
+winget install Docker.DockerDesktop
 
-Linux:
+# Install VS Code (optional)
+winget install Microsoft.VisualStudioCode
 
-```bash
-sudo apt install hugo
-```
-
-Verify:
-
-```bash
+# Verify installation (restart PowerShell first)
 hugo version
+git --version
+docker --version
 ```
 
-The output should include:
+## 2.2 Create Hugo Site (Local)
 
-```text
-extended
+```powershell
+# Navigate to working directory
+cd C:\Projects
+
+# Create Hugo site
+hugo new site my-blog
+
+# Navigate to directory
+cd my-blog
+
+# Initialize Git
+git init
+
+# Install PaperMod theme (as submodule)
+git submodule add --depth=1 https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod
 ```
 
-## 2.3 Clone Repository
+## 2.3 Create GitHub Repository
 
-```bash
-git clone https://github.com/CJYjob/CJYjob.github.io.git
-cd CJYjob.github.io
+1. Go to GitHub
+2. Click **New repository**
+3. Repository name: `[username].github.io` (e.g., `CJYjob.github.io`)
+4. Select **Public**
+5. Click **Create repository**
+
+## 2.4 GitHub Actions Workflow Setup
+
+Create `.github/workflows/hugo.yaml` file:
+
+```yaml
+name: Deploy Hugo site to Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      HUGO_VERSION: 0.152.2
+    steps:
+      - name: Install Hugo CLI
+        run: |
+          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
+          && sudo dpkg -i ${{ runner.temp }}/hugo.deb
+      
+      - name: Install Dart Sass
+        run: sudo snap install dart-sass
+      
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Merge pending workout records
+        run: python scripts/merge_workout_pending.py
+
+      - name: Commit merged workout records
+        run: |
+          if git diff --quiet; then
+            echo "No workout merge changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/workout.json content/ko/portfolio/workout.md
+          git add -u data
+          git commit -m "Merge workout pending records"
+          git push
+      
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+      
+      - name: Install Node.js dependencies
+        run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
+      
+      - name: Build with Hugo
+        env:
+          HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
+          HUGO_ENVIRONMENT: production
+          TZ: Asia/Seoul
+        run: |
+          hugo \
+            --gc \
+            --minify \
+            --baseURL "${{ steps.pages.outputs.base_url }}/"
+      
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./public
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 ```
 
-## 2.4 Initialize Hugo Site
+Because the workflow may commit merged workout records back to `main`, it requires `contents: write`; this is not a read-only Pages build workflow.
 
-If starting from an empty repository:
-
-```bash
-hugo new site . --force
-```
-
-Basic generated structure:
-
-```
-.
-├── archetypes/
-├── assets/
-├── content/
-├── data/
-├── layouts/
-├── static/
-├── themes/
-└── hugo.toml
-```
-
-This project uses `hugo.yaml` instead of `hugo.toml`.
-
-## 2.5 PaperMod Theme Installation
-
-### Add Theme as Git Submodule
-
-```bash
-git submodule add https://github.com/adityatelange/hugo-PaperMod themes/PaperMod
-```
-
-Initialize submodule:
-
-```bash
-git submodule update --init --recursive
-```
-
-Commit:
-
-```bash
-git add .
-git commit -m "Add PaperMod theme"
-git push
-```
-
-### Verify `.gitmodules`
-
-```ini
-[submodule "themes/PaperMod"]
-    path = themes/PaperMod
-    url = https://github.com/adityatelange/hugo-PaperMod
-```
-
-### Important: Clone with Submodules
-
-When cloning the repository later:
-
-```bash
-git clone --recurse-submodules https://github.com/CJYjob/CJYjob.github.io.git
-```
-
-If already cloned:
-
-```bash
-git submodule update --init --recursive
-```
-
-## 2.6 Hugo Configuration
-
-### `hugo.yaml`
+## 2.5 hugo.yaml Configuration (Currently in Use)
 
 ```yaml
 baseURL: "https://cjyjob.github.io/"
@@ -356,119 +390,71 @@ The `params.mainSections: [log, portfolio]` setting restricts where the PaperMod
 
 ## 2.6 GitHub Pages Configuration
 
-Repository → Settings → Pages:
+1. Repository → **Settings** tab
+2. Left menu → **Pages**
+3. Source: Select **GitHub Actions**
+4. Save
 
-```
-Source: GitHub Actions
+## 2.7 Google Search Console Registration
+
+1. Go to [Google Search Console](https://search.google.com/search-console)
+2. **Add property** → **URL prefix** → `https://cjyjob.github.io`
+3. Select **HTML tag** verification method
+4. Add the provided meta tag to `layouts/partials/extend_head.html`:
+
+```html
+<!-- Google Search Console -->
+<meta name="google-site-verification" content="verification-code" />
 ```
 
-Do not use "Deploy from a branch" when using the Hugo GitHub Actions workflow.
+5. Click **Verify**
+6. Submit `sitemap.xml` in the **Sitemaps** menu
+
+## 2.8 Google Analytics Setup
+
+### Get Measurement ID
+
+1. Go to [Google Analytics](https://analytics.google.com)
+2. Create account → Create property → Create web stream
+3. Copy the measurement ID (e.g., `G-ABC123DEF4`)
+
+### Apply to Blog
+
+Add to `hugo.yaml` file:
+
+```yaml
+googleAnalytics: "G-ABC123DEF4"  # Your measurement ID
+```
 
 ---
 
-# Part 3: GitHub Actions CI/CD
+# Part 3: Technical Details
 
-## 3.1 Workflow File
+## 3.1 Hugo (Static Site Generator)
 
-Path:
+### Concept
 
-```
-.github/workflows/hugo.yaml
-```
+Hugo is a **Static Site Generator (SSG)**.
 
-## 3.2 Workflow Purpose
+| Aspect | Dynamic Site | Static Site |
+|--------|--------------|-------------|
+| Operation | Server generates pages on request | Pre-generated HTML files served |
+| Server | Requires PHP, Node.js, etc. | Web server only |
+| Database | Required | Not required |
+| Speed | Relatively slow | Very fast |
+| Security | Vulnerability risks | Minimal attack surface |
+| Hosting Cost | Paid server required | Free hosting possible (GitHub Pages) |
 
-The workflow performs:
-
-```
-Push to main
-      ↓
-Checkout repository
-      ↓
-Initialize submodules
-      ↓
-Install Hugo Extended
-      ↓
-Build static site
-      ↓
-Upload Pages artifact
-      ↓
-Deploy to GitHub Pages
-```
-
-## 3.3 Typical Workflow Structure
-
-```yaml
-name: Deploy Hugo site to Pages
-
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: false
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
-          fetch-depth: 0
-
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v3
-        with:
-          hugo-version: latest
-          extended: true
-
-      - name: Build
-        run: hugo --minify
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./public
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-```
-
-## 3.4 Structured Data Build Flow
+### How It Works
 
 ```
-/data/*.json
-      │
-      ├── Hugo Site.Data ───────────────┐
-      │                                 │
-      ↓                                 ↓
-layouts/shortcodes/*.html         content/*.md
-      │                                 │
-      └──────────────┬──────────────────┘
-                     ↓
-                hugo --minify
-                     ↓
-                  public/
-                     ↓
-              GitHub Pages
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│   Markdown      │     │      Hugo       │     │   HTML/CSS/JS   │
+│   (.md files)   │ ──→ │   Build Engine  │ ──→ │  (Static files) │
+│   + Theme       │     │                 │     │   public/ folder│
+│   + Data (JSON) │     │                 │     │                 │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+      [Input]               [Process]               [Output]
 ```
 
 In this blog, build inputs include both *Markdown* and *JSON files under `/data/`*. Hugo auto-loads `/data/` as `Site.Data` at build time. Markdown content can then render this data through Hugo shortcodes. See `docs/master/system-operation.md` section *C-2-2-2 (정형 데이터 자산 흐름)* for the full data convention.
@@ -476,302 +462,208 @@ In this blog, build inputs include both *Markdown* and *JSON files under `/data/
 ### Key Commands
 
 ```bash
-# local build
+# Create new site
+hugo new site [sitename]
+
+# Create new content
+hugo new [path]/[filename].md
+
+# Run development server (including drafts)
+hugo server -D
+
+# Production build
 hugo --minify
 
-# local preview
-hugo server -D
+# Check version
+hugo version
 ```
 
-## 3.5 Deployment Verification
+## 3.2 PaperMod (Hugo Theme)
 
-After a push:
+### Role
 
-1. Open GitHub Actions.
-2. Confirm the Hugo workflow succeeds.
-3. Confirm the Pages deployment job succeeds.
-4. Open the public URL and verify the changed page.
-5. For cache-sensitive changes, use a cache-busting query or independent curl/browser request.
+- Provides blog design and layout
+- Dark mode support
+- SEO optimization
+- Search functionality
+- Automatic table of contents
 
-Repository verification and public-site verification are separate gates. A successful commit does not by itself prove that Pages has deployed the intended HTML.
+### Location
+
+```
+themes/PaperMod/  (Managed as Git submodule)
+```
+
+### Requirements
+
+- Hugo Extended version
+- Hugo 0.146.0 or higher
+
+## 3.3 GitHub Pages (Hosting)
+
+### Concept
+
+Free static website hosting service provided by GitHub.
+
+### Features
+
+| Item | Content |
+|------|---------|
+| Cost | Free |
+| URL | `[username].github.io` |
+| SSL | Automatic HTTPS |
+| Storage | 1GB recommended per repository |
+| Bandwidth | 100GB per month |
+
+## 3.4 GitHub Actions (CI/CD)
+
+### CI/CD Concepts
+
+| Term | Full Name | Meaning |
+|------|-----------|---------|
+| CI | Continuous Integration | Automatic build/test on code changes |
+| CD | Continuous Deployment | Automatic deployment on successful build |
+
+### Workflow
+
+```
+1. Commit on GitHub web / Git push / Coach Action commit
+                ↓
+2. GitHub Actions auto-triggers
+                ↓
+3. Ubuntu virtual environment created
+                ↓
+4. Hugo installed (specified version)
+                ↓
+5. Repository code checked out (including submodules)
+                ↓
+6. Pending workout records merged and committed when present
+                ↓
+7. hugo --minify executed (build)
+                ↓
+8. public/ folder deployed to GitHub Pages
+                ↓
+9. https://cjyjob.github.io updated
+```
+
+### Configuration File Location
+
+```
+.github/workflows/hugo.yaml
+```
+
+## 3.5 Mermaid.js (Diagrams)
+
+### Role
+
+Creates text-based diagrams within Markdown. The `mermaid` shortcode renders the wrapper element; Mermaid.js loading/initialization is handled globally in `layouts/partials/extend_head.html`.
+
+### Supported Diagrams
+
+- `mindmap`: Mind maps
+- `flowchart`: Flowcharts
+- `graph TD/LR`: Directional graphs
+- `sequenceDiagram`: Sequence diagrams
+- `classDiagram`: Class diagrams
+
+### Usage Example
+
+```markdown
+{{</* mermaid */>}}
+mindmap
+  root((Topic))
+    Subtopic1
+      DetailA
+      DetailB
+    Subtopic2
+      DetailC
+{{</* /mermaid */>}}
+```
 
 ---
 
-# Part 4: Repository Structure
+# Part 4: Directory Structure
 
-## 4.1 Complete Structure
+## 4.1 Current Repository Structure
 
 ```text
 CJYjob.github.io/
-│
-├── .github/
-│   └── workflows/
-│       └── hugo.yaml              # GitHub Actions CI/CD config
-│
-├── archetypes/                    # Content templates
+├── .github/workflows/hugo.yaml
+├── archetypes/
 │   ├── default.md
 │   ├── log.md
 │   └── portfolio.md
-│
 ├── content/
-│   └── ko/                        # language content root (published without /ko/ prefix)
-│       ├── about/
-│       │   └── index.md
-│       ├── categories/            # category hub pages
-│       ├── log/                   # 📒 raw accumulated data
-│       │   ├── _index.md
-│       │   ├── {topic}/
-│       │   │   └── {intermediate-N}/index.md
-│       │   └── reflection/
-│       │       ├── daily/
-│       │       ├── weekly/
-│       │       ├── monthly/
-│       │       ├── quarterly/
-│       │       ├── semiyearly/
-│       │       └── yearly/
-│       ├── portfolio/             # 🗂️ completed outputs
-│       │   ├── _index.md
-│       │   ├── {completed-topic}/index.md
-│       │   ├── insights/index.md
-│       │   └── workout.md
-│       ├── series/                # series hub pages
+│   └── ko/
+│       ├── about/index.md
+│       ├── categories/
+│       ├── log/
+│       ├── portfolio/
+│       ├── series/
 │       └── search.md
-│
-├── data/                          # Hugo Site.Data source
+├── data/
 │   ├── workout.json
 │   └── workout_mapping.json
-│
-├── docs/
-│   └── master/                    # operational SSOT; not Hugo content
-│
+├── docs/master/
 ├── layouts/
+│   ├── _partials/
+│   ├── partials/
 │   └── shortcodes/
-│       ├── datatable.html
-│       ├── workout-volume-chart.html
-│       ├── workout-cardio-chart.html
-│       ├── alert.html
-│       ├── youtube.html
-│       ├── codesandbox.html
-│       ├── docker-example.html
-│       └── mermaid.html
-│
 ├── scripts/
 │   └── merge_workout_pending.py
-│
 ├── static/
-│   ├── images/
-│   └── CNAME                      # only if a custom domain is used
-│
-├── themes/
-│   └── PaperMod/                  # Git submodule
-│
-├── hugo.yaml
-├── .gitmodules
-└── README.md
+├── themes/PaperMod/
+└── hugo.yaml
 ```
+
+Paths described elsewhere as future/standard asset locations (for example higher reflection tiers, `portfolio/insights/`, or `static/images/`) may not exist until first used. The tree above distinguishes currently present top-level structure from those on-demand paths.
 
 The legacy top-level content trees (`content/log`, `content/portfolio`, `content/about`, etc.) were removed after migration verification. Do not recreate them.
 
-## 4.2 Directory Responsibilities
+## 4.2 Key File Roles
 
-| Directory | Responsibility |
-|-----------|----------------|
+| File/Folder | Role |
+|-------------|------|
+| `hugo.yaml` | Overall blog settings (title, menu, mainSections, theme params, etc.) |
 | `content/ko/log/` | Incomplete materials and reflections accumulate here |
 | `content/ko/portfolio/` | Completed outputs displayed here |
-| `data/` | Structured JSON data loaded by Hugo as `Site.Data` |
-| `layouts/shortcodes/` | Reusable rendering logic |
-| `static/` | Files published directly from the site root |
+| `data/` | Structured data (JSON). Hugo auto-loads as Site.Data |
+| `layouts/shortcodes/` | User-defined shortcodes (datatable, etc.) |
+| `static/` | Images, CSS, and other static assets |
+| `themes/PaperMod/` | Theme files (do not modify) |
+| `.github/workflows/` | CI/CD automation settings |
 | `content/ko/categories/` | Category hub pages |
 | `content/ko/series/` | Series hub pages |
-| `docs/master/` | Operational SSOT; not Hugo content |
 
-## 4.3 Asset Placement Rules
-
-| Asset Type | Location |
-|------------|----------|
-| Incomplete study/practice material | `content/ko/log/...` |
-| Daily/weekly/monthly/etc. reflection | `content/ko/log/reflection/...` |
-| Completed unstructured output | `content/ko/portfolio/...` |
-| Structured time-series raw data | `/data/{activity}.json` |
-| Static structured mapping data | `/data/{mapping}.json` |
-| Structured-data public page | `content/ko/portfolio/{activity}.md` or directory-style `index.md` |
-| Operational SSOT | `docs/master/...` |
-
-Detailed asset classification is defined in `docs/master/system-operation.md` section *C-2-1 (자산 구조)*.
-
-## 4.4 Source Path vs Public URL
+## 4.3 Source Path vs Live URL
 
 This repository sets Korean `contentDir` to `content/ko`; Hugo publishes those source files without a `/ko/` URL prefix. When linking between pages in Markdown, use the *live URL* (not the source path).
 
-| Source | Public URL |
-|--------|------------|
-| `content/ko/log/_index.md` | `/log/` |
-| `content/ko/portfolio/_index.md` | `/portfolio/` |
-| `content/ko/about/index.md` | `/about/` |
-| `content/ko/log/reflection/daily/2026-06-01/index.md` | `/log/reflection/daily/2026-06-01/` |
-| `content/ko/portfolio/workout.md` | `/portfolio/workout/` |
+| Location | Source Path (in repository) | Live URL (after publish) |
+|----------|-----------------------------|--------------------------|
+| Log index | `content/ko/log/_index.md` | `/log/` |
+| Portfolio index | `content/ko/portfolio/_index.md` | `/portfolio/` |
+| About | `content/ko/about/index.md` | `/about/` |
+| Daily reflection (example) | `content/ko/log/reflection/daily/2026-06-01/index.md` | `/log/reflection/daily/2026-06-01/` |
+| Workout public page | `content/ko/portfolio/workout.md` | `/portfolio/workout/` |
 
 Use `[Portfolio](/portfolio/)` (live URL), not `[Portfolio](/content/ko/portfolio/)`. The latter results in a 404 on the live site.
 
-## 4.5 Legacy URLs
-
-When content moves, preserve old public URLs with Hugo `aliases` where needed. Hugo aliases may render as static HTML with `canonical` and `meta refresh` rather than an HTTP 301/302 response. Therefore legacy verification must inspect the alias HTML or final browser behavior, not only the HTTP status code.
-
 ---
 
-# Part 5: Content Model
+# Part 5: Content Creation Guide
 
-## 5.1 Log
+## 5.1 Working Methods
 
-Log stores *raw accumulated data*.
+This blog is modified through three paths:
 
-Examples:
-
-- incomplete study notes
-- in-progress practice logs
-- daily/weekly/monthly/quarterly/semiannual/annual reflections
-- structured-data time series (physically under `/data/`, conceptually raw data)
-
-## 5.2 Portfolio
-
-Portfolio stores *completed outputs*.
-
-Examples:
-
-- completed study output
-- project write-up
-- vulnerability analysis
-- structured-data public dashboard/page
-- accumulated insights
-
-## 5.3 About
-
-About stores blog meta information, including:
-
-- blog purpose
-- owner introduction
-- technical stack
-- external tool attribution where required
-
-## 5.4 Search
-
-Search is implemented using PaperMod's JSON output and Fuse.js.
-
-The `outputs.home` configuration must include `JSON`.
-
----
-
-# Part 6: Front Matter Standard
-
-## 6.1 Standard Base Fields
-
-Every post must use YAML Front Matter with these six base fields:
-
-```yaml
----
-title: "Post Title"
-date: 2026-05-28
-draft: false
-description: "Short description for SEO and listing"
-categories: ["Security"]
-tags: ["XSS", "Web Security"]
----
-```
-
-### Required Fields
-
-| Field | Purpose |
-|-------|---------|
-| `title` | Page title |
-| `date` | Page date |
-| `draft` | Publication state |
-| `description` | SEO/list summary |
-| `categories` | Primary classification |
-| `tags` | Search/discovery keywords |
-
-### Publication Rule
-
-```yaml
-draft: false
-```
-
-must be confirmed before final publication.
-
-## 6.2 Conditional Fields
-
-Add only when needed:
-
-```yaml
-aliases:
-  - /old/path/
-series:
-  - "Web Security"
-weight: 10
-ShowToc: true
-TocOpen: false
-```
-
-Do not add coach metadata such as:
-
-```text
-session_started_at
-session_ended_at
-recorded_by
-time_lookup_status
-```
-
-Coach activity timestamps are already preserved in Git history. User activity timestamps belong in structured data or natural body text according to the system-operation document.
-
-## 6.3 Archetypes
-
-### `archetypes/default.md`
-
-```yaml
----
-title: "{{ replace .Name "-" " " | title }}"
-date: {{ .Date }}
-draft: false
-description: ""
-categories: []
-tags: []
----
-```
-
-### `archetypes/log.md`
-
-```yaml
----
-title: "{{ replace .Name "-" " " | title }}"
-date: {{ .Date }}
-draft: false
-description: ""
-categories: []
-tags: []
----
-```
-
-### `archetypes/portfolio.md`
-
-```yaml
----
-title: "{{ replace .Name "-" " " | title }}"
-date: {{ .Date }}
-draft: false
-description: ""
-categories: []
-tags: []
----
-```
-
----
-
-# Part 7: Coach Repository Operations
-
-## 7.1 Confirmation Gate
+1. **GitHub web interface** — operator edits files directly.
+2. **Automation coach GPT Action** — automation/blog operations changes.
+3. **Life coach and other domain coach GPT Actions** — operational records, reflections, and domain asset updates.
 
 Changes via coaches use the *platform confirmation modal as the only approval gate*; a separate chat commit preview or `approve/proceed` message is not required. The full safety convention is defined in `docs/master/system-operation.md` section *PartB-5 (저장소 쓰기 확인 게이트)*.
 
-## 7.2 Coach Repository Write Standard
+### Coach repository write standard
 
 Coach-driven writes use the GitHub Git Database API. The previous Contents API + Base64 PUT flow is retired.
 
@@ -781,532 +673,571 @@ Coach-driven writes use the GitHub Git Database API. The previous Contents API +
 4. Create a tree using the current tree as `base_tree`.
 5. Create a commit whose parent is the starting `main` commit.
 6. Update `main` with `force:false`.
-7. Re-read latest `main` and the target raw/tree state before declaring success.
-8. On 409/non-fast-forward, restart from the latest `main` and reconstruct the intended changes.
+7. Re-read `main` and raw/tree state before declaring success.
 
-## 7.3 Content Paths
+## 5.2 Creating Content on GitHub Web
 
-| Asset | Path Pattern |
-|-------|--------------|
+### New Post Creation Procedure
+
+#### Step 1: Access Repository
+
+```
+https://github.com/CJYjob/CJYjob.github.io
+```
+
+#### Step 2: Create New File
+
+1. Click **Add file** button
+2. Select **Create new file**
+
+#### Step 3: Enter File Path
+
+Enter the full path in the top input field (typing `/` auto-creates folders):
+
+| Asset Type | File Path Example |
+|------------|-------------------|
 | Log — in-progress study/practice | `content/ko/log/{topic}/{intermediate-1}/index.md` |
 | Log — daily reflection | `content/ko/log/reflection/daily/2026-06-01/index.md` |
-| Log — weekly reflection | `content/ko/log/reflection/weekly/2026-W23/index.md` |
+| Log — weekly reflection | `content/ko/log/reflection/weekly/2026-06-07/index.md` |
 | Portfolio — completed unstructured asset | `content/ko/portfolio/{completed-topic}/index.md` |
 | Portfolio — insights | `content/ko/portfolio/insights/index.md` (single accumulating page) |
 | Portfolio — structured-data public page | `content/ko/portfolio/{activity}/index.md` |
 
-Some existing single-page assets, such as workout, use a flat Markdown file (`content/ko/portfolio/workout.md`). Preserve the existing path unless a migration is explicitly required.
+#### Step 4: Write Content
 
-## 7.4 Fine-Grained PAT Scope
-
-For coach tokens scoped to this repository:
-
-- **Contents**: Read/Write
-- **Metadata**: Read
-- **Actions Read**: only for the coach responsible for blog infrastructure
-
-Do not reuse one token across all coaches. Keep blast radius isolated.
-
-Detailed token policy is defined in `docs/master/system-operation.md` section *C-1 (GPT Action 토큰 관리 규약)*.
-
+```markdown
+---
+title: "Post Title"
+date: 2026-06-01
+draft: false
+description: "Post description (for SEO)"
+categories: ["Category"]
+tags: ["Tag1", "Tag2"]
 ---
 
-# Part 8: Structured Data System
-
-## 8.1 Design
-
-Structured data is stored separately from Markdown:
-
-```
-/data/{activity}.json
-        ↓
-Hugo Site.Data
-        ↓
-layouts/shortcodes/{renderer}.html
-        ↓
-content/ko/portfolio/{activity}.md
-        ↓
-public page
+Write body content here...
 ```
 
-The repository currently does not maintain a separate `/schemas/` directory. Structured-data validation follows the established field structure in the existing JSON plus the activity-specific convention in `docs/master/system-operation.md`. If formal JSON Schema validation is introduced later, add `/schemas/` and update both documents at the same time.
+#### Step 5: Commit (Save)
 
-## 8.2 Structured Data Write Flow
+1. Click **Commit changes...** at bottom of page
+2. Enter commit message (e.g., `Add: new daily reflection`)
+3. Click **Commit changes**
 
-1. Read the latest `main` commit and tree, then read `/data/{activity}.json` as raw UTF-8.
-2. Append or update the intended record in memory.
-3. Validate the new data against the existing field structure and activity-specific convention.
-4. Write the complete updated JSON through a Git Data API tree entry.
-5. Create a commit whose parent is the starting `main` commit, update `main` with `force:false`, then re-read raw/tree state.
-6. If `main` changed and the ref update is non-fast-forward, restart from the latest `main` and reconstruct the update.
+#### Step 6: Verify Deployment
 
-The *original file is always fetched first* to avoid overwriting prior records.
+1. Check build status in **Actions** tab (✅ green)
+2. Verify result at `https://cjyjob.github.io`
 
-## 8.3 Datatable Shortcode
+## 5.3 Editing Existing Files
 
-`layouts/shortcodes/datatable.html` renders structured data as an HTML table.
+1. Click on file to open
+2. Click **pencil icon** (Edit this file) at top right
+3. Edit content
+4. Click **Commit changes**
 
-### Example Usage
+## 5.4 Deleting Files
 
-Use the actual executable shortcode form in a post. When documenting the syntax itself, escape it so Hugo does not execute it.
+1. Click on file to open
+2. Click **trash icon** at top right
+3. Click **Commit changes**
 
-```text
-{{< datatable data="workout" sort="date desc" >}}
+## 5.5 Uploading Images
+
+### Method 1: Upload to static folder
+
+1. Navigate to `static/`; create `images/` if it does not yet exist
+2. Open `static/images/` and select **Add file** → **Upload files**
+3. Drag and drop image files
+4. **Commit changes**
+
+### Method 2: Reference in content
+
+```markdown
+![Image description](/images/filename.png)
 ```
 
-### Parameters
+## 5.6 Front Matter (Post Metadata)
 
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `data` | Yes | `Site.Data` key, e.g. `workout` |
-| `sort` | No | `"field asc"` or `"field desc"`; omit to keep original order |
-
-## 8.4 Workout Chart Shortcodes
-
-### Volume Chart
-
-```text
-{{< workout-volume-chart >}}
-```
-
-Purpose:
-
-- filter `type == "strength"`
-- aggregate `sets[].volume_kg`
-- render time-volume stacked bar chart
-
-### Cardio Chart
-
-```text
-{{< workout-cardio-chart >}}
-```
-
-Purpose:
-
-- filter `type == "cardio"`
-- use `distance_km`
-- render time-distance bar chart
-
-## 8.5 Hugo Site.Data + Client JS Pattern
-
-Important Hugo behavior:
-
-```go-html-template
-{{ site.Data.workout | jsonify }}
-```
-
-is inserted into JavaScript as a **JSON string**, not directly as a JavaScript array/object.
-
-Incorrect:
-
-```javascript
-const data = {{ site.Data.workout | jsonify }};
-data.filter(...); // TypeError: data.filter is not a function
-```
-
-Correct:
-
-```javascript
-const data = JSON.parse({{ site.Data.workout | jsonify }});
-data.filter(...);
-```
-
-This pattern must be used in client-side Chart.js shortcodes that consume `Site.Data`.
-
-## 8.6 Raw HTML and Goldmark
-
-Custom HTML/JavaScript in Markdown requires:
+YAML-format settings at the top of every Markdown file:
 
 ```yaml
-markup:
-  goldmark:
-    renderer:
-      unsafe: true
+---
+title: "Post Title"                # Required
+date: 2026-06-01                   # Creation date (required)
+draft: false                       # true excludes from build
+description: "Post description"    # For SEO, preview
+categories: ["Log", "Web"]         # Categories
+tags: ["XSS", "Security"]          # Tags
+aliases: []                         # Optional: preserve legacy URLs
+series: ["OWASP Top 10"]           # Series (serial posts)
+weight: 10                         # Sort order (lower = first)
+ShowToc: true                      # Show table of contents
+TocOpen: true                      # TOC expanded state
+---
 ```
 
-Without this setting, raw HTML may be escaped or omitted.
+### draft Setting
 
-## 8.7 Shortcode Escape
+| Value | Meaning |
+|-------|---------|
+| `draft: true` | Draft — excluded from build, not shown on site |
+| `draft: false` | Published — included in build, shown on site |
 
-When *showing* shortcode syntax in documentation, escape it so Hugo does not execute it.
+Operational standard: *always verify `draft: false` before commit*.
 
-When *using* a shortcode in a real post, use the executable form.
+The current archetypes (`default.md`, `log.md`, `portfolio.md`) intentionally start new content with `draft: true`; publication still requires changing the generated content to `draft: false`.
 
-Do not confuse documentation escape syntax with production shortcode syntax.
+## 5.7 Shortcode Usage
+
+### Mermaid (Diagrams/Mindmaps)
+
+```markdown
+{{</* mermaid */>}}
+mindmap
+  root((Web Security))
+    Injection
+      SQL Injection
+      Command Injection
+    XSS
+      Stored XSS
+      Reflected XSS
+{{</* /mermaid */>}}
+```
+
+The shortcode itself outputs the Mermaid wrapper; global Mermaid.js loading and initialization are defined in `layouts/partials/extend_head.html`.
+
+### Datatable (Structured Data Table)
+
+```markdown
+{{</* datatable activity="workout" */>}}
+{{</* datatable activity="workout" sort="date desc" */>}}
+```
+
+The actual shortcode reads `.Get "activity"`. It renders `/data/{activity}.json` as a cumulative table. The `sort` parameter accepts `"field asc"` or `"field desc"` form; omit to keep original order. The underlying data flow and schema convention are defined in `docs/master/system-operation.md` section *C-2-2-2*.
+
+### Workout Volume Chart (Strength Stacked Bar)
+
+```markdown
+{{</* workout-volume-chart days="30" */>}}
+```
+
+Reads `/data/workout.json`, filters records with `type: "strength"` from the last N days (default 30), and renders a stacked bar chart of volume (kg) per exercise per day using Chart.js. The chart's data source is the same `volume_kg` field accumulated per set (= `weight_kg × reps`).
+
+Schema convention is defined in `docs/master/system-operation.md` section *C-2-2-3*. See also the *Hugo Site.Data + Client JS Pattern* note in the Appendix.
+
+### Workout Cardio Chart (Distance Bar)
+
+```markdown
+{{</* workout-cardio-chart days="30" */>}}
+```
+
+Reads `/data/workout.json`, filters records with `type: "cardio"` from the last N days (default 30), and renders a bar chart of cumulative distance (km) per exercise per day. Uses `distance_km` if present; otherwise computes from `speed_kmh × (duration_min / 60)`.
+
+### Warning (Warning Box)
+
+```markdown
+{{</* warning */>}}
+This experiment should only be used for educational purposes.
+{{</* /warning */>}}
+```
+
+### YouTube Embedding
+
+```markdown
+{{</* youtube id="VIDEO_ID" title="Video Title" */>}}
+```
+
+`https://youtube.com/watch?v=ABC123` → `id="ABC123"`
+
+### CodeSandbox Embedding
+
+```markdown
+{{</* codesandbox id="sandbox-id" height="400" */>}}
+```
+
+### Docker Run Command Box
+
+```markdown
+{{</* docker-run image="vulnerables/web-dvwa" port="80" name="dvwa" localport="8080" */>}}
+```
+
+## 5.8 Asset-Type Content Templates
+
+### Log — In-Progress Study/Practice
+
+```markdown
+---
+title: "Topic — Intermediate Output 1"
+date: 2026-06-01
+draft: false
+description: "Scope covered by this intermediate output"
+categories: ["Log"]
+tags: ["topic-tag"]
+ShowToc: true
+---
+
+## Goal
+
+- Goal 1
+- Goal 2
+
+## Progress
+
+(Accumulated work-in-progress content)
+
+## Blockers / Attempts
+
+- (If any)
+
+## Next Steps
+
+- (If any)
+```
+
+### Log — Daily Reflection
+
+```markdown
+---
+title: "2026-06-01 Daily Reflection"
+date: 2026-06-01
+draft: false
+description: "Daily reflection"
+categories: ["Log", "Reflection"]
+tags: ["Daily Reflection"]
+---
+
+## Plan
+
+- (Day's planned items)
+
+## Record
+
+- HH:MM — Activity
+- HH:MM — Activity
+
+## Analysis
+
+- (Time allocation and execution rate analysis)
+
+## Reflection
+
+- (What went well / what to improve / carry into next cycle)
+```
+
+Higher reflection tiers (weekly, monthly, quarterly, semiannual, annual) follow the same skeleton. Tier handling and insight-extraction rules are defined in `docs/master/system-operation.md` section *C-2-2-1*.
+
+### Portfolio — Completed Unstructured Asset
+
+```markdown
+---
+title: "Completed Topic"
+date: 2026-06-01
+draft: false
+description: "Summary of the completed output (SEO / external readers)"
+categories: ["Portfolio", "{domain}"]
+tags: ["{domain-tag}"]
+ShowToc: true
+---
+
+## Overview
+
+(Topic introduction in reader-friendly tone)
+
+## Mind Map
+
+{{</* mermaid */>}}
+mindmap
+  root((Topic))
+    Subtopic1
+    Subtopic2
+{{</* /mermaid */>}}
+
+## Body
+
+### Section 1
+
+(Completed content — intermediate outputs accumulated in log, now restructured)
+
+## References
+
+- [Link](URL)
+```
+
+### Portfolio — Structured-Data Public Page
+
+```markdown
+---
+title: "Workout Records"
+date: 2026-06-01
+draft: false
+description: "Cumulative workout records"
+categories: ["Portfolio", "Workout"]
+tags: ["Workout", "Data"]
+---
+
+## Overview
+
+Cumulative workout records. Data updates are owned solely by the workout coach.
+
+## Cumulative Data
+
+{{</* datatable activity="workout" */>}}
+
+## Activity Analysis
+
+(Activity analysis — updated by the workout coach)
+```
+
+### Portfolio — Insights
+
+```markdown
+---
+title: "Insights"
+date: 2026-06-01
+draft: false
+description: "Cumulative insights extracted from reflections"
+categories: ["Portfolio", "Insights"]
+tags: ["Insight"]
+ShowToc: true
+---
+
+## YYYY-MM-DD — Insight title
+
+(Insight body — appended by the life coach when extracted during reflection)
 
 ---
 
-# Part 9: Content Creation Workflow
+## YYYY-MM-DD — Another insight
 
-## 9.1 Manual Post Creation
-
-### Log Post
-
-```bash
-hugo new --kind log log/security/xss/part-1/index.md
+(Same pattern continues)
 ```
 
-### Portfolio Post
+---
 
-```bash
-hugo new --kind portfolio portfolio/security/xss/index.md
+# Part 6: Operations and Maintenance
+
+## 6.1 Daily Operations Workflow
+
+```
+1. Organize content ideas
+        ↓
+2. Create new file via GitHub web or coach GPT
+        ↓
+3. Write content in Markdown (coach constructs the content before the platform confirmation modal)
+        ↓
+4. Verify draft: false
+        ↓
+5. Commit (coach: confirm modal)
+        ↓
+6. Check build in Actions tab (takes 1-2 minutes)
+        ↓
+7. Verify result on site
 ```
 
-Edit the generated file, then:
+## 6.2 GitHub Actions Status Check
 
-```bash
+| Status | Icon | Meaning | Action |
+|--------|------|---------|--------|
+| Success | ✅ Green | Deployment complete | None |
+| In Progress | 🟡 Yellow | Building | Wait |
+| Failed | ❌ Red | Error occurred | Check logs |
+
+### How to Check Logs on Failure
+
+1. Click Actions tab
+2. Click failed workflow
+3. Click red step to see error message
+
+## 6.3 Google Search Console Monitoring
+
+### Check Frequency: Weekly
+
+- **Performance**: Check impressions, clicks
+- **Indexing → Pages**: Check indexed page count
+- **Sitemaps**: Check sitemap status
+
+### Request Indexing for New Content
+
+1. Enter new post URL in top search bar
+2. Click **Request indexing**
+
+## 6.4 Google Analytics Monitoring
+
+### Items to Check
+
+| Menu | What to Check |
+|------|---------------|
+| Real-time | Current visitor count |
+| Reports → Acquisition | Traffic sources (search, direct, SNS, etc.) |
+| Reports → Engagement | Popular pages, session duration |
+
+## 6.5 Theme Updates (When Needed)
+
+When PaperMod theme update is required:
+
+### Update in Local Environment
+
+```powershell
+cd C:\Projects\my-blog
+git submodule update --remote --merge
 git add .
-git commit -m "Add XSS study output"
+git commit -m "Update: PaperMod theme"
 git push
 ```
 
-## 9.2 Coach-Driven Post Creation
+### Cautions
 
-Typical flow:
-
-```
-User activity
-    ↓
-Coach summarizes/structures
-    ↓
-Determine log or portfolio
-    ↓
-Build Markdown with Front Matter
-    ↓
-Platform confirmation modal
-    ↓
-Git Data API write
-    ↓
-GitHub Actions build
-    ↓
-Public verification
-```
-
-## 9.3 Asset Conversion: Log → Portfolio
-
-When an intermediate output is completed:
-
-1. Preserve the original log page.
-2. Create/update the portfolio output.
-3. Add references between log and portfolio where appropriate.
-4. Update the portfolio index page if the output belongs to a multi-page asset.
-
-The source log is preserved for traceability.
+- Build errors may occur after theme update
+- Check Hugo version compatibility
 
 ---
 
-# Part 10: Search
+# Part 7: Docker Practice Environment (For Security Practice)
 
-## 10.1 Search Page
+## 7.1 Docker Basic Concepts
 
-`content/ko/search.md`:
+Docker is a platform that runs applications in isolated environments called **containers**.
 
-```yaml
----
-title: "검색"
-layout: "search"
-url: "/search/"
-summary: "search"
----
-```
+### Advantages
 
-## 10.2 JSON Output
+- Environment consistency (runs the same anywhere)
+- Isolation (separated from host system)
+- Easy install/uninstall
 
-`hugo.yaml` must include:
-
-```yaml
-outputs:
-  home:
-    - HTML
-    - RSS
-    - JSON
-```
-
-PaperMod uses this JSON output for Fuse.js search.
-
----
-
-# Part 11: Mermaid Diagrams
-
-## 11.1 Mermaid Shortcode
-
-Example shortcode file:
-
-```html
-<div class="mermaid">
-  {{ .Inner | safeHTML }}
-</div>
-<script type="module">
-  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-  mermaid.initialize({ startOnLoad: true });
-</script>
-```
-
-## 11.2 Usage
-
-```text
-{{< mermaid >}}
-flowchart TD
-    A[Input] --> B[Process]
-    B --> C[Output]
-{{< /mermaid >}}
-```
-
-## 11.3 Recommended Uses
-
-- system architecture
-- request/response flow
-- security attack path
-- learning roadmap
-- automation pipeline
-
----
-
-# Part 12: Reusable Visual Shortcodes
-
-## 12.1 Alert Box
-
-Example:
-
-```text
-{{< alert type="warning" >}}
-Never test a production system without authorization.
-{{< /alert >}}
-```
-
-Suggested types:
-
-- info
-- warning
-- danger
-- success
-
-## 12.2 YouTube Embed
-
-```text
-{{< youtube id="VIDEO_ID" >}}
-```
-
-## 12.3 CodeSandbox Embed
-
-```text
-{{< codesandbox id="SANDBOX_ID" >}}
-```
-
-## 12.4 Docker Example
-
-```text
-{{< docker-example >}}
-docker run --rm -it example/image
-{{< /docker-example >}}
-```
-
----
-
-# Part 13: SEO
-
-## 13.1 Google Search Console
-
-Register:
-
-```text
-https://search.google.com/search-console
-```
-
-Recommended property:
-
-```text
-https://cjyjob.github.io/
-```
-
-## 13.2 Sitemap
-
-Hugo generates:
-
-```text
-/sitemap.xml
-```
-
-Submit:
-
-```text
-https://cjyjob.github.io/sitemap.xml
-```
-
-## 13.3 Robots
-
-With:
-
-```yaml
-enableRobotsTXT: true
-```
-
-Hugo generates:
-
-```text
-/robots.txt
-```
-
-## 13.4 SEO Checklist
-
-- meaningful `title`
-- useful `description`
-- stable public URL
-- category/tag discipline
-- internal links
-- image alt text
-- sitemap submitted
-- no accidental draft/future date
-
----
-
-# Part 14: Google Analytics
-
-## 14.1 Configuration
-
-In `hugo.yaml`:
-
-```yaml
-googleAnalytics: "G-XXXXXXXXXX"
-```
-
-Replace with the real GA4 Measurement ID.
-
-## 14.2 Verification
-
-After deployment:
-
-1. Open the site.
-2. Check GA4 Realtime.
-3. Confirm page view appears.
-
----
-
-# Part 15: Local Testing
-
-## 15.1 Preview Drafts
-
-```bash
-hugo server -D
-```
-
-## 15.2 Production-Like Build
-
-```bash
-hugo --minify
-```
-
-## 15.3 Check Generated Output
-
-```bash
-ls public
-```
-
-Windows:
+## 7.2 Docker Basic Commands
 
 ```powershell
-Get-ChildItem public
+# Run container
+docker run -d --name [name] -p [localport]:[containerport] [image]
+
+# Check running containers
+docker ps
+
+# Check all containers
+docker ps -a
+
+# Stop container
+docker stop [name]
+
+# Remove container
+docker rm [name]
+
+# Check container logs
+docker logs [name]
+
+# List images
+docker images
+
+# Clean unused images
+docker image prune
 ```
 
-## 15.4 Useful Verification
+## 7.3 Vulnerability Practice Environments
 
-```bash
-hugo --printPathWarnings
+### DVWA (Damn Vulnerable Web Application)
+
+```powershell
+# Run
+docker run -d --name dvwa -p 8080:80 vulnerables/web-dvwa
+
+# Access: http://localhost:8080
+# Login: admin / password
+# Initial setup: Click Create/Reset Database
+
+# Shutdown
+docker stop dvwa && docker rm dvwa
 ```
 
-Check for:
+### OWASP Juice Shop
 
-- broken resource paths
-- duplicate target paths
-- invalid templates
-- missing shortcode references
+```powershell
+# Run
+docker run -d --name juice-shop -p 3000:3000 bkimminich/juice-shop
+
+# Access: http://localhost:3000
+
+# Shutdown
+docker stop juice-shop && docker rm juice-shop
+```
+
+### WebGoat
+
+```powershell
+# Run
+docker run -d --name webgoat -p 8080:8080 -p 9090:9090 webgoat/webgoat
+
+# WebGoat Access: http://localhost:8080/WebGoat
+# WebWolf Access: http://localhost:9090/WebWolf
+
+# Shutdown
+docker stop webgoat && docker rm webgoat
+```
 
 ---
 
-# Part 16: Troubleshooting
+# Part 8: Troubleshooting Guide
 
-## 16.1 Theme Not Found
+## 8.1 GitHub Actions Build Failure
 
-Symptom:
+### Cause 1: Hugo Version Mismatch
 
-```text
-failed to load modules
-```
+**Symptom**: `hugo v0.146.0 or greater is required`
 
-Fix:
+**Solution**:
+1. Edit `.github/workflows/hugo.yaml`
+2. Verify `HUGO_VERSION: 0.152.2`
+3. Commit
 
-```bash
-git submodule update --init --recursive
-```
+### Cause 2: Theme Submodule Missing
 
-## 16.2 GitHub Actions Build Failure
+**Symptom**: `theme not found` error
 
-Check:
+**Solution**: Verify `submodules: recursive` setting in workflow
 
-- Hugo version
-- Extended build
-- submodule checkout
-- invalid Front Matter
-- invalid shortcode syntax
-- malformed JSON under `/data/`
+### Cause 3: mainSections Mismatch
 
-## 16.3 Page Not Reflected
+**Symptom**: Home page shows empty post list
 
-1. Confirm the intended commit is on `main`.
-2. Confirm Actions deployment succeeded.
-3. Confirm the source file is under `content/ko/`.
-4. Confirm `draft: false`.
-5. Check the public URL without a `/ko/` prefix.
-6. Use cache busting if necessary.
+**Solution**:
+1. Verify `mainSections` in `hugo.yaml` matches the section directory names under the configured language `contentDir` (`content/ko/`)
+2. Current standard: `mainSections: [log, portfolio]`
 
-## 16.4 Home Page Does Not Show Posts
+## 8.2 Changes Not Reflected on Site
 
-1. Verify `params.mainSections` in `hugo.yaml` matches the section directory names under the configured language `contentDir` (`content/ko/`).
-2. Confirm posts are not drafts/future-dated.
-3. Confirm section index files and content paths are valid.
+### Verification Order
 
-## 16.5 Search Does Not Work
+1. **Verify commit completed**
+2. **Check build status in Actions tab**
+3. **Clear browser cache** (Ctrl+Shift+R)
 
-Check:
+## 8.3 Google Search Console Indexing Failure
 
-```yaml
-outputs:
-  home:
-    - HTML
-    - RSS
-    - JSON
-```
+### Sitemap "Couldn't fetch"
 
-Also confirm `content/ko/search.md` uses the PaperMod search layout.
+**Cause**: Google crawler delay
 
-## 16.6 Raw HTML Not Rendered
+**Solution**: Wait 24–48 hours for automatic resolution
 
-Confirm:
+### Page Not Indexed
 
-```yaml
-markup:
-  goldmark:
-    renderer:
-      unsafe: true
-```
+**Solution**:
+1. Enter the URL in URL inspection tool
+2. Click "Request indexing"
 
-## 16.7 Datatable/Chart `filter is not a function`
+## 8.4 Images Not Displaying
 
-Cause:
+### Things to Check
 
-`Site.Data` was serialized into a JavaScript string.
+1. Verify the referenced file exists under `static/` (for `/images/...`, create/use `static/images/` as needed)
+2. Verify the public path starts from the site root, e.g. `/images/filename.png`
+3. Check filename case sensitivity
 
-Fix:
+## 8.5 Coach GPT Action Failures
 
-```javascript
-const data = JSON.parse({{ site.Data.x | jsonify }});
-```
+### Symptom: 401 Unauthorized
 
-## 16.8 GitHub Action Authentication
-
-### Symptom: read works but write fails
-
-Public repositories allow anonymous reads. A successful GET does not prove that the PAT used for writes is valid.
+**Cause**: Token expired, revoked, or insufficient permissions.
 
 **Solution**: Verify token status in GitHub Settings → Fine-grained tokens. Reissue if needed and update the Authentication value in the GPT builder. Token issuance and rotation conventions are defined in `docs/master/system-operation.md` section *C-1 (GPT Action 토큰 관리 규약)*.
 
@@ -1316,303 +1247,167 @@ Public repositories allow anonymous reads. A successful GET does not prove that 
 
 **Solution**: Re-fetch latest `main` and its tree, reconstruct the intended minimal changes, create a new tree/commit, and retry the `main` update with `force:false`. The repository write convention (latest main/tree → modify → create tree/commit → update main with `force:false` → verify raw/tree) is defined in `docs/master/system-operation.md` section *C-1 (GPT Action 토큰 관리 규약)*.
 
-## 16.9 Confirmation Modal Does Not Appear
+### Symptom: Modal does not appear and write fires immediately
+
+**Cause**: `x-openai-isConsequential: true` missing from the write operation in the OpenAPI schema.
 
 **Solution**: Verify `x-openai-isConsequential: true` on the repository write operations in the coach schema, then re-save. The confirmation gate convention is defined in `docs/master/system-operation.md` section *PartB-5 (저장소 쓰기 확인 게이트)*.
 
-## 16.10 Structured Data Format Mismatch
+## 8.6 Structured Data Format Mismatch
 
 ### Symptom: Coach halts a write because a new record does not match the existing data structure
 
+**Solution**:
 1. Inspect the current `/data/{activity}.json` structure and the activity-specific convention.
 2. Compare the attempted record with the existing field structure and value conventions.
 3. Correct the new data rather than silently changing the established structure. If the structure itself must change, update the operating documents and dependent rendering logic together.
 
 The repository currently does not maintain a separate `/schemas/` directory. The structured-data convention is defined in `docs/master/system-operation.md` section *C-2-2-2*.
 
-## 16.11 Raw GitHub Cache Delay
-
-`raw.githubusercontent.com` may lag for minutes after a commit.
-
-For fresh verification, prefer:
-
-- GitHub API raw/blob retrieval
-- repository blob view
-
-Do not treat stale raw CDN output as proof that the commit failed.
-
-## 16.12 Korean Base64 Corruption (Historical)
-
-Historical coach writes using the GitHub Contents API encoded the body as Base64, and Korean text occasionally became corrupted.
-
-Current standard:
-
-- use the Git Data API tree/commit/ref flow
-- write UTF-8 text through tree-entry `content`
-- re-read raw/blob after the commit
-
 ---
 
-# Part 17: Security Practice Environment
+# Part 9: Appendix
 
-## 17.1 Docker-Based Labs
+## 9.1 Useful Links
 
-Recommended labs:
+### Official Documentation
 
-- DVWA
-- OWASP Juice Shop
-- WebGoat
+| Service | URL |
+|---------|-----|
+| Hugo | https://gohugo.io/documentation/ |
+| PaperMod | https://adityatelange.github.io/hugo-PaperMod/ |
+| GitHub Pages | https://docs.github.com/en/pages |
+| GitHub Actions | https://docs.github.com/en/actions |
+| Git Database API | https://docs.github.com/en/rest/git |
+| Mermaid.js | https://mermaid.js.org/ |
+| time.now Developer API | https://time.now/developer/api/timezone/Asia/Seoul |
 
-Example:
+### Vulnerability Practice
+
+| Platform | URL |
+|----------|-----|
+| DVWA | https://github.com/digininja/DVWA |
+| Juice Shop | https://owasp.org/www-project-juice-shop/ |
+| WebGoat | https://owasp.org/www-project-webgoat/ |
+
+## 9.2 Common Markdown Syntax
+
+```markdown
+# Heading 1
+## Heading 2
+### Heading 3
+
+**Bold**
+*Italic*
+~~Strikethrough~~
+
+- List item
+- List item
+
+1. Ordered list
+2. Ordered list
+
+[Link text](URL)
+
+![Image description](image URL)
+
+`inline code`
+
+​```language
+code block
+​```
+
+| Header1 | Header2 |
+|---------|---------|
+| Content1 | Content2 |
+
+> Blockquote
+```
+
+## 9.3 Git Commands (For Local Environment)
 
 ```bash
-docker run --rm -it -p 3000:3000 bkimminich/juice-shop
-```
+# Clone repository
+git clone git@github.com:CJYjob/CJYjob.github.io.git
 
-## 17.2 Practice Documentation Pattern
-
-Each lab write-up should record:
-
-1. objective
-2. environment
-3. vulnerable flow
-4. reproduction steps
-5. root cause
-6. mitigation
-7. evidence/screenshots
-8. references
-
-Do not publish secrets, credentials, private customer information, or unauthorized target details.
-
----
-
-# Part 18: Search Console / Analytics Operations
-
-## 18.1 Routine Checks
-
-### Search Console
-
-- indexing status
-- coverage errors
-- search queries
-- CTR
-- sitemap state
-
-### Analytics
-
-- users
-- sessions
-- popular pages
-- referral sources
-- engagement
-
-## 18.2 Suggested Review Cycle
-
-Weekly:
-
-- failed builds
-- broken links/images
-- indexing issues
-
-Monthly:
-
-- traffic trend
-- top pages
-- search queries
-- content gaps
-
----
-
-# Part 19: Publishing Checklist
-
-## 19.1 Before Commit
-
-- [ ] Correct English-only repository path
-- [ ] Six base Front Matter fields present
-- [ ] `draft: false` for final public content
-- [ ] Conditional fields used only when required
-- [ ] Internal links use public URLs, not source paths
-- [ ] No accidental `/ko/` prefix in public links
-- [ ] Referenced static assets exist
-- [ ] Required legacy aliases preserved
-- [ ] No unrelated body text rewritten
-
-## 19.2 After Commit
-
-- [ ] `main` points to the intended commit
-- [ ] Raw/tree state matches intended changes
-- [ ] GitHub Actions deployment succeeded
-- [ ] Public URL reflects the latest content
-- [ ] Legacy aliases resolve correctly when applicable
-
----
-
-# Part 20: Migration Notes
-
-## 20.1 Current Canonical Source Tree
-
-The current canonical content tree is:
-
-```text
-content/ko/
-├── log/
-├── portfolio/
-├── about/
-├── categories/
-├── series/
-└── search.md
-```
-
-The historical top-level content trees were removed after migration verification.
-
-## 20.2 Legacy URL Preservation
-
-During structural migrations:
-
-1. preserve old URLs with `aliases`
-2. verify alias HTML/canonical target
-3. verify new canonical page
-4. update internal links to the new public URL
-5. only then remove obsolete source trees
-
----
-
-# Part 21: Operational Principles
-
-## 21.1 Minimal Change
-
-When editing an existing file:
-
-- fetch the current raw content first
-- modify only the necessary lines
-- do not rewrite unrelated paragraphs
-- preserve headings, terminology, and ordering unless the change requires otherwise
-
-## 21.2 Source of Truth
-
-For blog technical operations:
-
-```text
-docs/master/blog-operations.md
-```
-
-For the self-management support system:
-
-```text
-docs/master/system-operation.md
-```
-
-For the security career roadmap:
-
-```text
-docs/master/security-five-year-plan.md
-```
-
-If a local/uploaded copy conflicts with `main`, the GitHub `main` copy is authoritative after migration is complete.
-
----
-
-# Appendix A: Quick Command Reference
-
-## Git
-
-```bash
+# Check status
 git status
+
+# Stage all changes
 git add .
+
+# Commit
 git commit -m "message"
+
+# Push
 git push
-```
 
-## Hugo
+# Pull (get remote changes)
+git pull
 
-```bash
-hugo server -D
-hugo --minify
-```
-
-## Submodules
-
-```bash
+# Initialize submodules
 git submodule update --init --recursive
+
+# Update theme
+git submodule update --remote --merge
 ```
 
-## Docker
+## 9.4 Cross-References to System Documentation
 
-```bash
-docker ps
-docker images
+This manual covers *blog technical operations only*. The following topics are defined in the system design document.
+
+| Topic | Reference |
+|-------|-----------|
+| Asset classification and completeness | `docs/master/system-operation.md` C-2-1 |
+| Unstructured document asset flow | C-2-2-1 |
+| Structured data asset flow | C-2-2-2 |
+| Workout structured-data schema (session_id, sets, etc.) | C-2-2-3 |
+| Operational records (reflections, daily pages) | C-2-2-1 |
+| Coach personas | C-3 |
+| Time signal, time-API mechanism, token management | C-1 |
+| Response format, write confirmation gate | PartB-5, PartB-6 |
+| Operational diagnostic assets (D group) | Appendix D |
+
+## 9.5 Technical Notes
+
+### Hugo Site.Data + Client JS Pattern
+
+When rendering `/data/*.json` content in client-side JavaScript (Chart.js, custom widgets, etc.), `{{ site.Data.X | jsonify }}` produces a *JSON-encoded string*, not a native JS object/array when embedded into a JS variable. Calling `data.filter(...)` on the result therefore fails with `TypeError: a.filter is not a function`.
+
+Standard implementation: wrap the Hugo expression with `JSON.parse(...)`:
+
+```html
+<script>
+  const data = JSON.parse({{ site.Data.workout | jsonify }});
+  // data is now a real JS array; data.filter(...) etc. work normally
+</script>
 ```
+
+This pattern is used in `workout-volume-chart.html` and `workout-cardio-chart.html`. Any future shortcode that consumes Site.Data from client JS should follow the same pattern.
+
+### Markdown + Raw HTML/Script Rendering
+
+PaperMod with the current `hugo.yaml` (`markup.goldmark.renderer.unsafe: true`) allows raw HTML/script inside markdown bodies. Shortcodes that emit `<div>`, `<canvas>`, and `<script>` elements (such as the workout chart shortcodes) therefore render correctly when called from a content page's markdown body. If this setting is changed back to `unsafe: false`, all client-side chart shortcodes break — verify this setting before any future shortcode that relies on inline script/markup.
+
+### Shortcode Escape Notation vs Live Invocation
+
+Hugo documentation conventions use `{{</* shortcode */>}}` (with `/*` and `*/` inside the braces) to *show* a shortcode in documentation without executing it. When writing instructions for a coach (or any agent) to insert a shortcode into a content file, give the *live invocation form* (`{{< shortcode >}}`) inside code blocks — the agent may copy escape notation verbatim into the content file and break rendering.
 
 ---
 
-# Appendix B: Key File Reference
-
-| File | Purpose |
-|------|---------|
-| `hugo.yaml` | Hugo/PaperMod configuration |
-| `.github/workflows/hugo.yaml` | CI/CD |
-| `content/ko/log/_index.md` | Log landing page |
-| `content/ko/portfolio/_index.md` | Portfolio landing page |
-| `content/ko/about/index.md` | About page |
-| `content/ko/search.md` | Search page |
-| `/data/*.json` | Structured data |
-| `layouts/shortcodes/*.html` | Data/visual rendering |
-| `docs/master/system-operation.md` | System operation convention |
-| `docs/master/blog-operations.md` | This manual |
-
----
-
-# Appendix C: Known Technical Pitfalls
-
-## C.1 Hugo `Site.Data` + Client JavaScript
-
-Use:
-
-```javascript
-const data = JSON.parse({{ site.Data.x | jsonify }});
-```
-
-not:
-
-```javascript
-const data = {{ site.Data.x | jsonify }};
-```
-
-when JavaScript expects an array/object.
-
-## C.2 Raw HTML
-
-Custom HTML/JS requires:
-
-```yaml
-markup:
-  goldmark:
-    renderer:
-      unsafe: true
-```
-
-## C.3 Shortcode Escape
-
-Use escaped syntax only when *displaying shortcode syntax as text*. Use executable syntax in real content.
-
-## C.4 Raw CDN Cache
-
-`raw.githubusercontent.com` can lag after a commit. Use GitHub API raw/blob for immediate verification.
-
-## C.5 Korean Text Writes
-
-The current Git Data API flow avoids the historical Base64 encoding path. Re-read the stored UTF-8 content after Korean-text writes.
-
----
-
-# Revision History
+# Change History
 
 | Date | Version | Changes |
 |------|---------|---------|
-| 2024-12 | 1.0 | Initial blog setup |
-| 2025 | 1.x | PaperMod customization and operational refinements |
+| 2025-03 | 1.0 | Initial creation — Diary/Gallery/Lab structure |
 | 2026-06 | 2.0 | Menu restructure (Log/Portfolio), `/data/` and `/schemas/` introduced, structured-data rendering mechanism, coach Action integration acknowledged, system-document cross-references added, troubleshooting expanded |
+| 2026-06 | 2.1 | Restored English tone; removed sections duplicated with system design doc (coach integration table, token rotation, structured-data rendering mechanism); reduced 5.1 to working-paths summary with reference; troubleshooting now cites system doc instead of duplicating |
+| 2026-06 | 2.2 | Added workout-volume-chart and workout-cardio-chart shortcodes (Chart.js); datatable shortcode `sort` parameter; datatable attribute fixed from `name` to `activity` (matched implementation); 9.5 Technical Notes added (Hugo Site.Data + Client JS pattern, raw HTML rendering, shortcode escape convention) |
 | 2026-08 | 2.3 | Updated source paths to `content/ko`, documented category/series hubs and legacy-tree removal, aligned the current `hugo.yaml`, retired Contents API/Base64 write guidance in favor of Git Data API, and recorded the current no-`/schemas/` implementation. |
+
+---
+
+# End of Document
 
 ---
 
