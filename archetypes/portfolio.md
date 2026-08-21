@@ -3,12 +3,8 @@ title: "{{ replace .Name "-" " " | title }}"
 date: {{ .Date }}
 draft: true
 description: ""
-categories: ["PortFolio"]
+categories: []
 tags: []
-series: []
-weight: 10
-ShowToc: true
-TocOpen: true
 ---
 
 ## 개요

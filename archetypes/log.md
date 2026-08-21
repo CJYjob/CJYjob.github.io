@@ -3,11 +3,8 @@ title: "{{ replace .Name "-" " " | title }}"
 date: {{ .Date }}
 draft: true
 description: ""
-categories: ["Log"]
+categories: []
 tags: []
-series: []
-ShowToc: true
-TocOpen: true
 ---
 
 {{</* warning */>}}
