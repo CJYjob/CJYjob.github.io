@@ -56,7 +56,7 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/workout.json content/portfolio/workout/index.md
+          git add data/workout.json content/ko/portfolio/workout.md
           git add -u data
           git commit -m "Merge workout pending records"
           git push
