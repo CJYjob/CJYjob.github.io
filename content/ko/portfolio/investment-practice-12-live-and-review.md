@@ -20,7 +20,7 @@ aliases:
 
 ## 이 편의 위치
 
-설계([백테스트 설계 편](/ko/portfolio/investment-strategy-08-backtest-design/))·검증 코드([구현 편](/ko/portfolio/investment-practice-09-implementation/)·[엔진 편](/ko/portfolio/investment-practice-10-backtest-engine/))·[자동매매 편](/ko/portfolio/investment-practice-11-automation/)까지 마친 전략을 실제 계좌에서 돌리고 기록하는 단계다. 목표는 단기 수익이 아니라, 검증된 구간에서만 참여하고 모든 판단을 기록해 복기하는 습관을 만드는 것이다.
+설계([백테스트 설계 편](/portfolio/investment-strategy-08-backtest-design/))·검증 코드([구현 편](/portfolio/investment-practice-09-implementation/)·[엔진 편](/portfolio/investment-practice-10-backtest-engine/))·[자동매매 편](/portfolio/investment-practice-11-automation/)까지 마친 전략을 실제 계좌에서 돌리고 기록하는 단계다. 목표는 단기 수익이 아니라, 검증된 구간에서만 참여하고 모든 판단을 기록해 복기하는 습관을 만드는 것이다.
 
 ## 모의 → 실전 순서
 
@@ -33,7 +33,7 @@ aliases:
 → 재검증(백테스트/모의)
 ```
 
-규칙을 손실 직후 즉흥적으로 바꾸지 않는다. 규칙 수정은 충분한 표본, 반복된 동일 문제, 과정 오류 확인, 백테스트·실전 차이의 설명 가능성, 수정 후 재검증 가능성을 만족할 때만 한다([리스크와 예외 조건 편](/ko/portfolio/investment-strategy-07-risk-and-exceptions/) 참조).
+규칙을 손실 직후 즉흥적으로 바꾸지 않는다. 규칙 수정은 충분한 표본, 반복된 동일 문제, 과정 오류 확인, 백테스트·실전 차이의 설명 가능성, 수정 후 재검증 가능성을 만족할 때만 한다([리스크와 예외 조건 편](/portfolio/investment-strategy-07-risk-and-exceptions/) 참조).
 
 ## 진입 전 최소 기록
 
@@ -68,4 +68,4 @@ aliases:
 
 ## 기록은 어디에 두나
 
-완결된 학습은 이 시리즈(Portfolio)에 두고, 진행 중인 원시 매매·복기 기록은 Log에 누적한다. 실제 일자별 기록은 **[ETF 실전 매매 기록 로그](/ko/log/etf-live-trading/)** 에 쌓는다.
+완결된 학습은 이 시리즈(Portfolio)에 두고, 진행 중인 원시 매매·복기 기록은 Log에 누적한다. 실제 일자별 기록은 **[ETF 실전 매매 기록 로그](/log/etf-live-trading/)** 에 쌓는다.

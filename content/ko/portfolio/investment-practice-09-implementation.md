@@ -150,7 +150,7 @@ c_kosdaq = build_combined('kosdaq150', 'KOSDAQ')
 
 ### 셀 4 — 지표 계산 + 국면 라벨링 (5단계 → 횡보 3분할 → 7단계)
 
-[지표 편](/ko/portfolio/investment-strategy-03-regime-indicators/)의 4지표(SMA 배열·ADX·BB %B·수급 z-점수)를 계산하고, [국면 분류 편](/ko/portfolio/investment-strategy-02-market-regimes/)의 규칙대로 라벨을 붙인다. ADX 임계값은 **하락 비대칭**(강한상승 ≥30 vs 강한하락 ≥25)을 반영하고, 횡보는 %B로 상단/중단/하단 3분할해 7단계로 확장한다. 파라미터는 KOSPI 20/60·ADX14, KOSDAQ 10/40·ADX10의 *예시*이며 8단계 최적화에서 보정한다. `add_indicators`에는 `flow_lag` 인자를 두었는데, 여기(셀 4·설명용 라벨)서는 기본 0이고 [엔진 편](/ko/portfolio/investment-practice-10-backtest-engine/) 백테스트에서 1로 켜서 미래참조를 차단한다.
+[지표 편](/portfolio/investment-strategy-03-regime-indicators/)의 4지표(SMA 배열·ADX·BB %B·수급 z-점수)를 계산하고, [국면 분류 편](/portfolio/investment-strategy-02-market-regimes/)의 규칙대로 라벨을 붙인다. ADX 임계값은 **하락 비대칭**(강한상승 ≥30 vs 강한하락 ≥25)을 반영하고, 횡보는 %B로 상단/중단/하단 3분할해 7단계로 확장한다. 파라미터는 KOSPI 20/60·ADX14, KOSDAQ 10/40·ADX10의 *예시*이며 8단계 최적화에서 보정한다. `add_indicators`에는 `flow_lag` 인자를 두었는데, 여기(셀 4·설명용 라벨)서는 기본 0이고 [엔진 편](/portfolio/investment-practice-10-backtest-engine/) 백테스트에서 1로 켜서 미래참조를 차단한다.
 
 ```python
 # ===== 셀 4: 지표 계산 + 국면 라벨링 (5단계, 횡보 3분할 → 7단계) =====
@@ -253,12 +253,12 @@ regime
 약한하락       89
 ```
 
-각 지표가 자리 잡으려면 워밍업 구간이 필요하므로 초반은 `-`(미산출)로 빠진다. KOSDAQ150의 `-`가 KOSPI보다 훨씬 많은 것은 이 산출 구간 차이에서 비롯된 것으로, *국면 비율을 비교하려면* 공통의 유효 구간으로 잘라 다시 세야 한다([국면 분류 편](/ko/portfolio/investment-strategy-02-market-regimes/) "분포는 가정 말고 측정"의 실제 적용).
+각 지표가 자리 잡으려면 워밍업 구간이 필요하므로 초반은 `-`(미산출)로 빠진다. KOSDAQ150의 `-`가 KOSPI보다 훨씬 많은 것은 이 산출 구간 차이에서 비롯된 것으로, *국면 비율을 비교하려면* 공통의 유효 구간으로 잘라 다시 세야 한다([국면 분류 편](/portfolio/investment-strategy-02-market-regimes/) "분포는 가정 말고 측정"의 실제 적용).
 
 ### 라벨링 다음 단계
 
-이 코드는 9단계 중 1·3·4까지다. 남은 2·5~8단계를 [엔진 편](/ko/portfolio/investment-practice-10-backtest-engine/)에서 코드로 잇는다. 핵심은 다음과 같다.
+이 코드는 9단계 중 1·3·4까지다. 남은 2·5~8단계를 [엔진 편](/portfolio/investment-practice-10-backtest-engine/)에서 코드로 잇는다. 핵심은 다음과 같다.
 
 - **2단계(미래참조 차단):** 지금은 같은 날 데이터로 라벨을 만들지만, 실거래·정직한 백테스트에서는 신호를 *전일(t−1)* 로 미뤄야 한다. 특히 수급 확정값은 장 마감 후(15:35·18:00)에 나오므로 **종가 매매 시점엔 그날 `flow`를 쓸 수 없다** → `flow`는 반드시 하루 이상 지연시켜 사용.
-- **5~7단계:** 비용(수수료·스프레드·세금)과 B 모드 리밸런싱 규칙을 넣어 손익을 시뮬레이션하고, 단순 보유·정적 50:50·전액 현금과 비교한 뒤 [성과 지표 편](/ko/portfolio/investment-strategy-06-position-and-metrics/) 지표로 평가.
+- **5~7단계:** 비용(수수료·스프레드·세금)과 B 모드 리밸런싱 규칙을 넣어 손익을 시뮬레이션하고, 단순 보유·정적 50:50·전액 현금과 비교한 뒤 [성과 지표 편](/portfolio/investment-strategy-06-position-and-metrics/) 지표로 평가.
 - **8~9단계:** 학습/검증 분할로 임계값을 *고원형*으로 고르고, KOSPI·KOSDAQ 임계값 표를 따로 만든다. 손익 검증은 지수가 아니라 *실제 4개 ETF 가격*으로(인버스 decay·베이시스 반영).

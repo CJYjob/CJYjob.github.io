@@ -27,7 +27,7 @@ aliases:
 | 약한 상승 | 정방향 65 / 현금 35 | 혼합(전이) |
 | 강한 상승 | 정방향 90 / 현금 10 | A(방향) |
 
-(추세 구간엔 현금, 횡보 구간에만 인버스 — [수익 원천 편](/ko/portfolio/investment-strategy-01-foundation-and-edge/) 심화 참조. 비율 수치는 예시이며 백테스트로 보정한다.)
+(추세 구간엔 현금, 횡보 구간에만 인버스 — [수익 원천 편](/portfolio/investment-strategy-01-foundation-and-edge/) 심화 참조. 비율 수치는 예시이며 백테스트로 보정한다.)
 
 **왜 5단계인가:** 3단계(상승/횡보/하락)는 강·약 구분이 없어 약한 추세에서도 풀(full) 베팅하게 되어 위험이 크다. 7단계 이상은 경계선이 많아져 국면 사이를 자주 오가며 거래비용·과적합을 부른다. 5가 균형점이다.
 
@@ -37,7 +37,7 @@ aliases:
 
 ### KOSPI vs KOSDAQ — 규모 차이가 만드는 것
 
-(두 시장의 기본 정의·상장 기준은 [투자 기초 ②](/ko/portfolio/investment-theory-02-market-structure/) 참조. 여기서는 전략에 영향을 주는 *행태 차이*만 본다.)
+(두 시장의 기본 정의·상장 기준은 [투자 기초 ②](/portfolio/investment-theory-02-market-structure/) 참조. 여기서는 전략에 영향을 주는 *행태 차이*만 본다.)
 
 | 항목 | KOSPI 200 | KOSDAQ 150 |
 |---|---|---|
