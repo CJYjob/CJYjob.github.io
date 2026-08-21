@@ -14,6 +14,18 @@ Custom GPTs and coaches must read the latest `main` version of the relevant mast
 
 Repository writes use the GitHub Git Database API flow defined in `system-operation.md`. Blog content lives under `content/ko/`; this `docs/master/` directory is operational documentation and is not Hugo content.
 
+## Cross-document consistency rules
+
+The following rules reflect the current repository implementation and resolve older wording that may remain in the larger master documents:
+
+- The six-field Front Matter standard (`title`, `date`, `draft`, `description`, `categories`, `tags`) applies to ordinary Log/Portfolio asset pages. Functional/meta pages and hubs — such as `search.md`, section `_index.md` files, category hubs, and series hubs — may use only the Front Matter required by their Hugo function and page role.
+- New ordinary posts are public by default. `archetypes/default.md`, `archetypes/log.md`, and `archetypes/portfolio.md` currently generate `draft: false`. Use `draft: true` only when a page is intentionally unpublished.
+- Direct GitHub Actions build-status inspection belongs to the automation coach, which holds Actions Read permission. Other coaches may verify repository state and public-page state within their own permissions, but should not assume Actions access they do not have.
+- `content/ko/` is the only current Hugo content root. Historical top-level `content/log`, `content/portfolio`, `content/about`, and similar legacy trees must not be recreated.
+- Public URLs do not include `/ko/`. Internal Markdown links use public URLs rather than repository source paths.
+
+When a statement in `system-operation.md` or `blog-operations.md` conflicts with one of the implementation facts above, use this section as the current reconciliation rule until the older wording is directly revised in that source document.
+
 ## Archive
 
 `docs/master/_archive/` stores source documents exactly as originally supplied for restoration and comparison. Archive files are reference-only and are not SSOT. To preserve original identity, filenames inside `_archive/` may retain their original language and naming; this is an explicit exception to the normal English-path convention.
