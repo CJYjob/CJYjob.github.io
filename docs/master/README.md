@@ -26,6 +26,20 @@ The following rules reflect the current repository implementation and resolve ol
 
 When a statement in `system-operation.md` or `blog-operations.md` conflicts with one of the implementation facts above, use this section as the current reconciliation rule until the older wording is directly revised in that source document.
 
+## Pending Custom GPT integration
+
+The repository already contains `scripts/apply_exact_patch.py` and `.github/workflows/apply-doc-patch.yaml` for source-preserving exact replacements in `docs/master/`. A reference Action schema is stored at `docs/action-schemas/automation-coach-doc-patch.openapi.yaml`.
+
+When Custom GPT Action editing is available on PC, resume from this point:
+
+1. Add the fixed document-patch workflow dispatch and workflow-run lookup operations to the automation coach Action schema.
+2. Configure the automation-coach GitHub credential with the minimum Actions Read/Write access required for this workflow.
+3. Test one small master-document replacement using the current blob SHA, one exact old/new replacement, and a small `max_changed_lines` limit.
+4. Verify workflow success, resulting Git diff, latest `main`, and raw content before using the mechanism on the remaining stale statements in `system-operation.md` and `blog-operations.md`.
+5. After those master documents are directly reconciled, remove or reduce the temporary cross-document reconciliation rules above if they are no longer needed.
+
+The reference Action-schema file is optional infrastructure and may be removed after the Custom GPT schema is updated; the patch script and workflow are the reusable repository-side implementation.
+
 ## Archive
 
 `docs/master/_archive/` stores source documents exactly as originally supplied for restoration and comparison. Archive files are reference-only and are not SSOT. To preserve original identity, filenames inside `_archive/` may retain their original language and naming; this is an explicit exception to the normal English-path convention.
