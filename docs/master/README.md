@@ -14,4 +14,8 @@ Custom GPTs and coaches must read the latest `main` version of the relevant mast
 
 Repository writes use the GitHub Git Database API flow defined in `system-operation.md`. Blog content lives under `content/ko/`; this `docs/master/` directory is operational documentation and is not Hugo content.
 
-Path names under this directory use English only. Document bodies may remain Korean.
+## Archive
+
+`docs/master/_archive/` stores source documents exactly as originally supplied for restoration and comparison. Archive files are reference-only and are not SSOT. To preserve original identity, filenames inside `_archive/` may retain their original language and naming; this is an explicit exception to the normal English-path convention.
+
+Outside `_archive/`, path names under `docs/master/` use English only. Document bodies may remain Korean.
