@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 424" width="680" height="424" role="img" aria-label="경기순환 그래프">
+<title>경기순환</title>
+<desc>장기 추세선을 기준으로 위쪽 전체를 호황, 아래쪽 전체를 불황으로 표시하고, 회복·확장·둔화·수축 네 국면과 국면별 주도 자산을 함께 나타낸 그래프.</desc>
+<style>
+  text{font-family:'Pretendard','Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',system-ui,sans-serif;}
+  .lbl{fill:#3d3d3a;font-size:12px;}
+  .phase{font-size:14px;font-weight:500;}
+  .boom-lbl{font-size:16px;font-weight:500;fill:#3B6D11;}
+  .bust-lbl{font-size:16px;font-weight:500;fill:#A32D2D;}
+  .axis{stroke:#73726c;stroke-width:1;fill:none;}
+  .trend{stroke:#8a8980;stroke-width:1;stroke-dasharray:4 4;fill:none;}
+  .divider{stroke:#bdbcb4;stroke-width:.75;stroke-dasharray:3 4;}
+  .boom-fill{fill:#639922;opacity:.12;}
+  .bust-fill{fill:#e24b4a;opacity:.10;}
+  .curve{fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+  .c-rec{stroke:#0F8A66;} .c-exp{stroke:#5E9120;} .c-slo{stroke:#BA7517;} .c-con{stroke:#D8423F;}
+  .dot{fill:#3d3d3a;}
+  .n-rec{fill:#0F6E56;} .n-exp{fill:#3B6D11;} .n-slo{fill:#854F0B;} .n-con{fill:#A32D2D;}
+  @media (prefers-color-scheme:dark){
+    .lbl{fill:#c2c0b6;}
+    .boom-lbl{fill:#C0DD97;} .bust-lbl{fill:#F09595;}
+    .axis{stroke:#9c9a92;}
+    .trend{stroke:#73726c;}
+    .divider{stroke:#56554f;}
+    .boom-fill{fill:#97C459;opacity:.16;}
+    .bust-fill{fill:#F09595;opacity:.14;}
+    .c-rec{stroke:#5DCAA5;} .c-exp{stroke:#97C459;} .c-slo{stroke:#EF9F27;} .c-con{stroke:#F09595;}
+    .dot{fill:#c2c0b6;}
+    .n-rec{fill:#5DCAA5;} .n-exp{fill:#C0DD97;} .n-slo{fill:#FAC775;} .n-con{fill:#F09595;}
+  }
+</style>
+<defs>
+<marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<path class="boom-fill" d="M205,260 L232,234 L259,209 L286,188 L313,171 L340,160 L367,155 L394,156 L421,161 L448,170 L475,180 L205,260 Z"/>
+<path class="bust-fill" d="M70,300 L205,260 L178,287 L151,311 L124,333 L97,349 L70,360 Z"/>
+<path class="bust-fill" d="M475,180 L610,140 L610,200 L583,205 L556,205 L529,199 L502,191 L475,180 Z"/>
+<line class="divider" x1="205" y1="92" x2="205" y2="382"/>
+<line class="divider" x1="367" y1="92" x2="367" y2="382"/>
+<line class="divider" x1="475" y1="92" x2="475" y2="382"/>
+<line class="trend" x1="70" y1="300" x2="610" y2="140"/>
+<text class="lbl" x="606" y="131" text-anchor="end">장기 추세선</text>
+<line class="axis" x1="62" y1="382" x2="62" y2="66" marker-end="url(#ar)"/>
+<line class="axis" x1="62" y1="382" x2="628" y2="382" marker-end="url(#ar)"/>
+<text class="lbl" x="64" y="32" text-anchor="start">경기 수준</text>
+<text class="lbl" x="600" y="374" text-anchor="start">시간</text>
+<path class="curve c-rec" d="M70,360 L97,349 L124,333 L151,311 L178,287 L205,260"/>
+<path class="curve c-exp" d="M205,260 L232,234 L259,209 L286,188 L313,171 L340,160 L367,155"/>
+<path class="curve c-slo" d="M367,155 L394,156 L421,161 L448,170 L475,180"/>
+<path class="curve c-con" d="M475,180 L502,191 L529,199 L556,205 L583,205 L610,200"/>
+<circle class="dot" cx="367" cy="155" r="3"/>
+<text class="lbl" x="374" y="150" text-anchor="start">정점</text>
+<circle class="dot" cx="70" cy="360" r="3"/>
+<text class="lbl" x="80" y="350" text-anchor="start">저점</text>
+<text class="phase n-rec" x="137.5" y="48" text-anchor="middle">회복</text>
+<text class="phase n-exp" x="286" y="48" text-anchor="middle">확장</text>
+<text class="phase n-slo" x="421" y="48" text-anchor="middle">둔화</text>
+<text class="phase n-con" x="542.5" y="48" text-anchor="middle">수축</text>
+<text class="lbl" x="137.5" y="66" text-anchor="middle">주식</text>
+<text class="lbl" x="286" y="66" text-anchor="middle">주식·부동산·현물</text>
+<text class="lbl" x="421" y="66" text-anchor="middle">채권</text>
+<text class="lbl" x="542.5" y="66" text-anchor="middle">채권·현금·금</text>
+<text class="boom-lbl" x="330" y="198" text-anchor="middle">호황</text>
+<text class="bust-lbl" x="545" y="184" text-anchor="middle">불황</text>
+</svg>
