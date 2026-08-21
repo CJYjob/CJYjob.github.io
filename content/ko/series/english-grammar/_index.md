@@ -11,6 +11,7 @@ tags:
   - "직업 영어"
 aliases:
   - /portfolio/english/grammar/gangseongtae-grammar/
+  - /portfolio/english/grammar/
 ---
 
 ## 개요

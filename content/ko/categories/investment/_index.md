@@ -7,6 +7,8 @@ categories:
   - "Investment"
 tags:
   - "Investment"
+aliases:
+  - /portfolio/investing/stock/
 ---
 
 투자 학습과 완결 산출물을 자산군과 목적에 따라 연결한다.

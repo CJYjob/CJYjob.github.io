@@ -7,6 +7,8 @@ categories:
   - "English"
 tags:
   - "English"
+aliases:
+  - /portfolio/english/
 ---
 
 ## 개요

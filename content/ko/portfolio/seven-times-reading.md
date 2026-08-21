@@ -12,6 +12,7 @@ tags:
 ShowToc: true
 aliases:
   - /portfolio/HowToStudy/7timesReading/
+  - /portfolio/HowToStudy/
 ---
 
 ## 개요
