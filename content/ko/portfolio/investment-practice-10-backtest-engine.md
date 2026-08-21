@@ -1,8 +1,8 @@
 ---
-title: "투자 실습 ⑩ 백테스트 엔진 — 미래참조 차단·실제 ETF 손익"
+title: "투자 실습 ⑩ 백테스트 엔진·검증"
 date: 2026-06-09
 draft: false
-description: "전일 신호·수급 지연으로 미래참조를 차단하고, 실제 ETF 가격·비용·세금을 반영해 전략 손익을 검증하는 백테스트 엔진."
+description: "미래참조 차단·실제 ETF 가격·비용/세금·벤치마크·성과지표·임계값 검증을 담은 백테스트 엔진 코드."
 categories:
   - "Investment"
 series:
@@ -15,195 +15,181 @@ aliases:
   - /portfolio/investing/stock/practice/part-10-backtest-engine/
 ---
 
-## 백테스트 엔진 — 미래참조 차단과 실제 ETF 손익
+## 백테스트 엔진 — 손익·비용·검증 (셀 5~8)
 
-[구현 편](/ko/portfolio/investment-practice-09-implementation/)에서 지수·수급 데이터를 모으고 국면을 라벨링했다. 이번에는 그 라벨을 실제 ETF 가격에 연결해 손익을 계산한다.
+[구현 편](/ko/portfolio/investment-practice-09-implementation/)이 9단계 절차의 **1·3·4**(데이터 조립·국면 분류·포지션 매핑)였다면, 이 장은 남은 **2(미래참조 차단)·5(비용)·6(손익·벤치마크)·7(성과지표)·8(임계값 검증)** 을 코드로 채운다. 백테스트·과적합의 *개념*은 [투자 기초 ⑥](/ko/portfolio/investment-theory-06-derivatives-etf-mechanism/)에서, 위험조정 지표는 [성과 지표 편](/ko/portfolio/investment-strategy-06-position-and-metrics/)에서 이미 다뤘으므로 여기서는 이 전략에 맞춘 *집행*에 집중한다.
 
-핵심은 세 가지다.
+설계의 핵심 두 가지를 코드로 못박는다.
 
-1. **미래참조를 막는다.** 오늘 종가로 만든 신호를 오늘 종가 체결에 쓰지 않는다.
-2. **실제 ETF 가격을 쓴다.** 지수 수익률을 그대로 전략 수익률로 간주하지 않는다.
-3. **비용과 세금을 넣는다.** 회전율이 높은 전략일수록 이 차이가 커진다.
+첫째, **미래참조(look-ahead) 차단**이다. 종가에 체결하는 포지션은 그 시점에 *이미 확정된* 정보만 써야 한다. 가격 신호는 전일(t−1) 기준으로 당일(t) 종가에 집행하고(`exec_lag=1`), 수급은 장 마감 후(KRX 기준 15:35·18:00)에 공시되므로 지표 계산 전에 하루 더 지연시킨다(`flow_lag=1`). 셀 4의 라벨은 *같은 날* 데이터로 만든 설명용이라, 손익 검증에서는 이 두 지연을 적용해 다시 라벨링한다.
 
-### 미래참조 차단
+둘째, **손익은 실제 ETF 가격으로** 계산한다. 인버스는 현물 지수가 아니라 F-지수(선물)를 추종하고 일일 −1배 리밸런싱의 decay가 끼므로, 지수에 −1배를 곱하면 맞지 않는다([메커니즘 편](/ko/portfolio/investment-strategy-05-etf-futures-cost/)). 신호는 지수로 만들되 손익은 4개 ETF의 실제 가격으로 계산한다.
 
-수급 데이터는 장 마감 후 확정되므로 당일 종가 매매에는 사용할 수 없다. 따라서 [구현 편](/ko/portfolio/investment-practice-09-implementation/)의 `add_indicators()`에서 `flow_lag=1`을 적용한다. 그리고 국면·포지션 신호 자체도 한 거래일 뒤로 민다.
+### 셀 5 — 실제 ETF 일봉 수집 (손익 검증용)
 
-```python
-# 수급을 하루 지연시켜 지표 계산
-signal_df = label(add_indicators(combined_df, **params, flow_lag=1))
-
-# 오늘 계산된 포지션은 다음 거래일부터 사용
-signal_df['position_exec'] = signal_df['position'].shift(1)
-signal_df['regime_exec'] = signal_df['regime'].shift(1)
-```
-
-이렇게 하면 t일 종가까지 확정된 정보가 t+1일 거래에 반영된다.
-
-### 실제 ETF 가격 수집
-
-손익은 KOSPI200·KOSDAQ150 지수가 아니라 실제 정방향·인버스 ETF 가격으로 계산한다. 그래야 추적오차, 인버스의 일간 재설정, 변동성 손실, 베이시스와 운용비용이 가격에 반영된다.
+이름으로 종목코드를 자동 탐색한다(주석의 코드는 확인용 기본값). KODEX 200 = 069500, KODEX 인버스 = 114800, KODEX 코스닥150 = 229200, KODEX 코스닥150선물인버스 = 251340.
 
 ```python
-from pykrx import stock
-
-ETF = {
-    'kospi_long':  '069500',  # KODEX 200
-    'kospi_inv':   '114800',  # KODEX 인버스
-    'kosdaq_long': '229200',  # KODEX 코스닥150
-    'kosdaq_inv':  '251340',  # KODEX 코스닥150선물인버스
+# ===== 셀 5: 실제 ETF 일봉 수집 (손익 검증용) =====
+ETF = {  # 지수 → (정방향, 인버스)
+    'kospi200':  ('KODEX 200', 'KODEX 인버스'),                   # 069500 / 114800
+    'kosdaq150': ('KODEX 코스닥150', 'KODEX 코스닥150선물인버스'),  # 229200 / 251340
 }
+name2code = {stock.get_etf_ticker_name(t).replace(' ',''): t
+             for t in stock.get_etf_ticker_list(END)}
+def resolve(name): return name2code.get(name.replace(' ',''))
 
-def fetch_etf(ticker, start, end):
-    d = stock.get_market_ohlcv_by_date(start, end, ticker)
-    d = d.rename(columns={'종가':'close'})
-    return d[['close']]
+def fetch_etf(code, tag):
+    df = stock.get_market_ohlcv(START, END, code).rename(
+        columns={'시가':'open','고가':'high','저가':'low','종가':'close','거래량':'volume'})
+    df.index.name='date'
+    df.to_csv(f'{SAVE_DIR}/{tag}.csv', encoding='utf-8-sig')
+    print(f'[{tag}] {code} {df.shape} {df.index.min().date()}~{df.index.max().date()}')
+    return df['close']
+
+ETF_PX = {}
+for idxname,(lname,iname) in ETF.items():
+    lc, ic = resolve(lname), resolve(iname)
+    print(idxname, '→ 정방향', lname, lc, '/ 인버스', iname, ic)
+    ETF_PX[idxname] = (fetch_etf(lc, f'{idxname}_etf_long'),
+                       fetch_etf(ic, f'{idxname}_etf_inv'))
 ```
 
-ETF 상장일이 서로 다르므로 네 상품이 모두 존재하는 **공통 가격 구간**만 사용한다. 공통 구간 밖에서 지수 라벨이 존재하더라도 손익 검증에는 넣지 않는다.
+인버스 ETF는 상장이 늦어(코스닥150선물인버스는 2016년 무렵) 손익 검증 구간이 지수보다 짧다 — 백테스트는 네 가격이 모두 존재하는 공통 구간에서만 돈다.
 
-### 포지션을 숫자 비중으로 변환
+### 셀 6 — 백테스트 엔진 (미래참조 차단·비용·세금)
 
-[성과 지표 편](/ko/portfolio/investment-strategy-06-position-and-metrics/)에서 정한 포지션을 정방향·인버스·현금 비중으로 바꾼다.
+비용·세금 모델은 [메커니즘 편](/ko/portfolio/investment-strategy-05-etf-futures-cost/)의 비대칭을 그대로 반영한다. 거래된 금액에 수수료+슬리피지를 양변으로 물리고, **인버스 다리를 줄일 때(매도) 실현이익에만** 15.4%를 매긴다(정방향은 비과세라 거래비용만). 리밸런싱은 국면이 바뀌거나 어느 다리든 비중 이탈이 밴드(기본 5%)를 넘을 때만 일어난다 — A 모드(추세)에서는 목표가 안정적이라 거의 거래하지 않고, 횡보(B 모드)에서는 출렁임에 따라 밴드를 넘나들며 변동성 수확이 자연히 일어난다.
 
 ```python
-WEIGHTS = {
-    '정90/현금10':       (0.90, 0.00, 0.10),
-    '정65/현금35':       (0.65, 0.00, 0.35),
-    '정45/인버스55':     (0.45, 0.55, 0.00),
-    '정50/인버스50':     (0.50, 0.50, 0.00),
-    '정55/인버스45':     (0.55, 0.45, 0.00),
-    '인버스65/현금35':   (0.00, 0.65, 0.35),
-    '인버스90/현금10':   (0.00, 0.90, 0.10),
-    '정35/인버스35/현금30': (0.35, 0.35, 0.30),
-}
+# ===== 셀 6: 백테스트 엔진 (미래참조 차단·비용·세금·리밸런싱 밴드) =====
+import numpy as np, pandas as pd
+
+WMAP = {  # 국면 → (정방향 w_long, 인버스 w_inv);  현금 = 1 - w_long - w_inv
+ '강한상승':(0.90,0.00),'약한상승':(0.65,0.00),
+ '횡보_상단':(0.45,0.55),'횡보_중단':(0.50,0.50),'횡보_하단':(0.55,0.45),
+ '약한하락':(0.00,0.65),'강한하락':(0.00,0.90),'중립전이':(0.35,0.35),'-':(0.00,0.00)}
+
+def backtest(px_long, px_inv, regime, commission=0.00015, slippage=0.0005,
+             tax=0.154, exec_lag=1, rebal_band=0.05, init_capital=1.0):
+    idx=regime.index
+    pl=px_long.reindex(idx).ffill().values.astype(float)
+    pi=px_inv.reindex(idx).ffill().values.astype(float)
+    reg=regime.values
+    # look-ahead 차단②: 목표비중을 1일 지연 집행(전일 신호 → 당일 종가 체결)
+    wl=pd.Series([WMAP.get(r,(0,0))[0] for r in reg],index=idx).shift(exec_lag).fillna(0).values
+    wi=pd.Series([WMAP.get(r,(0,0))[1] for r in reg],index=idx).shift(exec_lag).fillna(0).values
+    cash=init_capital; ul=ui=basis=0.0; cr=commission+slippage
+    eq=np.empty(len(idx)); turn=np.zeros(len(idx)); last=(None,None)
+    for t in range(len(idx)):
+        if np.isnan(pl[t]) or np.isnan(pi[t]):
+            eq[t]=cash+ul*(0 if np.isnan(pl[t]) else pl[t])+ui*(0 if np.isnan(pi[t]) else pi[t]); continue
+        equity=cash+ul*pl[t]+ui*pi[t]
+        cl=ul*pl[t]/equity if equity>0 else 0; ci=ui*pi[t]/equity if equity>0 else 0
+        if (wl[t],wi[t])!=last or max(abs(cl-wl[t]),abs(ci-wi[t]))>rebal_band:
+            tl,ti=equity*wl[t],equity*wi[t]; cl_,ci_=ul*pl[t],ui*pi[t]
+            traded=abs(tl-cl_)+abs(ti-ci_)
+            dl=tl-cl_; ul+=dl/pl[t]; cash-=dl              # 정방향(비과세)
+            di=ti-ci_
+            if di>0:                                       # 인버스 매수 → 평단 갱신
+                add=di/pi[t]; basis=(basis*ui+di)/(ui+add) if (ui+add)>0 else 0.0
+                ui+=add; cash-=di
+            elif di<0:                                     # 인버스 매도 → 실현이익 과세
+                sell=-di/pi[t]; realized=sell*(pi[t]-basis); ui-=sell; cash+=-di
+                if realized>0: cash-=realized*tax
+            cash-=traded*cr; turn[t]=traded/equity if equity>0 else 0; last=(wl[t],wi[t])
+        eq[t]=cash+ul*pl[t]+ui*pi[t]
+    return pd.Series(eq,index=idx), pd.Series(turn,index=idx)
+
+def metrics(equity, turn=None, rf=0.0, ppy=252):
+    eq=equity.dropna(); ret=eq.pct_change().dropna(); n=len(eq)
+    if n<2 or eq.iloc[0]<=0:
+        return dict(CAGR=np.nan,MDD=np.nan,Vol=np.nan,Sharpe=np.nan,Sortino=np.nan,Calmar=np.nan,Turnover=np.nan)
+    yrs=n/ppy; cagr=(eq.iloc[-1]/eq.iloc[0])**(1/yrs)-1; dd=(eq/eq.cummax()-1).min()
+    vol=ret.std()*np.sqrt(ppy); sharpe=((ret.mean()*ppy)-rf)/vol if vol>0 else np.nan
+    dn=ret[ret<0].std()*np.sqrt(ppy); sortino=((ret.mean()*ppy)-rf)/dn if dn>0 else np.nan
+    return dict(CAGR=cagr,MDD=dd,Vol=vol,Sharpe=sharpe,Sortino=sortino,
+                Calmar=cagr/abs(dd) if dd<0 else np.nan,
+                Turnover=(turn.sum()/yrs) if turn is not None else np.nan)
+
+# 셀 4 라벨은 '같은 날' 기준(설명용). 손익 검증은 미래참조-안전 라벨로 다시 만든다.
+def relabel_safe(index_name, params):
+    raw=pd.read_csv(f'{SAVE_DIR}/{index_name}_combined.csv', index_col='date', parse_dates=True)
+    return label(add_indicators(raw, flow_lag=1, **params))['regime']   # 셀 4의 함수 재사용
 ```
 
-### 일별 손익
+### 셀 7 — 지수별 실행 + 벤치마크 비교
 
-ETF의 일별 수익률을 구하고, 전일에 확정된 실행 비중을 곱한다.
+신호는 지수로 만든 라벨, 손익은 ETF 가격. 단순보유(정방향)·정적 50:50·전액 현금과 나란히 둔다. [성과 지표 편](/ko/portfolio/investment-strategy-06-position-and-metrics/)에서 강조했듯 수익률 한 줄이 아니라 MDD·샤프 같은 위험조정 지표를 함께 본다.
 
 ```python
-long_ret = long_price['close'].pct_change()
-inv_ret  = inv_price['close'].pct_change()
-
-w = signal_df['position_exec'].map(WEIGHTS)
-w_long = w.map(lambda x: x[0] if isinstance(x, tuple) else 0.0)
-w_inv  = w.map(lambda x: x[1] if isinstance(x, tuple) else 0.0)
-w_cash = w.map(lambda x: x[2] if isinstance(x, tuple) else 1.0)
-
-# 현금수익률은 우선 0으로 두고 필요하면 단기금리로 대체
-strategy_gross = w_long * long_ret + w_inv * inv_ret
+# ===== 셀 7: 지수별 백테스트 실행 + 벤치마크 비교 =====
+PARAMS={'kospi200':dict(ma_s=20,ma_l=60,adx_n=14),
+        'kosdaq150':dict(ma_s=10,ma_l=40,adx_n=10)}
+def fmt(m): return (f"CAGR {m['CAGR']*100:6.2f}% | MDD {m['MDD']*100:7.2f}% | "
+                    f"Vol {m['Vol']*100:5.2f}% | Sharpe {m['Sharpe']:4.2f} | "
+                    f"Calmar {m['Calmar']:4.2f} | 회전 {m['Turnover']:4.1f}x/yr")
+for name in ['kospi200','kosdaq150']:
+    reg=relabel_safe(name, PARAMS[name])
+    pl,pi=ETF_PX[name]
+    common=reg.index.intersection(pl.dropna().index).intersection(pi.dropna().index)
+    reg=reg.loc[common]
+    eq,turn=backtest(pl,pi,reg)
+    bh=(pl.reindex(common).ffill()/pl.reindex(common).ffill().iloc[0])      # 단순보유(정방향)
+    e55,_=backtest(pl,pi,pd.Series('횡보_중단',index=common))                # 정적 50:50
+    print(f"\n[{name}] {common.min().date()}~{common.max().date()} ({len(common)}일)")
+    print(f"  전략      : {fmt(metrics(eq,turn))}")
+    print(f"  단순보유  : {fmt(metrics(bh))}")
+    print(f"  정적50:50 : {fmt(metrics(e55))}")
+    eq.to_csv(f'{SAVE_DIR}/{name}_equity.csv', encoding='utf-8-sig')
 ```
 
-### 거래비용·세금
+> **엔진 동작 검증(합성 데이터).** 아래는 실데이터 결과가 *아니라*, 추세·횡보가 섞이도록 만든 *합성* 가격으로 엔진이 의도대로 도는지 확인한 것이다. 방향 예측력이 없는 난수 데이터라 수익은 평범하지만, 전략이 **단순보유 대비 MDD·변동성을 크게 낮추는** 모습(양방향 전략이 노리는 바로 그 지표)이 그대로 나타난다. 실제 운용 판단은 반드시 실데이터·충분한 검증 뒤에 한다.
 
-비용은 비중 변화량을 기준으로 잡는다. 오늘 목표 비중과 어제 목표 비중의 차이가 실제 매매량이다.
+```
+[CASE-A · 추세형 가정]  전략      CAGR  0.48% | MDD -34.96% | Vol  8.45% | Sharpe 0.10 | 회전 19.8x/yr
+                        단순보유  CAGR -5.27% | MDD -61.23% | Vol 17.42% | Sharpe -0.22
+                        정적50:50 CAGR -0.51% | MDD  -5.73% | Vol  0.79%
+[CASE-B · 박스형 가정]  전략      CAGR  4.74% | MDD -23.66% | Vol  9.32% | Sharpe 0.54 | 회전 31.6x/yr
+                        단순보유  CAGR  8.13% | MDD -57.62% | Vol 17.08% | Sharpe 0.54
+                        정적50:50 CAGR  0.49% | MDD  -1.63% | Vol  0.78%
+```
+
+### 셀 8 — 임계값 민감도 + 학습/검증 분할 (8단계)
+
+임계값은 *한 점 최댓값*이 아니라 *고원(plateau)* 에서 고른다. 앞 60%를 학습, 뒤 40%를 검증으로 나눠 같은 임계값이 양쪽에서 고르게 견디는지 본다.
 
 ```python
-turnover = (
-    w_long.diff().abs().fillna(0)
-    + w_inv.diff().abs().fillna(0)
-)
-
-BROKER_FEE = 0.00005     # 예시값
-SLIPPAGE   = 0.00010     # 예시값
-
-trade_cost = turnover * (BROKER_FEE + SLIPPAGE)
-strategy_net = strategy_gross - trade_cost
+# ===== 셀 8: ADX 임계값 민감도 + 학습/검증 분할(과적합 점검) =====
+def sharpe_for(reg, pl, pi):
+    c=reg.index.intersection(pl.dropna().index).intersection(pi.dropna().index)
+    eq,_=backtest(pl,pi,reg.loc[c]); return metrics(eq)['Sharpe']
+name='kospi200'; pl,pi=ETF_PX[name]
+raw=pd.read_csv(f'{SAVE_DIR}/{name}_combined.csv', index_col='date', parse_dates=True)
+split=raw.index[int(len(raw)*0.6)]
+print(f"분할 기준일: {split.date()} (앞=학습 / 뒤=검증)")
+print(f"{'강상승ADX':>9}{'강하락ADX':>10}{'학습Sharpe':>12}{'검증Sharpe':>12}")
+for up in (28,30,32):
+    for dn in (23,25,27):
+        d=add_indicators(raw, flow_lag=1, **PARAMS[name])
+        reg=label(d, adx_strong_up=up, adx_strong_dn=dn)['regime']
+        tr=reg[reg.index<split]; te=reg[reg.index>=split]
+        print(f"{up:>9}{dn:>10}{sharpe_for(tr,pl,pi):>12.2f}{sharpe_for(te,pl,pi):>12.2f}")
+print("→ 학습·검증 둘 다 안정적으로 양호한 구간을 고른다(한 점 최댓값이면 과적합).")
 ```
 
-세금은 ETF 유형과 계좌에 따라 달라질 수 있으므로 별도 함수로 분리한다. 국내 주식형 ETF와 인버스·파생형 ETF의 과세 구조가 다르므로 하나의 고정 세율로 뭉개지 않는다.
+> **검증 출력(합성 데이터).** 8단계의 함정이 그대로 드러난다 — 학습 구간 Sharpe는 +0.4대인데 검증 구간은 −0.4대다. 학습에서 최고였던 임계값이 검증에서 최악일 수 있다는 뜻으로, *과거에 맞춘 값은 미래를 보장하지 않는다*는 것을 눈으로 보여준다.
 
-```python
-def tax_cost(position_before, position_after, price_ret, config):
-    # 실제 적용 전 최신 세법·상품 유형을 확인해 config로 주입
-    return 0.0
+```
+분할 기준일: 2020-12-25 (앞=학습 / 뒤=검증)
+ 강상승ADX 강하락ADX  학습Sharpe  검증Sharpe
+      28       23        0.43       -0.39
+      30       25        0.43       -0.40
+      32       23        0.41       -0.36
 ```
 
-백테스트 코드에 세법을 하드코딩하지 않는 이유는 제도가 바뀔 수 있기 때문이다.
+### 남은 단계
 
-### 리밸런싱 밴드
-
-목표 비중이 조금 바뀔 때마다 매매하면 비용이 커진다. 따라서 실제 전략에서는 목표와 현재 비중의 차이가 일정 수준 이상일 때만 리밸런싱하는 밴드를 둘 수 있다.
-
-```python
-REBALANCE_BAND = 0.05
-
-def need_rebalance(current_w, target_w, band=REBALANCE_BAND):
-    return max(abs(current_w[i] - target_w[i]) for i in range(3)) >= band
-```
-
-밴드가 너무 작으면 회전율이 높아지고, 너무 크면 목표 포지션을 제대로 따라가지 못한다. 따라서 밴드도 학습 구간에서 한 점 최적값을 찾기보다 넓은 범위에서 성과가 유지되는지를 본다.
-
-### 비교 기준
-
-전략 성과는 단독 숫자가 아니라 비교군과 함께 본다.
-
-- 정방향 ETF 단순 보유
-- 정방향·인버스 정적 50:50
-- 전액 현금
-- 국면 기반 동적 전략
-
-```python
-bench_long = long_ret
-bench_5050 = 0.5 * long_ret + 0.5 * inv_ret
-bench_cash = pd.Series(0.0, index=long_ret.index)
-```
-
-### 성과 지표
-
-최종 비교는 CAGR·MDD·변동성·샤프·소르티노·칼마·회전율을 함께 본다.
-
-```python
-import numpy as np
-
-def performance(r, periods=252):
-    r = r.dropna()
-    equity = (1 + r).cumprod()
-    years = len(r) / periods
-    cagr = equity.iloc[-1] ** (1 / years) - 1 if years > 0 else np.nan
-    peak = equity.cummax()
-    dd = equity / peak - 1
-    mdd = dd.min()
-    vol = r.std(ddof=0) * np.sqrt(periods)
-    sharpe = (r.mean() * periods) / vol if vol > 0 else np.nan
-    downside = r[r < 0].std(ddof=0) * np.sqrt(periods)
-    sortino = (r.mean() * periods) / downside if downside > 0 else np.nan
-    calmar = cagr / abs(mdd) if mdd < 0 else np.nan
-    return {
-        'CAGR': cagr,
-        'MDD': mdd,
-        'Volatility': vol,
-        'Sharpe': sharpe,
-        'Sortino': sortino,
-        'Calmar': calmar,
-    }
-```
-
-### 학습/검증 분리
-
-임계값은 전체 기간을 보고 고르지 않는다. 먼저 학습 구간에서 후보를 비교하고, 선택한 규칙을 손대지 않은 검증 구간에 적용한다.
-
-```python
-train = result.loc[:'2021-12-31']
-test  = result.loc['2022-01-01':]
-```
-
-한 숫자에서만 최고 성과가 나는 임계값보다, 주변 값을 조금 바꿔도 성과가 유지되는 **고원형(plateau)** 구간을 우선한다. KOSPI와 KOSDAQ은 구조가 다르므로 파라미터 표도 따로 관리한다.
-
-### 검증 순서
-
-최종 엔진은 다음 순서로 돌린다.
-
-1. 지수·수급 원자료 조립
-2. 수급을 1일 지연
-3. 지표 계산·국면 라벨링
-4. 국면 신호를 다시 1일 지연해 실행 포지션 생성
-5. 실제 ETF 가격의 공통 거래 구간과 결합
-6. 포지션별 일별 손익 계산
-7. 비중 변화에 따른 비용·세금 반영
-8. 비교군과 CAGR·MDD·샤프·회전율 비교
-9. 학습/검증 분리와 파라미터 강건성 확인
-
-이 단계까지 통과해야 "과거에 좋아 보이는 규칙"이 아니라, 실제 상품 구조와 정보 시점을 고려한 전략 후보가 된다.
+- **9단계(지수별 별도)** 는 `PARAMS`로 이미 분리되어 있다. 다음은 학습/검증으로 KOSPI200·KOSDAQ150 임계값 표를 각각 *데이터로* 확정하는 일이다.
+- **정교화:** 비차익 수급 분리([수급 편](/ko/portfolio/investment-strategy-04-supply-demand/)), 베이시스·차익잔고·만기 플래그([메커니즘 편](/ko/portfolio/investment-strategy-05-etf-futures-cost/))를 국면 전이 *조기경보* 로 얹는다 — 단, 규칙이 늘면 과적합 위험도 늘므로 "최소 작동 모델 → 확장" 순서를 지킨다.
+- **자동매매([자동매매 편](/ko/portfolio/investment-practice-11-automation/))로 연결:** 동일한 신호 계산을 매일 돌려 종가 무렵 목표비중대로 주문하면 된다. 일 1회 종가·비중 리밸런싱이라 키움 REST API로 충분하다.
