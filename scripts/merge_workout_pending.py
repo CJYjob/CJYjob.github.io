@@ -216,8 +216,6 @@ tags:
   - "Strength"
   - "Cardio"
 ShowToc: true
-aliases:
-  - /portfolio/workout/
 ---
 
 # 운동 기록
