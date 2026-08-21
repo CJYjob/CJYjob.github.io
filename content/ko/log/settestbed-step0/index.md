@@ -4,7 +4,7 @@ date: 2026-03-24
 draft: false
 description: "실무 수준의 하이브리드 업무환경 테스트베드를 단계적으로 구축하는 과정을 기록합니다. 온프레미스와 OCI 클라우드를 연결하는 풀스택 환경을 최소 구성부터 점진적으로 확장합니다."
 categories:
-  - "Lab"
+  - "Security"
 tags:
   - "테스트베드"
   - "Docker"

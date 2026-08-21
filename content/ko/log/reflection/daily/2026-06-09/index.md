@@ -1,9 +1,10 @@
 ---
-title: "2026-06-09 일일 기록"
+title: "2026-06-09 일일 회고"
 date: 2026-06-09
 draft: false
-categories: ["reflection", "daily"]
-tags: ["daily-log"]
+description: "2026-06-09 일일 계획·기록·분석·회고"
+categories: ["Reflection"]
+tags: ["Daily Reflection"]
 ---
 
 ## 계획

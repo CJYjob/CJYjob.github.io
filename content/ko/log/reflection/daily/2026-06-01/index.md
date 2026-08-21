@@ -2,6 +2,9 @@
 title: "2026-06-01 일일 회고"
 date: 2026-06-01T19:52:26+09:00
 draft: false
+description: "2026-06-01 일일 계획·기록·분석·회고"
+categories: ["Reflection"]
+tags: ["Daily Reflection"]
 ---
 
 # 계획
