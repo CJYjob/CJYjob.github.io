@@ -1,0 +1,104 @@
+name: Apply exact master-document patch
+
+on:
+  workflow_dispatch:
+    inputs:
+      path:
+        description: "Repository-relative Markdown path under docs/master/ (archive excluded)"
+        required: true
+        type: string
+      expected_blob_sha:
+        description: "Expected Git blob SHA of the current file"
+        required: true
+        type: string
+      replacements_json:
+        description: 'JSON array: [{"old":"exact existing text","new":"replacement text"}]'
+        required: true
+        type: string
+      max_changed_lines:
+        description: "Maximum additions + deletions allowed by git diff"
+        required: true
+        default: "20"
+        type: string
+      commit_message:
+        description: "Commit message"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: master-document-patch
+  cancel-in-progress: false
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+          persist-credentials: true
+
+      - name: Validate numeric limit
+        env:
+          MAX_CHANGED_LINES: ${{ inputs.max_changed_lines }}
+        run: |
+          if ! [[ "$MAX_CHANGED_LINES" =~ ^[1-9][0-9]*$ ]]; then
+            echo "max_changed_lines must be a positive integer" >&2
+            exit 1
+          fi
+
+      - name: Apply exact source-preserving patch
+        env:
+          PATCH_PATH: ${{ inputs.path }}
+          EXPECTED_BLOB_SHA: ${{ inputs.expected_blob_sha }}
+          REPLACEMENTS_JSON: ${{ inputs.replacements_json }}
+        run: |
+          python scripts/apply_exact_patch.py \
+            --path "$PATCH_PATH" \
+            --expected-blob-sha "$EXPECTED_BLOB_SHA" \
+            --replacements-json "$REPLACEMENTS_JSON"
+
+      - name: Validate diff
+        env:
+          PATCH_PATH: ${{ inputs.path }}
+          MAX_CHANGED_LINES: ${{ inputs.max_changed_lines }}
+        run: |
+          git diff --check
+
+          mapfile -t changed_files < <(git diff --name-only)
+          if [[ ${#changed_files[@]} -ne 1 || "${changed_files[0]}" != "$PATCH_PATH" ]]; then
+            echo "Exactly one requested file must change." >&2
+            printf 'Changed: %s\n' "${changed_files[@]}" >&2
+            exit 1
+          fi
+
+          read -r additions deletions file < <(git diff --numstat -- "$PATCH_PATH")
+          if [[ -z "$file" || "$additions" == "-" || "$deletions" == "-" ]]; then
+            echo "Unable to calculate text diff size." >&2
+            exit 1
+          fi
+
+          changed_lines=$((additions + deletions))
+          echo "Changed lines: $changed_lines (additions=$additions deletions=$deletions)"
+          if (( changed_lines > MAX_CHANGED_LINES )); then
+            echo "Diff exceeds max_changed_lines=$MAX_CHANGED_LINES" >&2
+            exit 1
+          fi
+
+          git diff --unified=3 -- "$PATCH_PATH"
+
+      - name: Commit and push
+        env:
+          PATCH_PATH: ${{ inputs.path }}
+          COMMIT_MESSAGE: ${{ inputs.commit_message }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- "$PATCH_PATH"
+          git commit -m "$COMMIT_MESSAGE"
+          git push origin HEAD:main
