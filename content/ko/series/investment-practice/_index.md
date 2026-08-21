@@ -16,6 +16,6 @@ aliases:
 
 ## 개요
 
-[투자 전략](/ko/portfolio/investment-strategy-01-foundation-and-edge/)에서 설계한 규칙을 실제 코드로 옮겨, 데이터 수집부터 백테스트·검증·자동화·실전 기록까지 한 단계씩 직접 만들어 본다.
+[투자 전략](/portfolio/investment-strategy-01-foundation-and-edge/)에서 설계한 규칙을 실제 코드로 옮겨, 데이터 수집부터 백테스트·검증·자동화·실전 기록까지 한 단계씩 직접 만들어 본다.
 
 `데이터·라벨링 → 백테스트 엔진 → 자동매매 → 모의·실전 기록`
