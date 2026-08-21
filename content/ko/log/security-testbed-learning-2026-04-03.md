@@ -6,7 +6,7 @@ description: "테스트베드 구축과 정보보안 이론 학습을 하나의 
 categories:
   - "Security"
 series:
-  - "보안 학습 기록"
+  - "Security Learning Record"
 tags:
   - "보안"
   - "정보보안"
