@@ -2,7 +2,7 @@
 title: "ETF 실전 매매 기록"
 date: 2026-06-09
 draft: false
-description: "양방향똥 ETF 전략의 모의·실전 매매와 복기를 누적 기록한다."
+description: "양방향 ETF 전략의 모의·실전 매매와 복기를 누적 기록한다."
 categories: ["Investment"]
 tags: ["Investment", "ETF", "Trading"]
 ---
