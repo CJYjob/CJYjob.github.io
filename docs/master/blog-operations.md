@@ -759,7 +759,7 @@ Write body content here...
 
 ## 5.6 Front Matter (Post Metadata)
 
-YAML-format settings at the top of every Markdown file:
+Ordinary Log/Portfolio asset pages use YAML Front Matter with the standard fields below. Functional/meta pages and hubs (for example `search.md`, section `_index.md`, category hubs, and series hubs) use the Front Matter required by their Hugo function and page role:
 
 ```yaml
 ---
@@ -784,7 +784,7 @@ TocOpen: true                      # TOC expanded state
 | `draft: true` | Draft — excluded from build, not shown on site |
 | `draft: false` | Published — included in build, shown on site |
 
-Operational standard: *always verify `draft: false` before commit*.
+Operational standard for ordinary public asset pages: verify `draft: false` before commit. Use `draft: true` only when a page is intentionally unpublished.
 
 The current archetypes (`default.md`, `log.md`, `portfolio.md`) generate new content with `draft: false` by default. Use `draft: true` only when a page is intentionally unpublished.
 
