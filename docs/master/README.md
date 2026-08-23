@@ -20,7 +20,7 @@ Repository writes use the GitHub Git Database API flow defined in `system-operat
 
 Source-preserving master-document patches are implemented by `scripts/apply_exact_patch.py` and `.github/workflows/apply-doc-patch.yaml`. The automation coach Custom GPT Action exposes the fixed workflow dispatch and run lookup operations, and the mechanism has been verified with real master-document patches using blob-SHA checks, exact one-time replacements, diff limits, and post-commit raw/tree verification.
 
-`docs/action-schemas/automation-coach-doc-patch.openapi.yaml` is reference-only and may be removed once the Builder configuration is considered stable. Other coaches should be instantiated from their existing Instructions plus the current `system-operation.md` role definitions rather than duplicating the full SSOT into each Custom GPT.
+Other coaches should be instantiated from their existing Instructions plus the current `system-operation.md` role definitions rather than duplicating the full SSOT into each Custom GPT.
 
 ## Archive
 
