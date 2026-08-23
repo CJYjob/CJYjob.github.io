@@ -649,9 +649,9 @@ log 파일은 `content/ko/log/{주제-위계1}/.../{주제-위계n}/{중간 산�
 
 #### C-2-3-2. 필수 메타데이터 (Front Matter)
 
-모든 게시물은 YAML 형식의 Front Matter를 포함한다.
+일반 Log/Portfolio 자산 페이지는 YAML 형식의 Front Matter를 포함한다. `search.md`, 섹션 `_index.md`, category/series 허브 등 기능성·메타 페이지는 해당 Hugo 기능과 페이지 역할에 필요한 Front Matter를 사용한다.
 
-**필수 필드**:
+일반 자산 페이지의 **필수 필드**:
 - `title`: 게시물 제목
 - `date`: 작성 일자
 - `draft`: 배포 여부 (`true` 시 배포 제외)
@@ -705,11 +705,11 @@ log 파일은 `content/ko/log/{주제-위계1}/.../{주제-위계n}/{중간 산�
 3. Markdown 작성
 4. 메타데이터 입력
 5. Commit
-6. GitHub Actions 배포 확인
+6. 배포 상태 확인 (자동화 코치는 GitHub Actions를 직접 확인하고, 그 외 코치는 자신의 권한 범위에서 확인)
 7. 사이트 반영 확인
 8. 필요 시 Search Console 색인 요청
 
-배포 실패 시 Actions 로그를 확인하여 원인을 기록한다.
+배포 실패가 확인되면 자동화 코치가 Actions 로그를 확인하여 원인을 기록한다.
 
 #### C-2-4-2. 정기 점검 항목
 
@@ -722,7 +722,8 @@ log 파일은 `content/ko/log/{주제-위계1}/.../{주제-위계n}/{중간 산�
 - Analytics 유입 및 인기 페이지
 
 **점검 주기**:
-- 라이프코치가 블로그에 접근 시 마다 확인
+- 라이프 코치는 블로그 변동사항과 공개 페이지 반영 여부를 자신의 권한 범위에서 확인한다.
+- GitHub Actions 빌드 상태와 블로그 인프라 정기 점검은 Actions Read 권한을 가진 자동화 코치가 담당한다.
 - 점검 결과 필요한 개선은 자동화 코치 담당
 
 #### C-2-4-3. 트러블슈팅 담당
