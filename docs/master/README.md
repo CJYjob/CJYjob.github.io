@@ -14,31 +14,13 @@ Custom GPTs and coaches must read the latest `main` version of the relevant mast
 
 Repository writes use the GitHub Git Database API flow defined in `system-operation.md`. Blog content lives under `content/ko/`; this `docs/master/` directory is operational documentation and is not Hugo content.
 
-## Cross-document consistency rules
+## Current integration status
 
-The following rules reflect the current repository implementation and resolve older wording that may remain in the larger master documents:
+`system-operation.md` and `blog-operations.md` contain the current operating rules directly; this README is an index and must not override them.
 
-- The six-field Front Matter standard (`title`, `date`, `draft`, `description`, `categories`, `tags`) applies to ordinary Log/Portfolio asset pages. Functional/meta pages and hubs — such as `search.md`, section `_index.md` files, category hubs, and series hubs — may use only the Front Matter required by their Hugo function and page role.
-- New ordinary posts are public by default. `archetypes/default.md`, `archetypes/log.md`, and `archetypes/portfolio.md` currently generate `draft: false`. Use `draft: true` only when a page is intentionally unpublished.
-- Direct GitHub Actions build-status inspection belongs to the automation coach, which holds Actions Read permission. Other coaches may verify repository state and public-page state within their own permissions, but should not assume Actions access they do not have.
-- `content/ko/` is the only current Hugo content root. Historical top-level `content/log`, `content/portfolio`, `content/about`, and similar legacy trees must not be recreated.
-- Public URLs do not include `/ko/`. Internal Markdown links use public URLs rather than repository source paths.
+Source-preserving master-document patches are implemented by `scripts/apply_exact_patch.py` and `.github/workflows/apply-doc-patch.yaml`. The automation coach Custom GPT Action exposes the fixed workflow dispatch and run lookup operations, and the mechanism has been verified with real master-document patches using blob-SHA checks, exact one-time replacements, diff limits, and post-commit raw/tree verification.
 
-When a statement in `system-operation.md` or `blog-operations.md` conflicts with one of the implementation facts above, use this section as the current reconciliation rule until the older wording is directly revised in that source document.
-
-## Pending Custom GPT integration
-
-The repository already contains `scripts/apply_exact_patch.py` and `.github/workflows/apply-doc-patch.yaml` for source-preserving exact replacements in `docs/master/`. A reference Action schema is stored at `docs/action-schemas/automation-coach-doc-patch.openapi.yaml`.
-
-When Custom GPT Action editing is available on PC, resume from this point:
-
-1. Add the fixed document-patch workflow dispatch and workflow-run lookup operations to the automation coach Action schema.
-2. Configure the automation-coach GitHub credential with the minimum Actions Read/Write access required for this workflow.
-3. Test one small master-document replacement using the current blob SHA, one exact old/new replacement, and a small `max_changed_lines` limit.
-4. Verify workflow success, resulting Git diff, latest `main`, and raw content before using the mechanism on the remaining stale statements in `system-operation.md` and `blog-operations.md`.
-5. After those master documents are directly reconciled, remove or reduce the temporary cross-document reconciliation rules above if they are no longer needed.
-
-The reference Action-schema file is optional infrastructure and may be removed after the Custom GPT schema is updated; the patch script and workflow are the reusable repository-side implementation.
+`docs/action-schemas/automation-coach-doc-patch.openapi.yaml` is reference-only and may be removed once the Builder configuration is considered stable. Other coaches should be instantiated from their existing Instructions plus the current `system-operation.md` role definitions rather than duplicating the full SSOT into each Custom GPT.
 
 ## Archive
 
