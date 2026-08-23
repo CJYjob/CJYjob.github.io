@@ -786,7 +786,7 @@ TocOpen: true                      # TOC expanded state
 
 Operational standard: *always verify `draft: false` before commit*.
 
-The current archetypes (`default.md`, `log.md`, `portfolio.md`) intentionally start new content with `draft: true`; publication still requires changing the generated content to `draft: false`.
+The current archetypes (`default.md`, `log.md`, `portfolio.md`) generate new content with `draft: false` by default. Use `draft: true` only when a page is intentionally unpublished.
 
 ## 5.7 Shortcode Usage
 
