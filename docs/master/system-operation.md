@@ -527,15 +527,17 @@ log 파일은 `content/ko/log/{주제-위계1}/.../{주제-위계n}/{중간 산�
 사용자가 활동을 수행하면, 해당 활동의 JSON 파일(`/data/{활동명}.json`)에 한 건이 추가되거나 갱신된다. 갱신 주체는 해당 활동을 담당하는 코치이며, 사용자는 활동 내용만 담당 코치에게 보고만 하면 된다. 보고 시점은 해당 활동의 시작과 종료 시점이다.
 
 **정형 데이터 기록 메커니즘**
-각 활동의 데이터는 /data/{활동명}.json 파일 하나에 전체 기록이 목록(배열)으로 모여 있다 (예: 모든 운동 기록이 workout.json 한 파일에).
-새 기록 추가는 파일에 한 줄만 끼워 넣을 수 없으므로, 현재 원문을 읽고 수정된 전체 파일을 Git Data API로 다시 쓰는 방식으로 처리한다.
+각 활동의 데이터는 `/data/{활동명}.json` 파일 하나에 전체 기록이 목록(배열)으로 모여 있다. 기본 방식은 현재 raw 원문을 읽고 필요한 레코드만 추가·수정한 전체 파일을 Git Data API로 다시 쓰는 것이다.
 
-1. 가져오기: 최신 `main` commit과 tree를 조회하고, `/data/{활동명}.json`의 현재 raw UTF-8 전체 원문을 읽는다.
-2. 고치기: 받은 목록 끝에 새 기록을 더하고, 약속된 필드 구조와 기존 데이터 형식에 맞는지 확인한다.
-3. 되돌려쓰기: 수정된 전체 JSON을 `createGitTree`의 해당 path `content`에 넣고, 시작 시점 `main` commit을 parent로 새 commit을 만든 뒤 `main`을 `force:false`로 이동한다.
-4. 검증: 최신 `main`과 대상 raw/tree를 다시 조회해 의도한 데이터가 실제 반영됐는지 확인한다. 중간에 `main`이 바뀌어 non-fast-forward가 발생하면 최신 상태부터 다시 구성한다.
+다만 **운동 기록은 대용량 원본을 GPT가 직접 전체 재작성하지 않는 pending 병합 방식**을 사용한다. 운동 코치는 새 운동 레코드만 담은 `data/workout_pending_*.json` 파일을 생성하고, GitHub Actions의 Hugo workflow가 `scripts/merge_workout_pending.py`를 실행해 최신 `data/workout.json`을 로드한 뒤 pending 레코드를 검증·중복 확인·병합·정렬한다. 병합 후 `data/workout.json`과 `content/ko/portfolio/workout.md`를 갱신하고 처리된 pending 파일을 삭제하여 bot commit으로 반영한다.
 
-형식 검사는 기록하는 쪽(코치)이 저장 직전에 직접 한다. Hugo는 사이트를 만들 때 이 형식을 검사하지 않기 때문이다. 더 엄격한 자동 검사(CI)는 필요하면 나중에 추가하는 선택 사항이다.
+운동 외 정형 데이터는 다음 기본 절차를 따른다.
+1. 가져오기: 최신 `main` commit과 tree를 조회하고 `/data/{활동명}.json`의 현재 raw UTF-8 원문을 읽는다.
+2. 고치기: 필요한 레코드만 추가·수정하고 약속된 필드 구조와 기존 데이터 형식에 맞는지 확인한다.
+3. 되돌려쓰기: 수정된 전체 JSON을 `createGitTree`의 해당 path `content`에 넣고 시작 시점 `main` commit을 parent로 새 commit을 만든 뒤 `main`을 `force:false`로 이동한다.
+4. 검증: 최신 `main`과 대상 raw/tree를 다시 조회해 의도한 데이터가 실제 반영됐는지 확인한다. non-fast-forward가 발생하면 최신 상태부터 다시 구성한다.
+
+운동 코치는 pending 레코드 자체의 필드·시각·세트·계산값 정합성을 생성 전에 확인하고, 전체 원본과의 중복·전체 정합성 검사는 `merge_workout_pending.py`가 담당한다. Hugo는 이 검증을 대신하지 않는다.
 
 **공개 페이지 동시 갱신**
 원시 데이터가 갱신되는 시점에 해당 공개 페이지(`content/ko/portfolio/{활동명}.md` 또는 필요 시 디렉터리형 `index.md`)도 함께 갱신된다. 공개 페이지에는 다음이 포함된다.
@@ -1022,7 +1024,7 @@ log 파일은 `content/ko/log/{주제-위계1}/.../{주제-위계n}/{중간 산�
 
 - **체력 기반 유지 지도**: 유산소 체력 강화와 웨이트 근육량 증가의 병행 지도.
 - **운동 루틴 관리**: 운동 종류·세트·무게·반복·휴식·컨디션 지도.
-- **운동 정형 데이터 단독 갱신**: `/data/workout.json`, `/data/workout_mapping.json`, `content/ko/portfolio/workout.md` 단독 갱신.
+- **운동 정형 데이터 관리**: 새 운동 기록은 `data/workout_pending_*.json`으로 생성한다. `/data/workout_mapping.json`은 목표 근육 매핑을 위해 직접 관리하며, `/data/workout.json`과 `content/ko/portfolio/workout.md`의 병합·갱신은 GitHub Actions의 `scripts/merge_workout_pending.py`가 담당한다.
 
 #### 운영 규칙
 
@@ -1034,7 +1036,7 @@ log 파일은 `content/ko/log/{주제-위계1}/.../{주제-위계n}/{중간 산�
 
 **자산화 규칙**
 
-- **운동 기록 (정형 데이터)**: C-2-2-3 정형 데이터 자산 예시에 정의된 자동 입력 로직 및 저장 위치를 따른다.
+- **운동 기록 (정형 데이터)**: C-2-2-3 정형 데이터 자산 예시에 정의된 자동 입력 로직을 따른다. 운동 코치는 새 기록을 `data/workout_pending_*.json`에 작성하고, GitHub Actions가 이를 검증·병합해 다음 현행 자산을 갱신한다.
   - 시계열 원시 데이터: `/data/workout.json`
   - 매핑 정적 데이터: `/data/workout_mapping.json`
   - 공개 페이지: `content/ko/portfolio/workout.md`
