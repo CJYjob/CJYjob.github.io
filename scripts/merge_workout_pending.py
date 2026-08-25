@@ -131,6 +131,29 @@ def correct(records: list[dict[str, Any]]) -> int:
             if append_note_once(r, marker):
                 changed += 1
 
+        if (
+            r.get("date") == "2026-08-22"
+            and r.get("session_id") == "2026-08-22-evening"
+            and r.get("type") == "cardio"
+            and r.get("exercise") == "Treadmill"
+            and float(r.get("duration_min", 0)) == 5.0
+            and float(r.get("speed_kmh", 0)) == 3.0
+            and float(r.get("distance_km", 0)) == 0.25
+        ):
+            started = datetime.fromisoformat(str(r["started_at"]))
+            r["ended_at"] = datetime.fromtimestamp(
+                started.timestamp() + 50 * 60,
+                tz=started.tzinfo,
+            ).isoformat()
+            r["duration_min"] = 50
+            r["distance_km"] = 2.5
+            marker = (
+                "Corrected treadmill duration from 5 to 50 minutes; "
+                "distance recalculated from 0.25 to 2.5 km at 3 km/h."
+            )
+            if append_note_once(r, marker):
+                changed += 1
+
     return changed
 
 
