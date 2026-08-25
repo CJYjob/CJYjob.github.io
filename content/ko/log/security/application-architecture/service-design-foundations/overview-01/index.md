@@ -2,7 +2,7 @@
 title: "서버 애플리케이션 구조 읽기 - 학습 목차"
 date: 2026-08-24
 draft: false
-description: "JVM 기반 서버 애플리케이션의 런타임, 영속성, 캐시, 콘텐츠 전달, 계층 구조와 요청 인증을 일반적인 예제로 학습한 기록"
+description: "JVM 기반 서버 애플리케이션의 런타임, 영속성, 캐시, 계층 구조, 요청 인증, 데이터 모델과 API 처리 흐름을 일반적인 예제로 학습한 기록"
 categories: ["security", "development"]
 tags: ["backend", "architecture", "jvm", "cache", "authentication"]
 ---
@@ -21,6 +21,11 @@ tags: ["backend", "architecture", "jvm", "cache", "authentication"]
 6. [패키지와 애플리케이션 계층](../package-layering-01/)
 7. [Spring, MVC, 객체 연결과 DI](../spring-mvc-di-01/)
 8. [HMAC 요청 인증과 Replay 방어](../hmac-request-authentication-01/)
+9. [관계형 데이터 모델 읽기](../relational-data-model-01/)
+10. [HTTP API 명세와 요청 처리 흐름](../http-api-flow-01/)
+11. [기능 요구사항을 SQL 필터로 변환하기](../relational-filter-query-01/)
+12. [서명 URL과 콘텐츠 전달 경계](../signed-resource-delivery-01/)
+13. [단위·통합 테스트와 의존성 대체](../application-testing-01/)
 
 ## 일반적인 요청 흐름
 
@@ -30,6 +35,8 @@ tags: ["backend", "architecture", "jvm", "cache", "authentication"]
 
 요청 인증이 필요한 시스템에서는 Controller에 도달하기 전이나 요청 처리 초기에 서명, 시간 조건, 일회성 값 등의 검증을 수행할 수 있다. 이 인증 계층과 최종 사용자의 로그인·권한 검사는 목적이 다를 수 있으므로 별도로 구분해 읽는다.
 
+데이터 모델과 API 명세를 함께 읽으면 저장 구조가 외부 응답 객체로 어떻게 변환되는지, 관계형 데이터의 연결이 조회 조건으로 어떻게 사용되는지 추적할 수 있다. 기능 요구사항을 SQL로 읽을 때는 문법부터 보지 않고 `기능 조건 → 후보 행 제한 → 관계 연결 → 그룹화 → 그룹 조건 검사 → 결과 선택` 순서로 변환 과정을 추적한다.
+
 ## 진행 상태
 
-미완결 학습 로그다. 현재는 서버 애플리케이션의 구성 요소, 객체 연결, 데이터 흐름과 요청 인증의 기본 구조를 이해하는 단계다. 이후 허가된 테스트 환경에서 요청 하나를 추적하면서 모바일 애플리케이션과 API 경계의 보안 검증 포인트에 연결한다.
+미완결 학습 로그다. 서버 애플리케이션의 구성 요소와 데이터 흐름, 요청 인증, 관계형 데이터 모델, API 처리, 조건부 조회, 외부 콘텐츠 전달, 테스트 전략까지 설계 문서를 읽는 기본 프레임을 확장했다. 이후 허가된 테스트 환경에서 요청 하나를 추적하면서 모바일 애플리케이션과 API 경계의 보안 검증 포인트에 연결한다.
