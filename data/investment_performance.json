@@ -1,0 +1,14 @@
+{
+  "updated_at": null,
+  "samples": 0,
+  "direction_accuracy": null,
+  "range_accuracy": null,
+  "close_in_range_accuracy": null,
+  "principle_compliance_rate": null,
+  "strategy_outcomes": {},
+  "repeated_judgment_errors": {},
+  "notes": [
+    "Principle compliance is calculated only from explicitly recorded user_action.principle_followed values.",
+    "No user trade is inferred from market movement."
+  ]
+}

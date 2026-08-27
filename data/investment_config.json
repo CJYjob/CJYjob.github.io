@@ -1,0 +1,75 @@
+{
+  "market_history_period": "5y",
+  "forecast_lookback_sessions": 504,
+  "performance_neutral_threshold": 0.0025,
+  "llm_model": "gpt-5-mini",
+  "instruments": [
+    {
+      "name": "KODEX200",
+      "code": "069500",
+      "ticker": "069500.KS"
+    },
+    {
+      "name": "KODEX코스닥150",
+      "code": "229200",
+      "ticker": "229200.KS"
+    },
+    {
+      "name": "KODEX레버리지",
+      "code": "122630",
+      "ticker": "122630.KS"
+    },
+    {
+      "name": "KODEX인버스",
+      "code": "114800",
+      "ticker": "114800.KS"
+    },
+    {
+      "name": "KODEX코스닥150레버리지",
+      "code": "233740",
+      "ticker": "233740.KS"
+    },
+    {
+      "name": "KODEX코스닥150선물인버스",
+      "code": "251340",
+      "ticker": "251340.KS"
+    }
+  ],
+  "macro_indicators": [
+    {
+      "name": "US 10Y Treasury Yield",
+      "series_id": "DGS10",
+      "unit": "percent"
+    },
+    {
+      "name": "US 2Y Treasury Yield",
+      "series_id": "DGS2",
+      "unit": "percent"
+    },
+    {
+      "name": "VIX",
+      "series_id": "VIXCLS",
+      "unit": "index"
+    },
+    {
+      "name": "USD/KRW",
+      "series_id": "DEXKOUS",
+      "unit": "KRW per USD"
+    },
+    {
+      "name": "WTI Crude Oil",
+      "series_id": "DCOILWTICO",
+      "unit": "USD per barrel"
+    }
+  ],
+  "news_query": "(KOSPI OR KOSDAQ OR South Korea economy OR Federal Reserve OR global markets)",
+  "fallback_news_query": "(KOSPI OR KOSDAQ OR South Korea economy OR Federal Reserve OR global markets) when:1d",
+  "news_language": "en",
+  "news_max_items": 10,
+  "news_domains": [
+    "reuters.com",
+    "apnews.com",
+    "cnbc.com",
+    "ft.com"
+  ]
+}
