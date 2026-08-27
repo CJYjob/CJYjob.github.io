@@ -1,0 +1,20 @@
+{
+  "timezone": "Asia/Seoul",
+  "lookback_hours": 36,
+  "candidate_score_floor": 45,
+  "llm_candidates_per_category": 12,
+  "openai_model": "gpt-5-mini",
+  "limits": {
+    "security_news": 3,
+    "bug_bounty": 2,
+    "ai_research": 2
+  },
+  "arxiv_categories": ["cs.CR", "cs.AI", "cs.CL", "cs.SE"],
+  "arxiv_max_results": 60,
+  "rss_feeds": [
+    {"name": "KISA Security Notices", "url": "https://www.boho.or.kr/kr/rss.do?bbsId=B0000133", "category": "security_news", "trust": 15},
+    {"name": "KISA Vulnerability Info", "url": "https://www.boho.or.kr/kr/rss.do?bbsId=B0000302", "category": "security_news", "trust": 15},
+    {"name": "HackerOne Blog", "url": "https://www.hackerone.com/blog.rss", "category": "bug_bounty", "trust": 12},
+    {"name": "PortSwigger Research", "url": "https://portswigger.net/research/rss", "category": "bug_bounty", "trust": 18}
+  ]
+}

@@ -1,0 +1,54 @@
+name: Daily Job Briefing
+
+on:
+  schedule:
+    - cron: "0 4 * * *"
+      timezone: "Asia/Seoul"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: daily-job-briefing
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Generate briefing
+        env:
+          TZ: Asia/Seoul
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
+          NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
+          HACKERONE_USERNAME: ${{ secrets.HACKERONE_USERNAME }}
+          HACKERONE_API_TOKEN: ${{ secrets.HACKERONE_API_TOKEN }}
+        run: python scripts/job_briefing.py generate --config config/job_briefing.json
+      - name: Commit briefing data
+        run: |
+          if git diff --quiet -- data/job-briefing; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/job-briefing
+          git commit -m "Generate daily job briefing"
+          git pull --rebase origin main
+          git push origin main
+      - name: Create briefing issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          briefing_date="$(python -c 'import json; print(json.load(open("data/job-briefing/latest.json", encoding="utf-8"))["briefing_date"])')"
+          title="[Daily Job Briefing] ${briefing_date}"
+          existing="$(gh issue list --state all --search "\"${title}\" in:title" --limit 20 --json number --jq '.[0].number // empty')"
+          if [[ -n "${existing}" ]]; then exit 0; fi
+          gh issue create --title "${title}" --body-file data/job-briefing/latest.md
