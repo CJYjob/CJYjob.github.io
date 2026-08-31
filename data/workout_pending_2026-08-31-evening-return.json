@@ -1,0 +1,35 @@
+[
+  {
+    "date": "2026-08-31",
+    "session_id": "2026-08-31-evening",
+    "type": "strength",
+    "exercise": "Squat",
+    "started_at": "2026-08-31T21:40:00+09:00",
+    "ended_at": "2026-08-31T22:20:00+09:00",
+    "duration_min": 40,
+    "note": "Return-to-training session. Set 1 bodyweight squat; sets 2-6 Smith machine squat. Slight knee load was felt, but movement improved by focusing more on the thighs and glutes and using the knee less.",
+    "target_muscles": [
+      "Lower Body Muscles"
+    ],
+    "sets": [
+      {"set_number": 1, "weight_kg": 0, "reps": 30, "volume_kg": 0, "rest_sec": null},
+      {"set_number": 2, "weight_kg": 20, "reps": 12, "volume_kg": 240, "rest_sec": null},
+      {"set_number": 3, "weight_kg": 25, "reps": 12, "volume_kg": 300, "rest_sec": null},
+      {"set_number": 4, "weight_kg": 30, "reps": 12, "volume_kg": 360, "rest_sec": null},
+      {"set_number": 5, "weight_kg": 35, "reps": 12, "volume_kg": 420, "rest_sec": null},
+      {"set_number": 6, "weight_kg": 35, "reps": 6, "volume_kg": 210, "rest_sec": null}
+    ]
+  },
+  {
+    "date": "2026-08-31",
+    "session_id": "2026-08-31-evening",
+    "type": "cardio",
+    "exercise": "Treadmill",
+    "started_at": "2026-08-31T22:20:00+09:00",
+    "ended_at": "2026-08-31T22:30:00+09:00",
+    "duration_min": 10,
+    "note": "Switched to light cardio during return-to-training session.",
+    "speed_kmh": 3,
+    "distance_km": 0.5
+  }
+]
