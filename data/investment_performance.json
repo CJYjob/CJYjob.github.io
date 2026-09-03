@@ -1,12 +1,32 @@
 {
-  "updated_at": "2026-09-03T10:03:00+09:00",
-  "samples": 0,
-  "direction_accuracy": null,
-  "range_accuracy": null,
-  "close_in_range_accuracy": null,
+  "updated_at": "2026-09-03T23:56:05+09:00",
+  "samples": 6,
+  "direction_accuracy": 0.0,
+  "range_accuracy": 0.8333333333333334,
+  "close_in_range_accuracy": 1.0,
   "principle_compliance_rate": null,
-  "strategy_outcomes": {},
-  "repeated_judgment_errors": {},
+  "strategy_outcomes": {
+    "BUY": {
+      "samples": 2,
+      "average_actual_close_return": -0.012396039824509653,
+      "positive_return_rate": 0.0
+    },
+    "SELL": {
+      "samples": 1,
+      "average_actual_close_return": 0.006641366223908873,
+      "positive_return_rate": 1.0
+    },
+    "WAIT": {
+      "samples": 3,
+      "average_actual_close_return": -0.011858407679631497,
+      "positive_return_rate": 0.3333333333333333
+    }
+  },
+  "repeated_judgment_errors": {
+    "direction_miss": 6,
+    "range_miss": 1,
+    "volatility_underestimated": 1
+  },
   "notes": [
     "Principle compliance is calculated only from explicitly recorded user_action.principle_followed values.",
     "No user trade is inferred from market movement."

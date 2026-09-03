@@ -90,3 +90,57 @@ Rule-based fallback because LLM output is unavailable.
 
 - LLM synthesis unavailable; deterministic fallback used.
 - Colab의 pooled LSTM A/B는 현재 저장소에 학습 워크북·체크포인트가 없어 아직 동일 재현하지 않는다. 현재 범위는 누수 없는 과거 익일 OHLC 경험 분위수 기준선이다.
+
+## 저녁 복기
+
+- 상태: `ok`
+
+### 오전 예상 vs 실제
+
+| 자산 | 오전 방향 | 실제 방향 | 방향 적중 | 범위 적중 | 실제 종가수익률 |
+|---|---|---|---|---|---:|
+| KODEX200 | UP | DOWN | X | X | -0.87% |
+| KODEX코스닥150 | NEUTRAL | DOWN | X | O | -1.55% |
+| KODEX레버리지 | UP | DOWN | X | O | -1.61% |
+| KODEX인버스 | DOWN | UP | X | O | 0.66% |
+| KODEX코스닥150레버리지 | NEUTRAL | DOWN | X | O | -3.19% |
+| KODEX코스닥150선물인버스 | NEUTRAL | UP | X | O | 1.19% |
+
+### 사용자 실제 행동
+
+- 기록 없음. 자동화는 사용자의 매수·매도·보유·관망을 추정하지 않는다.
+
+### 복기
+
+LLM 복기를 사용할 수 없어 정량 비교만 저장했습니다.
+
+**잘된 판단**
+- 없음/판단 불가
+
+**틀린 판단**
+- KODEX200: direction_miss, range_miss, volatility_underestimated
+- KODEX코스닥150: direction_miss
+- KODEX레버리지: direction_miss
+- KODEX인버스: direction_miss
+- KODEX코스닥150레버리지: direction_miss
+- KODEX코스닥150선물인버스: direction_miss
+
+**오류 원인 후보**
+- direction_miss
+- range_miss
+- volatility_underestimated
+
+**다음 분석 반영**
+- 누적 표본에서 방향·범위 적중률을 계속 측정한다.
+
+**원칙 준수 검토:** 사용자 행동이 명시되지 않았으면 원칙 준수 여부를 평가하지 않는다.
+
+### 누적 성과
+
+- 방향 예측 적중률: 0.00%
+- 가격 범위 적중률: 83.33%
+- 종가 범위 적중률: 100.00%
+- 원칙 준수율: N/A
+- 누적 평가 표본: 6
+- 반복 오류: {"direction_miss": 6, "range_miss": 1, "volatility_underestimated": 1}
+
