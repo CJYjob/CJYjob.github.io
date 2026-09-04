@@ -5477,6 +5477,211 @@
           "Pooled LSTM model A/B inference because repository has no training workbook or model checkpoints"
         ]
       }
+    },
+    "evening": {
+      "generated_at": "2026-09-04T23:53:15+09:00",
+      "analysis_date": "2026-09-04",
+      "status": "ok",
+      "actual_market": [
+        {
+          "name": "KODEX200",
+          "code": "069500",
+          "status": "ok",
+          "market_date": "2026-09-04",
+          "open": 105005.0,
+          "high": 106785.0,
+          "low": 104705.0,
+          "close": 105720.0
+        },
+        {
+          "name": "KODEX코스닥150",
+          "code": "229200",
+          "status": "ok",
+          "market_date": "2026-09-04",
+          "open": 13515.0,
+          "high": 13890.0,
+          "low": 13505.0,
+          "close": 13820.0
+        },
+        {
+          "name": "KODEX레버리지",
+          "code": "122630",
+          "status": "ok",
+          "market_date": "2026-09-04",
+          "open": 101310.0,
+          "high": 105090.0,
+          "low": 101120.0,
+          "close": 103055.0
+        },
+        {
+          "name": "KODEX인버스",
+          "code": "114800",
+          "status": "ok",
+          "market_date": "2026-09-04",
+          "open": 1047.0,
+          "high": 1052.0,
+          "low": 1030.0,
+          "close": 1040.0
+        },
+        {
+          "name": "KODEX코스닥150레버리지",
+          "code": "233740",
+          "status": "ok",
+          "market_date": "2026-09-04",
+          "open": 6445.0,
+          "high": 6780.0,
+          "low": 6410.0,
+          "close": 6725.0
+        },
+        {
+          "name": "KODEX코스닥150선물인버스",
+          "code": "251340",
+          "status": "ok",
+          "market_date": "2026-09-04",
+          "open": 2510.0,
+          "high": 2520.0,
+          "low": 2440.0,
+          "close": 2450.0
+        }
+      ],
+      "evaluation": [
+        {
+          "instrument": "KODEX200",
+          "reference_close": 105290.0,
+          "predicted_direction": "UP",
+          "actual_direction": "UP",
+          "direction_hit": true,
+          "predicted_low": 101193.25333817933,
+          "predicted_high": 109017.03755902656,
+          "actual_open": 105005.0,
+          "actual_high": 106785.0,
+          "actual_low": 104705.0,
+          "actual_close": 105720.0,
+          "actual_close_return": 0.004083958590559433,
+          "range_hit": true,
+          "close_in_range": true,
+          "morning_strategy": "BUY",
+          "error_tags": []
+        },
+        {
+          "instrument": "KODEX코스닥150",
+          "reference_close": 13740.0,
+          "predicted_direction": "NEUTRAL",
+          "actual_direction": "UP",
+          "direction_hit": false,
+          "predicted_low": 13199.931419068667,
+          "predicted_high": 14246.486426851152,
+          "actual_open": 13515.0,
+          "actual_high": 13890.0,
+          "actual_low": 13505.0,
+          "actual_close": 13820.0,
+          "actual_close_return": 0.005822416302765587,
+          "range_hit": true,
+          "close_in_range": true,
+          "morning_strategy": "WAIT",
+          "error_tags": [
+            "direction_miss"
+          ]
+        },
+        {
+          "instrument": "KODEX레버리지",
+          "reference_close": 102230.0,
+          "predicted_direction": "UP",
+          "actual_direction": "UP",
+          "direction_hit": true,
+          "predicted_low": 94206.09935118856,
+          "predicted_high": 109451.2180311356,
+          "actual_open": 101310.0,
+          "actual_high": 105090.0,
+          "actual_low": 101120.0,
+          "actual_close": 103055.0,
+          "actual_close_return": 0.008070038149271319,
+          "range_hit": true,
+          "close_in_range": true,
+          "morning_strategy": "BUY",
+          "error_tags": []
+        },
+        {
+          "instrument": "KODEX인버스",
+          "reference_close": 1046.0,
+          "predicted_direction": "DOWN",
+          "actual_direction": "DOWN",
+          "direction_hit": true,
+          "predicted_low": 1008.5538009690006,
+          "predicted_high": 1087.3232883464514,
+          "actual_open": 1047.0,
+          "actual_high": 1052.0,
+          "actual_low": 1030.0,
+          "actual_close": 1040.0,
+          "actual_close_return": -0.005736137667303964,
+          "range_hit": true,
+          "close_in_range": true,
+          "morning_strategy": "SELL",
+          "error_tags": []
+        },
+        {
+          "instrument": "KODEX코스닥150레버리지",
+          "reference_close": 6630.0,
+          "predicted_direction": "NEUTRAL",
+          "actual_direction": "UP",
+          "direction_hit": false,
+          "predicted_low": 6104.40517856747,
+          "predicted_high": 7113.139378102953,
+          "actual_open": 6445.0,
+          "actual_high": 6780.0,
+          "actual_low": 6410.0,
+          "actual_close": 6725.0,
+          "actual_close_return": 0.014328808446455454,
+          "range_hit": true,
+          "close_in_range": true,
+          "morning_strategy": "WAIT",
+          "error_tags": [
+            "direction_miss"
+          ]
+        },
+        {
+          "instrument": "KODEX코스닥150선물인버스",
+          "reference_close": 2477.0,
+          "predicted_direction": "NEUTRAL",
+          "actual_direction": "DOWN",
+          "direction_hit": false,
+          "predicted_low": 2383.361177593361,
+          "predicted_high": 2580.414537564323,
+          "actual_open": 2510.0,
+          "actual_high": 2520.0,
+          "actual_low": 2440.0,
+          "actual_close": 2450.0,
+          "actual_close_return": -0.010900282599919264,
+          "range_hit": true,
+          "close_in_range": true,
+          "morning_strategy": "WAIT",
+          "error_tags": [
+            "direction_miss"
+          ]
+        }
+      ],
+      "user_action": null,
+      "llm_status": "OPENAI_API_KEY is not configured",
+      "review": {
+        "summary": "LLM 복기를 사용할 수 없어 정량 비교만 저장했습니다.",
+        "good_judgments": [
+          "KODEX200: direction hit",
+          "KODEX레버리지: direction hit",
+          "KODEX인버스: direction hit"
+        ],
+        "wrong_judgments": [
+          "KODEX코스닥150: direction_miss",
+          "KODEX코스닥150레버리지: direction_miss",
+          "KODEX코스닥150선물인버스: direction_miss"
+        ],
+        "error_candidates": [
+          "direction_miss"
+        ],
+        "next_adjustments": [
+          "누적 표본에서 방향·범위 적중률을 계속 측정한다."
+        ],
+        "principle_review": "사용자 행동이 명시되지 않았으면 원칙 준수 여부를 평가하지 않는다."
+      }
     }
   }
 ]

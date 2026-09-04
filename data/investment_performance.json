@@ -1,29 +1,29 @@
 {
-  "updated_at": "2026-09-04T09:54:28+09:00",
-  "samples": 6,
-  "direction_accuracy": 0.0,
-  "range_accuracy": 0.8333333333333334,
+  "updated_at": "2026-09-04T23:53:15+09:00",
+  "samples": 12,
+  "direction_accuracy": 0.25,
+  "range_accuracy": 0.9166666666666666,
   "close_in_range_accuracy": 1.0,
   "principle_compliance_rate": null,
   "strategy_outcomes": {
     "BUY": {
-      "samples": 2,
-      "average_actual_close_return": -0.012396039824509653,
-      "positive_return_rate": 0.0
+      "samples": 4,
+      "average_actual_close_return": -0.003159520727297138,
+      "positive_return_rate": 0.5
     },
     "SELL": {
-      "samples": 1,
-      "average_actual_close_return": 0.006641366223908873,
-      "positive_return_rate": 1.0
+      "samples": 2,
+      "average_actual_close_return": 0.0004526142783024545,
+      "positive_return_rate": 0.5
     },
     "WAIT": {
-      "samples": 3,
-      "average_actual_close_return": -0.011858407679631497,
-      "positive_return_rate": 0.3333333333333333
+      "samples": 6,
+      "average_actual_close_return": -0.004387380148265452,
+      "positive_return_rate": 0.5
     }
   },
   "repeated_judgment_errors": {
-    "direction_miss": 6,
+    "direction_miss": 9,
     "range_miss": 1,
     "volatility_underestimated": 1
   },
