@@ -1,128 +1,102 @@
 [
   {
     "exercise": "Dumbbell Incline Bench Press",
-    "target_muscles": [
-      "Upper Pectoralis Major"
-    ]
+    "target_muscles": ["Upper Pectoralis Major"]
   },
   {
     "exercise": "Dumbell Incline Bench Row",
-    "target_muscles": [
-      "Middle Trapezius"
-    ]
+    "target_muscles": ["Middle Trapezius"]
   },
   {
     "exercise": "Side Lateral Raise",
-    "target_muscles": [
-      "Lateral Deltoids"
-    ]
+    "target_muscles": ["Lateral Deltoids"]
   },
   {
     "exercise": "Lat Pullidown",
-    "target_muscles": [
-      "Latissimus Dorsi"
-    ]
+    "target_muscles": ["Latissimus Dorsi"]
   },
   {
     "exercise": "Seated Row",
-    "target_muscles": [
-      "Middle Trapezius"
-    ]
+    "target_muscles": ["Middle Trapezius"]
   },
   {
     "exercise": "Straight-Arm Pulldown",
-    "target_muscles": [
-      "Latissimus Dorsi"
-    ]
+    "target_muscles": ["Latissimus Dorsi"]
   },
   {
     "exercise": "Barbell Incline Bench Press",
-    "target_muscles": [
-      "Upper Pectoralis Major"
-    ]
+    "target_muscles": ["Upper Pectoralis Major"]
   },
   {
     "exercise": "Chest Press Machine",
-    "target_muscles": [
-      "Pectoralis Major"
-    ]
+    "target_muscles": ["Pectoralis Major"]
   },
   {
     "exercise": "Pec Deck Fly",
-    "target_muscles": [
-      "Pectoralis Major"
-    ]
+    "target_muscles": ["Pectoralis Major"]
   },
   {
     "exercise": "Incline Dumbbell Fly",
-    "target_muscles": [
-      "Pectoralis Major"
-    ]
+    "target_muscles": ["Pectoralis Major"]
   },
   {
     "exercise": "Adductor Machine",
-    "target_muscles": [
-      "Hip Adductors"
-    ]
+    "target_muscles": ["Hip Adductors"]
   },
   {
     "exercise": "Abductor Machine",
-    "target_muscles": [
-      "Gluteus Medius"
-    ]
+    "target_muscles": ["Gluteus Medius"]
   },
   {
     "exercise": "Squat",
-    "target_muscles": [
-      "Lower Body Muscles"
-    ]
+    "target_muscles": ["Lower Body Muscles"]
   },
   {
     "exercise": "Vertical Row",
-    "target_muscles": [
-      "Middle Trapezius"
-    ]
+    "target_muscles": ["Middle Trapezius"]
   },
   {
     "exercise": "Reverse Pec Deck",
-    "target_muscles": [
-      "Posterior Deltoids"
-    ]
+    "target_muscles": ["Posterior Deltoids"]
   },
   {
     "exercise": "Face Pull",
-    "target_muscles": [
-      "Posterior Deltoids"
-    ]
+    "target_muscles": ["Posterior Deltoids"]
   },
   {
     "exercise": "Assisted Pull-Up",
-    "target_muscles": [
-      "Latissimus Dorsi"
-    ]
+    "target_muscles": ["Latissimus Dorsi"]
   },
   {
     "exercise": "Assisted Chin-Up",
-    "target_muscles": [
-      "Latissimus Dorsi"
-    ]
+    "target_muscles": ["Latissimus Dorsi"]
   },
   {
     "exercise": "Leg Press",
-    "target_muscles": [
-      "Lower Body Muscles"
-    ]
+    "target_muscles": ["Lower Body Muscles"]
   },
   {
     "exercise": "Seated Leg Curl",
-    "target_muscles": [
-      "Hamstrings"
-    ]
+    "target_muscles": ["Hamstrings"]
   },
   {
     "exercise": "Leg Extension",
-    "target_muscles": [
-      "Quadriceps"
-    ]
+    "target_muscles": ["Quadriceps"]
+  },
+  {
+    "exercise": "Incline Pec Deck Fly",
+    "target_muscles": ["Upper Pectoralis Major"]
+  },
+  {
+    "exercise": "Incline Press",
+    "target_muscles": ["Upper Pectoralis Major"]
+  },
+  {
+    "exercise": "EZ-Bar Narrow Bench Press",
+    "target_muscles": ["Triceps"]
+  },
+  {
+    "exercise": "Triceps Extension",
+    "target_muscles": ["Triceps"]
   }
 ]
