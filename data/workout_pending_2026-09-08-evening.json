@@ -1,0 +1,36 @@
+[
+  {
+    "date": "2026-09-08",
+    "session_id": "2026-09-08-evening",
+    "type": "strength",
+    "exercise": "Squat",
+    "started_at": "2026-09-08T21:28:57+09:00",
+    "ended_at": "2026-09-08T21:41:00+09:00",
+    "duration_min": 12.05,
+    "note": "Smith machine squat.",
+    "target_muscles": ["Lower Body Muscles"],
+    "sets": [
+      {"set_number": 1, "weight_kg": 20, "reps": 12, "volume_kg": 240, "rest_sec": 133},
+      {"set_number": 2, "weight_kg": 30, "reps": 12, "volume_kg": 360, "rest_sec": 156},
+      {"set_number": 3, "weight_kg": 40, "reps": 12, "volume_kg": 480, "rest_sec": 132},
+      {"set_number": 4, "weight_kg": 50, "reps": 12, "volume_kg": 600, "rest_sec": 207},
+      {"set_number": 5, "weight_kg": 55, "reps": 6, "volume_kg": 330, "rest_sec": null}
+    ]
+  },
+  {
+    "date": "2026-09-08",
+    "session_id": "2026-09-08-evening",
+    "type": "strength",
+    "exercise": "Side Lateral Raise",
+    "started_at": "2026-09-08T21:41:00+09:00",
+    "ended_at": "2026-09-08T21:48:25+09:00",
+    "duration_min": 7.42,
+    "note": "Single-arm cable variation; left and right sides performed alternately with the same weight and reps. Reported machine weights were 10 lb, 20 lb, 10 lb; converted to kg for structured weight fields.",
+    "target_muscles": ["Lateral Deltoids"],
+    "sets": [
+      {"set_number": 1, "weight_kg": 4.5359, "reps": 24, "volume_kg": 108.8616, "rest_sec": null},
+      {"set_number": 2, "weight_kg": 9.0718, "reps": 24, "volume_kg": 217.7232, "rest_sec": null},
+      {"set_number": 3, "weight_kg": 4.5359, "reps": 24, "volume_kg": 108.8616, "rest_sec": null}
+    ]
+  }
+]
