@@ -7437,5 +7437,15 @@
         ]
       }
     }
+  },
+  {
+    "date": "2026-09-09",
+    "user_action": null,
+    "evening": {
+      "generated_at": "2026-09-09T00:01:01+09:00",
+      "analysis_date": "2026-09-09",
+      "status": "skipped",
+      "reason": "morning result not found"
+    }
   }
 ]
