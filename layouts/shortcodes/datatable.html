@@ -1,7 +1,13 @@
 {{- $key := .Get "activity" -}}
 {{- $sortRaw := .Get "sort" -}}
+{{- $daysRaw := .Get "days" -}}
 {{- with index site.Data $key -}}
   {{- $data := . -}}
+  {{- if $daysRaw -}}
+    {{- $days := int $daysRaw -}}
+    {{- $cutoff := (now.AddDate 0 0 (mul -1 $days)).Format "2006-01-02" -}}
+    {{- $data = where $data "date" "ge" $cutoff -}}
+  {{- end -}}
   {{- if $sortRaw -}}
     {{- $parts := split $sortRaw " " -}}
     {{- $field := index $parts 0 -}}

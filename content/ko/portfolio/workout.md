@@ -31,4 +31,4 @@ ShowToc: true
 ## 운동 기록
 (일자 내림차순)
 
-{{< datatable activity="workout" sort="date desc" >}}
+{{< datatable activity="workout" sort="date desc" days="30" >}}
