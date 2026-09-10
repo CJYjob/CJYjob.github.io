@@ -98,5 +98,9 @@
   {
     "exercise": "Triceps Extension",
     "target_muscles": ["Triceps"]
+  },
+  {
+    "exercise": "Dumbbell Triceps Extension",
+    "target_muscles": ["Triceps"]
   }
 ]
