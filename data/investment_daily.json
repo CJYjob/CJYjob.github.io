@@ -9396,5 +9396,879 @@
         ]
       }
     }
+  },
+  {
+    "date": "2026-09-11",
+    "user_action": null,
+    "morning": {
+      "generated_at": "2026-09-11T09:55:14+09:00",
+      "analysis_date": "2026-09-11",
+      "analysis_target": [
+        "KODEX200",
+        "KODEX코스닥150",
+        "KODEX레버리지",
+        "KODEX인버스",
+        "KODEX코스닥150레버리지",
+        "KODEX코스닥150선물인버스"
+      ],
+      "market": [
+        {
+          "name": "KODEX200",
+          "code": "069500",
+          "ticker": "069500.KS",
+          "market_data_source": "Yahoo Finance fallback",
+          "latest_market_date": "2026-09-11",
+          "current_price": 108605.0,
+          "indicators": {
+            "sma_5": 110745.0,
+            "sma_10": 108205.5,
+            "sma_20": 107870.5,
+            "sma_60": 113492.0,
+            "sma_120": 110384.33333333333,
+            "ema_12": 108588.4098456653,
+            "ema_26": 107957.82797936535,
+            "macd": 630.5818662999518,
+            "macd_signal": -74.01634591731498,
+            "macd_histogram": 704.5982122172668,
+            "rsi_14": 50.86025027147074,
+            "atr_14": 4977.613045722558,
+            "adx_14": 10.098330833820585,
+            "roc_10": 0.013295390931143958,
+            "bb_lower": 102484.91934421197,
+            "bb_mid": 107870.5,
+            "bb_upper": 113256.08065578803,
+            "bb_percent_b": 0.5681913471308441,
+            "bb_bandwidth": 0.0998527058980542
+          },
+          "forecast": {
+            "method": "empirical_next_session_quantiles",
+            "sample_count": 504,
+            "reference_close": 108605.0,
+            "predicted_range": {
+              "low": 104436.75750360858,
+              "high": 112449.38136668324
+            },
+            "close_scenarios": {
+              "bear": 107865.55553499919,
+              "base": 108894.16094959705,
+              "bull": 110065.09390492209
+            },
+            "direction": "UP",
+            "neutral_threshold": 0.0025,
+            "quantile_returns": {
+              "open_r": {
+                "q10": -0.017844934308667914,
+                "q25": -0.004300163825980696,
+                "q50": 0.0022541799919312266,
+                "q75": 0.00851366721472463,
+                "q90": 0.019168528355673863
+              },
+              "high_r": {
+                "q10": -0.005712039816081591,
+                "q25": 0.0027150725205419834,
+                "q50": 0.010738275427496724,
+                "q75": 0.02055720643587905,
+                "q90": 0.035397830364009404
+              },
+              "low_r": {
+                "q10": -0.038379839753155294,
+                "q25": -0.016278352636147242,
+                "q50": -0.005500617307632183,
+                "q75": 0.0015755283397486664,
+                "q90": 0.01024723362926616
+              },
+              "close_r": {
+                "q10": -0.022701345378704774,
+                "q25": -0.00680856742323846,
+                "q50": 0.0026625012623455735,
+                "q75": 0.01344407628490496,
+                "q90": 0.027169801371505285
+              }
+            },
+            "uncertainty": {
+              "close_q10_q90_width": 0.04987114675021006,
+              "range_width_pct": 0.07672225808808553,
+              "note": "Historical empirical quantiles are a baseline, not a guarantee. Colab LSTM checkpoints are not stored in this repository."
+            }
+          },
+          "projected_indicator_ranges": {
+            "bb_lower": [
+              102104.12084259435,
+              102317.06536468492
+            ],
+            "bb_mid": [
+              107589.33787518044,
+              107989.96906833416
+            ],
+            "bb_upper": [
+              113074.55490776653,
+              113662.8727719834
+            ],
+            "ma10": [
+              107887.67575036085,
+              108688.93813666832
+            ],
+            "ma120": [
+              110532.47297919674,
+              110599.24484472236
+            ],
+            "ma20": [
+              107589.33787518044,
+              107989.96906833416
+            ],
+            "ma5": [
+              109468.35150072172,
+              111070.87627333666
+            ],
+            "ma60": [
+              112783.52929172681,
+              112917.07302277806
+            ]
+          },
+          "status": "ok"
+        },
+        {
+          "name": "KODEX코스닥150",
+          "code": "229200",
+          "ticker": "229200.KS",
+          "market_data_source": "Yahoo Finance fallback",
+          "latest_market_date": "2026-09-11",
+          "current_price": 13905.0,
+          "indicators": {
+            "sma_5": 14022.0,
+            "sma_10": 13916.5,
+            "sma_20": 14119.5,
+            "sma_60": 14207.25,
+            "sma_120": 16594.5,
+            "ema_12": 14004.429275164483,
+            "ema_26": 14018.454731737776,
+            "macd": -14.025456573293923,
+            "macd_signal": -13.621605265508771,
+            "macd_histogram": -0.40385130778515155,
+            "rsi_14": 48.71723261607834,
+            "atr_14": 651.8785854963716,
+            "adx_14": 18.894556895476164,
+            "roc_10": -0.03937823834196896,
+            "bb_lower": 13400.508344971946,
+            "bb_mid": 14119.5,
+            "bb_upper": 14838.491655028054,
+            "bb_percent_b": 0.35083276106199696,
+            "bb_bandwidth": 0.10184378413230696
+          },
+          "forecast": {
+            "method": "empirical_next_session_quantiles",
+            "sample_count": 504,
+            "reference_close": 13905.0,
+            "predicted_range": {
+              "low": 13363.952843035586,
+              "high": 14417.56868743561
+            },
+            "close_scenarios": {
+              "bear": 13733.637948191817,
+              "base": 13922.938178172017,
+              "bull": 14084.538216338238
+            },
+            "direction": "NEUTRAL",
+            "neutral_threshold": 0.002550219409430232,
+            "quantile_returns": {
+              "open_r": {
+                "q10": -0.014556609989645796,
+                "q25": -0.0032755021634016113,
+                "q50": 0.0021211802557783432,
+                "q75": 0.007411520758954404,
+                "q90": 0.014085328035298427
+              },
+              "high_r": {
+                "q10": -0.002241922709884936,
+                "q25": 0.004215041620371118,
+                "q50": 0.010796904833685006,
+                "q75": 0.021685025121446044,
+                "q90": 0.0368621853603458
+              },
+              "low_r": {
+                "q10": -0.038910259400533206,
+                "q25": -0.02292070332564511,
+                "q50": -0.009940711462450624,
+                "q75": -0.000656652832189103,
+                "q90": 0.006503052637667817
+              },
+              "close_r": {
+                "q10": -0.027820455064835093,
+                "q25": -0.012323772154489848,
+                "q50": 0.0012900523676385722,
+                "q75": 0.012911773918607594,
+                "q90": 0.025582053269705817
+              }
+            },
+            "uncertainty": {
+              "close_q10_q90_width": 0.05340250833454091,
+              "range_width_pct": 0.07884013485943275,
+              "note": "Historical empirical quantiles are a baseline, not a guarantee. Colab LSTM checkpoints are not stored in this repository."
+            }
+          },
+          "projected_indicator_ranges": {
+            "bb_lower": [
+              13332.990583426918,
+              13441.56957043483
+            ],
+            "bb_mid": [
+              14046.19764215178,
+              14098.87843437178
+            ],
+            "bb_upper": [
+              14756.187298308729,
+              14759.404700876641
+            ],
+            "ma10": [
+              13815.895284303557,
+              13921.256868743561
+            ],
+            "ma120": [
+              16538.449607025297,
+              16547.229739061964
+            ],
+            "ma20": [
+              14046.19764215178,
+              14098.87843437178
+            ],
+            "ma5": [
+              13888.790568607117,
+              14099.513737487123
+            ],
+            "ma60": [
+              14135.81588071726,
+              14153.376144790593
+            ]
+          },
+          "status": "ok"
+        },
+        {
+          "name": "KODEX레버리지",
+          "code": "122630",
+          "ticker": "122630.KS",
+          "market_data_source": "Yahoo Finance fallback",
+          "latest_market_date": "2026-09-11",
+          "current_price": 108205.0,
+          "indicators": {
+            "sma_5": 112796.0,
+            "sma_10": 107984.0,
+            "sma_20": 107767.0,
+            "sma_60": 130326.91666666667,
+            "sma_120": 132672.875,
+            "ema_12": 108892.49773164546,
+            "ema_26": 109658.97600372571,
+            "macd": -766.4782720802468,
+            "macd_signal": -2686.0786735740926,
+            "macd_histogram": 1919.6004014938458,
+            "rsi_14": 48.78748755444702,
+            "atr_14": 10008.120879780676,
+            "adx_14": 12.540978373668498,
+            "roc_10": 0.017251104634765424,
+            "bb_lower": 97299.3343576511,
+            "bb_mid": 107767.0,
+            "bb_upper": 118234.6656423489,
+            "bb_percent_b": 0.5209215700503458,
+            "bb_bandwidth": 0.19426476829361314
+          },
+          "forecast": {
+            "method": "empirical_next_session_quantiles",
+            "sample_count": 504,
+            "reference_close": 108205.0,
+            "predicted_range": {
+              "low": 99899.50293970299,
+              "high": 115848.27396125431
+            },
+            "close_scenarios": {
+              "bear": 106770.44527150222,
+              "base": 108813.49743028109,
+              "bull": 111112.85099079431
+            },
+            "direction": "UP",
+            "neutral_threshold": 0.0040808550699359515,
+            "quantile_returns": {
+              "open_r": {
+                "q10": -0.03386768091279482,
+                "q25": -0.00930233533185193,
+                "q50": 0.004523017538233698,
+                "q75": 0.01610806987466734,
+                "q90": 0.04017182874460291
+              },
+              "high_r": {
+                "q10": -0.011710603534444463,
+                "q25": 0.004833525549954254,
+                "q50": 0.021117180052971363,
+                "q75": 0.04104890998383143,
+                "q90": 0.07063697575208452
+              },
+              "low_r": {
+                "q10": -0.07675705429783297,
+                "q25": -0.03299268342732606,
+                "q50": -0.011291799262271085,
+                "q75": 0.0029743245260486217,
+                "q90": 0.020237491613663523
+              },
+              "close_r": {
+                "q10": -0.045225440936709126,
+                "q25": -0.013257748981080175,
+                "q50": 0.005623561113452191,
+                "q75": 0.02687353625797617,
+                "q90": 0.05499399334369673
+              }
+            },
+            "uncertainty": {
+              "close_q10_q90_width": 0.10021943428040586,
+              "range_width_pct": 0.15964815191500636,
+              "note": "Historical empirical quantiles are a baseline, not a guarantee. Colab LSTM checkpoints are not stored in this repository."
+            }
+          },
+          "projected_indicator_ranges": {
+            "bb_lower": [
+              96433.77361229654,
+              97115.22364676326
+            ],
+            "bb_mid": [
+              107085.72514698515,
+              107883.16369806272
+            ],
+            "bb_upper": [
+              117737.67668167375,
+              118651.10374936218
+            ],
+            "ma10": [
+              107265.9502939703,
+              108860.82739612545
+            ],
+            "ma120": [
+              132761.03752449751,
+              132893.9439496771
+            ],
+            "ma20": [
+              107085.72514698515,
+              107883.16369806272
+            ],
+            "ma5": [
+              110166.90058794059,
+              113356.65479225086
+            ],
+            "ma60": [
+              128078.15838232839,
+              128343.97123268757
+            ]
+          },
+          "status": "ok"
+        },
+        {
+          "name": "KODEX인버스",
+          "code": "114800",
+          "ticker": "114800.KS",
+          "market_data_source": "Yahoo Finance fallback",
+          "latest_market_date": "2026-09-11",
+          "current_price": 1010.0,
+          "indicators": {
+            "sma_5": 990.2,
+            "sma_10": 1016.1,
+            "sma_20": 1022.2,
+            "sma_60": 1039.2,
+            "sma_120": 1168.6083333333333,
+            "ema_12": 1013.8794405286268,
+            "ema_26": 1034.9050522186717,
+            "macd": -21.02561169004491,
+            "macd_signal": -17.986774157404277,
+            "macd_histogram": -3.0388375326406347,
+            "rsi_14": 46.35313735870327,
+            "atr_14": 48.64092914767878,
+            "adx_14": 8.99334276393573,
+            "roc_10": -0.017509727626459193,
+            "bb_lower": 967.6597396413744,
+            "bb_mid": 1022.2,
+            "bb_upper": 1076.7402603586258,
+            "bb_percent_b": 0.3881560161266206,
+            "bb_bandwidth": 0.10671152486524309
+          },
+          "forecast": {
+            "method": "empirical_next_session_quantiles",
+            "sample_count": 504,
+            "reference_close": 1010.0,
+            "predicted_range": {
+              "low": 973.8425802855551,
+              "high": 1049.379825026511
+            },
+            "close_scenarios": {
+              "bear": 996.1109198998748,
+              "base": 1007.1608925657711,
+              "bull": 1016.6651766003068
+            },
+            "direction": "DOWN",
+            "neutral_threshold": 0.0025,
+            "quantile_returns": {
+              "open_r": {
+                "q10": -0.02042506660691934,
+                "q25": -0.008412884144201938,
+                "q50": -0.002098932392167241,
+                "q75": 0.00465387325852451,
+                "q90": 0.017519351346935497
+              },
+              "high_r": {
+                "q10": -0.009871869539895162,
+                "q25": -0.0010190774275281034,
+                "q50": 0.0066513599122294265,
+                "q75": 0.017388186505833625,
+                "q90": 0.03898992576882284
+              },
+              "low_r": {
+                "q10": -0.03579942545984652,
+                "q25": -0.02110817941952503,
+                "q50": -0.011228950096668466,
+                "q75": -0.0029102166748081193,
+                "q90": 0.00590959612551549
+              },
+              "close_r": {
+                "q10": -0.0275938973085306,
+                "q25": -0.013751564455569437,
+                "q50": -0.002810997459632647,
+                "q75": 0.006599184752779097,
+                "q90": 0.024210421923217023
+              }
+            },
+            "uncertainty": {
+              "close_q10_q90_width": 0.05180431923174762,
+              "range_width_pct": 0.07756617575584612,
+              "note": "Historical empirical quantiles are a baseline, not a guarantee. Colab LSTM checkpoints are not stored in this repository."
+            }
+          },
+          "projected_indicator_ranges": {
+            "bb_lower": [
+              962.0031774476835,
+              968.5980900698453
+            ],
+            "bb_mid": [
+              1020.3421290142778,
+              1024.1189912513255
+            ],
+            "bb_upper": [
+              1078.6810805808723,
+              1079.6398924328057
+            ],
+            "ma10": [
+              1010.9842580285555,
+              1018.5379825026512
+            ],
+            "ma120": [
+              1163.3320215023798,
+              1163.9614985418875
+            ],
+            "ma20": [
+              1020.3421290142778,
+              1024.1189912513255
+            ],
+            "ma5": [
+              987.1685160571111,
+              1002.2759650053022
+            ],
+            "ma60": [
+              1041.080709671426,
+              1042.3396637504418
+            ]
+          },
+          "status": "ok"
+        },
+        {
+          "name": "KODEX코스닥150레버리지",
+          "code": "233740",
+          "ticker": "233740.KS",
+          "market_data_source": "Yahoo Finance fallback",
+          "latest_market_date": "2026-09-11",
+          "current_price": 6770.0,
+          "indicators": {
+            "sma_5": 6887.0,
+            "sma_10": 6803.5,
+            "sma_20": 7034.5,
+            "sma_60": 7580.0,
+            "sma_120": 11355.625,
+            "ema_12": 6899.0216035574185,
+            "ema_26": 7019.140902492614,
+            "macd": -120.11929893519573,
+            "macd_signal": -144.34403643992235,
+            "macd_histogram": 24.22473750472662,
+            "rsi_14": 47.12907506579271,
+            "atr_14": 643.6591011517986,
+            "adx_14": 20.883111652754007,
+            "roc_10": -0.08451656524678841,
+            "bb_lower": 6286.530080818751,
+            "bb_mid": 7034.5,
+            "bb_upper": 7782.469919181249,
+            "bb_percent_b": 0.32318807667457405,
+            "bb_bandwidth": 0.21265759305743087
+          },
+          "forecast": {
+            "method": "empirical_next_session_quantiles",
+            "sample_count": 504,
+            "reference_close": 6770.0,
+            "predicted_range": {
+              "low": 6258.701431425498,
+              "high": 7263.341416252941
+            },
+            "close_scenarios": {
+              "bear": 6602.5219997946715,
+              "base": 6787.057740954965,
+              "bull": 6928.737404481749
+            },
+            "direction": "NEUTRAL",
+            "neutral_threshold": 0.004807166710251354,
+            "quantile_returns": {
+              "open_r": {
+                "q10": -0.02781009486307496,
+                "q25": -0.00749605869512493,
+                "q50": 0.002880809987914512,
+                "q75": 0.013864107525550617,
+                "q90": 0.027356964755037322
+              },
+              "high_r": {
+                "q10": -0.005069634768375805,
+                "q25": 0.00701786259824666,
+                "q50": 0.02044316092512899,
+                "q75": 0.04176742836308439,
+                "q90": 0.07287170107133527
+              },
+              "low_r": {
+                "q10": -0.07552416079387028,
+                "q25": -0.04470557721553495,
+                "q50": -0.019514402229623362,
+                "q75": -0.0018448162133794521,
+                "q90": 0.012158004264174564
+              },
+              "close_r": {
+                "q10": -0.05578772675217021,
+                "q25": -0.024738257046577283,
+                "q50": 0.0025196072311617357,
+                "q75": 0.023447179391691053,
+                "q90": 0.049278544873019824
+              }
+            },
+            "uncertainty": {
+              "close_q10_q90_width": 0.10506627162519003,
+              "range_width_pct": 0.1605189184745346,
+              "note": "Historical empirical quantiles are a baseline, not a guarantee. Colab LSTM checkpoints are not stored in this repository."
+            }
+          },
+          "projected_indicator_ranges": {
+            "bb_lower": [
+              6226.086015005378,
+              6339.793876171424
+            ],
+            "bb_mid": [
+              6956.685071571274,
+              7006.917070812648
+            ],
+            "bb_upper": [
+              7674.040265453871,
+              7687.284128137171
+            ],
+            "ma10": [
+              6703.370143142549,
+              6803.834141625293
+            ],
+            "ma120": [
+              11262.53084526188,
+              11270.902845135442
+            ],
+            "ma20": [
+              6956.685071571274,
+              7006.917070812648
+            ],
+            "ma5": [
+              6758.7402862850995,
+              6959.668283250588
+            ],
+            "ma60": [
+              7477.145023857092,
+              7493.889023604216
+            ]
+          },
+          "status": "ok"
+        },
+        {
+          "name": "KODEX코스닥150선물인버스",
+          "code": "251340",
+          "ticker": "251340.KS",
+          "market_data_source": "Yahoo Finance fallback",
+          "latest_market_date": "2026-09-11",
+          "current_price": 2435.0,
+          "indicators": {
+            "sma_5": 2422.0,
+            "sma_10": 2443.0,
+            "sma_20": 2412.25,
+            "sma_60": 2512.0833333333335,
+            "sma_120": 2298.7,
+            "ema_12": 2429.4629080859804,
+            "ema_26": 2453.77256960403,
+            "macd": -24.30966151804978,
+            "macd_signal": -30.894230881196243,
+            "macd_histogram": 6.584569363146464,
+            "rsi_14": 48.84208029830829,
+            "atr_14": 120.34729441345152,
+            "adx_14": 17.774516141148645,
+            "roc_10": 0.036170212765957555,
+            "bb_lower": 2293.781649796298,
+            "bb_mid": 2412.25,
+            "bb_upper": 2530.718350203702,
+            "bb_percent_b": 0.596017206118268,
+            "bb_bandwidth": 0.09822228227066175
+          },
+          "forecast": {
+            "method": "empirical_next_session_quantiles",
+            "sample_count": 504,
+            "reference_close": 2435.0,
+            "predicted_range": {
+              "low": 2342.948917012448,
+              "high": 2531.152009318579
+            },
+            "close_scenarios": {
+              "bear": 2404.2032205643077,
+              "base": 2431.481206524622,
+              "bull": 2467.3598826614516
+            },
+            "direction": "NEUTRAL",
+            "neutral_threshold": 0.0025674321723310636,
+            "quantile_returns": {
+              "open_r": {
+                "q10": -0.014477057500130763,
+                "q25": -0.007160235726217268,
+                "q50": -0.0012919982906896,
+                "q75": 0.004216500592155059,
+                "q90": 0.015504273504273478
+              },
+              "high_r": {
+                "q10": -0.006492096306041028,
+                "q25": 0.0013276539973788304,
+                "q50": 0.010862383589227309,
+                "q75": 0.02406101773561553,
+                "q90": 0.03948747815958071
+              },
+              "low_r": {
+                "q10": -0.0378033195020747,
+                "q25": -0.021274099696994037,
+                "q50": -0.010667140761811633,
+                "q75": -0.0037795824325861926,
+                "q90": 0.0024892388198271423
+              },
+              "close_r": {
+                "q10": -0.026306061696489944,
+                "q25": -0.012647548022871602,
+                "q50": -0.0014450897229479343,
+                "q75": 0.01328947953242371,
+                "q90": 0.027845528455284516
+              }
+            },
+            "uncertainty": {
+              "close_q10_q90_width": 0.05415159015177446,
+              "range_width_pct": 0.08032744160129335,
+              "note": "Historical empirical quantiles are a baseline, not a guarantee. Colab LSTM checkpoints are not stored in this repository."
+            }
+          },
+          "projected_indicator_ranges": {
+            "bb_lower": [
+              2301.540322107827,
+              2305.023522029343
+            ],
+            "bb_mid": [
+              2414.1474458506227,
+              2423.557600465929
+            ],
+            "bb_upper": [
+              2526.7545695934186,
+              2542.0916789025155
+            ],
+            "ma10": [
+              2440.2948917012445,
+              2459.115200931858
+            ],
+            "ma120": [
+              2301.4329076417703,
+              2303.0012667443216
+            ],
+            "ma20": [
+              2414.1474458506227,
+              2423.557600465929
+            ],
+            "ma5": [
+              2406.5897834024895,
+              2444.230401863716
+            ],
+            "ma60": [
+              2515.465815283541,
+              2518.602533488643
+            ]
+          },
+          "status": "ok"
+        }
+      ],
+      "macro": {
+        "status": "unavailable",
+        "reason": "FRED_API_KEY is not configured",
+        "indicators": []
+      },
+      "news": {
+        "status": "ok",
+        "provider": "Google News RSS fallback",
+        "articles": [
+          {
+            "title": "How To Measure An Innovation Economy: South Korea - Crunchbase News",
+            "source": "Crunchbase News",
+            "published_at": "Thu, 10 Sep 2026 11:00:27 GMT",
+            "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNSm9jbG9QR2hLRUMybS0xelpVVDhDNEhiOEhvRFgyd0Z1cHh6ODRiZUd0cExNOFEteXZrdUlsaG5LNFROLUxUejdxNnIyY2JPZjZYQTNnQ21VajlXMkRGYXRXOVFmM0RhSng1VW9tVE1RTUtlempOMThaeE5STy01RkI3Sm93WjUzQks1bHRfb2NtZ2hPTHpJTXJUaExfRmVJRUE?oc=5",
+            "description": null
+          },
+          {
+            "title": "Oil prices leap to their highest since May and drag Wall Street lower - reflector.com",
+            "source": "reflector.com",
+            "published_at": "Thu, 10 Sep 2026 20:20:32 GMT",
+            "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxQbnpjellwSlVwOGw1LVkxMzd4VVhZd1NMWjd1T3FJVTVzVkNyamZuZVN6ODhoeDBiRnB3NzhTemNoQ0NFT1RNTjRYU3VJQ1VPMW80ZFJCdGU2eWhXcmc3Q0pYbUwyRzU1TWlwZkcteHhLbHJkR2F0aGRxd3FfNlROSjRPU0xpcTlpT050c3ZIUlZ2d09qQXRaRDJIQWlPVDlrdjVYcUJPZnVmY1lYQkJ1TTNVNU1qUHdPMHlJLTd5X0Z1NTNSY0NxRlB4NmpXOVNmdXk0OEJ2TzJGUVlOTHNZREJQS2lTSEFLOEJyc2dBY3Q?oc=5",
+            "description": null
+          },
+          {
+            "title": "Kospi opens sharply lower, tracking U.S. losses, amid inflation woes - Korea JoongAng Daily",
+            "source": "Korea JoongAng Daily",
+            "published_at": "Fri, 11 Sep 2026 00:31:15 GMT",
+            "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQWVQ3bkFfYVA2dFBSQ3NPVmZoZkVOQnJFZXFONWtxS1U1Y0J2c1VDZjgtaGYtQ2N1bVZpWkttWEtWdDd0TFcxMEk3Q1VFcnNfYnZMMlBsdVZaMlBlT2wxTmo4NENCemh2bDhIdlU3NTRfQlhSM3k3QWhWTTAzaGFEM2F0TnF2V203bGJFLWdSR3p2M1Byd2ZqWXczT290eElycC10aEJPaHdPelVZNVN2S1JOaGpadU1E?oc=5",
+            "description": null
+          },
+          {
+            "title": "Macroscope | Why the global economy and markets continue to defy doomsayers - South China Morning Post",
+            "source": "South China Morning Post",
+            "published_at": "Thu, 10 Sep 2026 12:30:05 GMT",
+            "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPV3RJMHFVV1dfbjlUZlRoY0h3dUxBeVY2Q2Jxd0hKbzdsVWc5b2NKRURJNjdvZ2NHdkxvRGN5WkpRSVNfZG9yV0ZOZEhlcDFlU3E1YnNpaWZMM2o4OEFZMmtXYW1TM2diZzZNNXlxVXhhcXNJVW5sZ2hXcVAwdm9QOV9QLXpQX2V1T2JmNGNZY0xHWnZ1eHdCR0dSZWdUQ2ZCTEpYM1VWRnp6RENwOTlidE9VYzfSAbQBQVVfeXFMTlJVakNRSUVtYzMweXpvMTJ5VmJ2c2E3SjBhS1J1Um9YamNUSmNoNlNLZDhoWGpuVWRzcnlDaVlsNENCaDlRZktOUjFQdEdiMnJlTjhaY2RIeDh5LXFwc0NqNUlJSmMwUlp3Z3FzN3B5U210N0ZJM2lFclpENi03aUtJS1RDWGFvNGE2bTBkQlE3cW1Ra1B2RXRvRVBRTmFXWl9xTG9xOUg1X3ktejFvdjhnMWF3?oc=5",
+            "description": null
+          },
+          {
+            "title": "Japan and South Korea Stocks Drop 3% at Open; Kospi Breaches 6,900 as Samsung Electronics, SK Hynix and Kioxia Plunge 4% - TradingKey",
+            "source": "TradingKey",
+            "published_at": "Fri, 11 Sep 2026 00:39:47 GMT",
+            "url": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxQbEZfSVlpRWV3OFB5Vk5seGZCLVdubDFoOS15bldpNEpTMkdVZlBYemtTaVQ3Ym9WQkc4ZnJTcVFBYVE2NU1sLTdPd0FzZlNHNW5panlFZmRqdEJoakxONHc0VU1sODhRblFkNWtjeWdiRlNZMTVSdzdHa1pHaUFieEQ2dnd0UFU2WDVMS1hhQWIxYl9aZ0ZHZ1JaOTl0VkFEVW5LeHRfWS1GWUdOQVVwa19OOEtVa1V3MmxXV1JMc3Y4bTNWVFFfRjFYTDZQSV9HOUpucnlfZTVDcmZZQmZ5V2s2TGZLd1M3b204b3hB?oc=5",
+            "description": null
+          },
+          {
+            "title": "Bank of Korea Warns of Destabilizing Impact of High-Risk AI Trades - WSJ",
+            "source": "WSJ",
+            "published_at": "Thu, 10 Sep 2026 05:58:18 GMT",
+            "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNSUVHaWQ5NkVFNW5PMmxHRFk4N1N5RDdCSjVBU3NiNFpmNUlVT1NBMmZSVFcxckFUcHBNZlR0ZURCN1hRLWx6QmpGLWhqc0lYbDduYWdFVGR0ZHNLVkdQQTR0Q0xvcldNd0I2UF8yUVlfakdoaEVSOVRwX1A2T1pjeG42VXhTNXRZQ05yWld5QVRfb3BiREFvVFRtNS03a2MwYzRvQ09hZFphYk5haGUw?oc=5",
+            "description": null
+          },
+          {
+            "title": "Oil prices jump back to where they were in May and drag Wall Street lower - 2news.com",
+            "source": "2news.com",
+            "published_at": "Thu, 10 Sep 2026 14:47:34 GMT",
+            "url": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxQbmxNcmptRTdvaG9saDVSa2t3blJmREtESTR4M0g0c1RmM0l6cjFPQm9NNWxScXFsTk1BWmFjVngtYk1JNFc0bTJhTXU1ZEFXOHkzeXNNbmRVbnhZdzQ4N1lfNDFNUU9MdjgzazZqRFZ6eFBYME9SYU5YT0E3eTBJX003WlI3TmtaeVRJTGQ0VS01MnAyRF9hcHhPazFXNGo4RHFWWUl3b2pGQTRFQ09xZ01FbDRoY3BDZmF1WF8yVXBjYVlWYWlaRHkwbDJSQzY4S3F0Q3c3ZlIxd2Y5NzAzeEV3QXJ6VzlmQ1oxbm5B?oc=5",
+            "description": null
+          },
+          {
+            "title": "Oil prices jump back to where they were in May and weigh on Wall Street - Springfield News-Sun",
+            "source": "Springfield News-Sun",
+            "published_at": "Thu, 10 Sep 2026 13:47:52 GMT",
+            "url": "https://news.google.com/rss/articles/CBMi_gFBVV95cUxPNlgxeWFKaGxtYmdad0x0eEhleTZ3a1NoLTllY0tVYy1KUUFjX3ZGN0MtR0VYbWctOFFYUExJeWF1TWhjdG9KV0VGRnVRQkNIWFVfeGE5bW5QdnBTOWdWeGVqaWNULTVpVkFyRDZfZ3Zfa0MwVmtwSkZVSXpMMXZGS2pyRF92WWhLalpSUkZhNzF0RjRTaEpxcjdEUjl6WFg4SFg3V0tERE0teFZTYXMtY2gxSkJlZWl5aVNYQlU3U3dUYnNDTUJNY1VyalVzdUoweHVYT2dCUkktR1loZ3YyTDY0UVRrWTBCSTFmX2pJR1JWeUY0eU10ZHk1MHdwQQ?oc=5",
+            "description": null
+          },
+          {
+            "title": "Fidelity: AI Capex Ignites a New Asian Investment Cycle — Taiwan and South Korea Valuations Attractive, Asian Currencies Undervalued - finance.biggo.com",
+            "source": "finance.biggo.com",
+            "published_at": "Thu, 10 Sep 2026 19:55:00 GMT",
+            "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5DdVExT3B3Q1V4bnVkekM0Tzk0b19aTjh2ZWgwcWlIbl9UcDVFUC1XcWRQRXBtY0RVNldyemhhaHY4U3hGX3hQNjBrbWUwRXJ2YWE5bms3SU4xYV9RX255TFZCSU9ldjdoMGl0Vk9BMU16QnBPd0E?oc=5",
+            "description": null
+          },
+          {
+            "title": "South Korea sets up committee to rebuild domestic solar manufacturing - pv magazine Global",
+            "source": "pv magazine Global",
+            "published_at": "Thu, 10 Sep 2026 08:29:21 GMT",
+            "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNUVlvRmxBVExyZVJQM014QWlnU2NicHQ5WkU2elBRMnZOODEtejFEWmFMQ292dzdHZXpmTVZJN0ZERWlVU2NDV19yRnVkc3FQTjFha1B4UXg4eUpIbmVDandqMXN6NTEzcXQ3QzlfTzZCeHdDdng4WXd6UVRXZHl1bWtfallLYVVWRXZLWU0zRzRZaTdiam9nejVpOXBPaXRkSnR2MVpqNlZTY3NuNkxn?oc=5",
+            "description": null
+          }
+        ]
+      },
+      "llm_status": "OPENAI_API_KEY is not configured",
+      "llm_analysis": {
+        "market_summary": "Rule-based fallback because LLM output is unavailable.",
+        "macro_state": "Review collected macro indicators; missing indicators are not imputed.",
+        "strategies": [
+          {
+            "instrument": "KODEX200",
+            "action": "BUY",
+            "reason": "Baseline D1 forecast direction=UP; current technical indicators require human review.",
+            "invalidation": "Actual session trades outside forecast 104437~112449 or macro/news context materially changes.",
+            "risks": [
+              "Empirical range can fail in gap events",
+              "No order is executed by this automation"
+            ]
+          },
+          {
+            "instrument": "KODEX코스닥150",
+            "action": "WAIT",
+            "reason": "Baseline D1 forecast direction=NEUTRAL; current technical indicators require human review.",
+            "invalidation": "Actual session trades outside forecast 13364~14418 or macro/news context materially changes.",
+            "risks": [
+              "Empirical range can fail in gap events",
+              "No order is executed by this automation"
+            ]
+          },
+          {
+            "instrument": "KODEX레버리지",
+            "action": "BUY",
+            "reason": "Baseline D1 forecast direction=UP; current technical indicators require human review.",
+            "invalidation": "Actual session trades outside forecast 99900~115848 or macro/news context materially changes.",
+            "risks": [
+              "Empirical range can fail in gap events",
+              "No order is executed by this automation"
+            ]
+          },
+          {
+            "instrument": "KODEX인버스",
+            "action": "SELL",
+            "reason": "Baseline D1 forecast direction=DOWN; current technical indicators require human review.",
+            "invalidation": "Actual session trades outside forecast 974~1049 or macro/news context materially changes.",
+            "risks": [
+              "Empirical range can fail in gap events",
+              "No order is executed by this automation"
+            ]
+          },
+          {
+            "instrument": "KODEX코스닥150레버리지",
+            "action": "WAIT",
+            "reason": "Baseline D1 forecast direction=NEUTRAL; current technical indicators require human review.",
+            "invalidation": "Actual session trades outside forecast 6259~7263 or macro/news context materially changes.",
+            "risks": [
+              "Empirical range can fail in gap events",
+              "No order is executed by this automation"
+            ]
+          },
+          {
+            "instrument": "KODEX코스닥150선물인버스",
+            "action": "WAIT",
+            "reason": "Baseline D1 forecast direction=NEUTRAL; current technical indicators require human review.",
+            "invalidation": "Actual session trades outside forecast 2343~2531 or macro/news context materially changes.",
+            "risks": [
+              "Empirical range can fail in gap events",
+              "No order is executed by this automation"
+            ]
+          }
+        ],
+        "study": {
+          "concept": "예측 구간과 변동성",
+          "explanation": "익일 가격 범위는 점 하나보다 불확실성을 드러낸다. 범위 폭이 넓을수록 변동성 또는 모델 불확실성이 큰 것으로 보고 판단 강도를 낮춘다."
+        },
+        "uncertainty": [
+          "LLM synthesis unavailable; deterministic fallback used."
+        ]
+      },
+      "colab_migration": {
+        "ported": [
+          "D1 range output",
+          "moving-average/Bollinger projected ranges",
+          "indicator calculation",
+          "uncertainty fields"
+        ],
+        "pending": [
+          "Pooled LSTM model A/B inference because repository has no training workbook or model checkpoints"
+        ]
+      }
+    }
   }
 ]
