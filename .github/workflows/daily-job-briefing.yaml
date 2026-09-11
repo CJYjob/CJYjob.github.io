@@ -1,9 +1,6 @@
 name: Daily Job Briefing
 
 on:
-  schedule:
-    - cron: "0 4 * * *"
-      timezone: "Asia/Seoul"
   workflow_dispatch:
 
 permissions:
