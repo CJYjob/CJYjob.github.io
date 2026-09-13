@@ -102,5 +102,21 @@
   {
     "exercise": "Dumbbell Triceps Extension",
     "target_muscles": ["Triceps"]
+  },
+  {
+    "exercise": "Plate-Loaded Lat Pulldown",
+    "target_muscles": ["Latissimus Dorsi"]
+  },
+  {
+    "exercise": "Plate-Loaded Chest Press",
+    "target_muscles": ["Pectoralis Major"]
+  },
+  {
+    "exercise": "Overhead Triceps Extension",
+    "target_muscles": ["Triceps"]
+  },
+  {
+    "exercise": "Dumbbell Curl",
+    "target_muscles": ["Biceps"]
   }
 ]
