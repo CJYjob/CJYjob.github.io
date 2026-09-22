@@ -1,0 +1,19 @@
+[
+  {
+    "date": "2026-09-21",
+    "session_id": "2026-09-21-evening",
+    "type": "strength",
+    "exercise": "Squat",
+    "started_at": "2026-09-21T22:20:00+09:00",
+    "ended_at": "2026-09-21T22:50:00+09:00",
+    "duration_min": 30,
+    "note": "Smith machine squat practice; very slow, high-repetition execution. User requested recording only that the exercise was performed at 1 kg.",
+    "target_muscles": ["Lower Body Muscles"],
+    "sets": [
+      {
+        "set_number": 1,
+        "weight_kg": 1
+      }
+    ]
+  }
+]
