@@ -1,0 +1,62 @@
+[
+  {
+    "date": "2026-09-22",
+    "session_id": "2026-09-22-evening",
+    "type": "strength",
+    "exercise": "Plate-Loaded High Row",
+    "started_at": "2026-09-22T22:22:00+09:00",
+    "ended_at": "2026-09-22T22:29:24+09:00",
+    "duration_min": 7.4,
+    "note": "Very slow, high-repetition back training. Load was not reported; 1 kg is used only as a placeholder to record that the exercise was performed.",
+    "target_muscles": ["Middle Trapezius"],
+    "sets": [{"set_number":1,"weight_kg":1,"reps":100,"volume_kg":100}]
+  },
+  {
+    "date": "2026-09-22",
+    "session_id": "2026-09-22-evening",
+    "type": "strength",
+    "exercise": "Plate-Loaded Lat Pulldown",
+    "started_at": "2026-09-22T22:29:24+09:00",
+    "ended_at": "2026-09-22T22:36:15+09:00",
+    "duration_min": 6.9,
+    "note": "Very slow, high-repetition execution. Biceps near the elbow were felt more strongly; lat connection was inconsistent and body position felt unstable. Load was not reported; 1 kg is used only to record performance.",
+    "target_muscles": ["Latissimus Dorsi"],
+    "sets": [{"set_number":1,"weight_kg":1,"reps":100,"volume_kg":100}]
+  },
+  {
+    "date": "2026-09-22",
+    "session_id": "2026-09-22-evening",
+    "type": "strength",
+    "exercise": "Plate-Loaded Row",
+    "started_at": "2026-09-22T22:36:15+09:00",
+    "ended_at": "2026-09-22T22:40:34+09:00",
+    "duration_min": 4.3,
+    "note": "Very slow execution. Keep shoulders supported rather than hanging; prevent the right shoulder from rolling forward. Load was not reported; 1 kg is used only to record performance.",
+    "target_muscles": ["Middle Trapezius"],
+    "sets": [{"set_number":1,"weight_kg":1,"reps":55,"volume_kg":55}]
+  },
+  {
+    "date": "2026-09-22",
+    "session_id": "2026-09-22-evening",
+    "type": "strength",
+    "exercise": "Straight-Arm Pulldown",
+    "started_at": "2026-09-22T22:41:31+09:00",
+    "ended_at": "2026-09-22T22:46:57+09:00",
+    "duration_min": 5.4,
+    "note": "20 lb felt too light, almost moving with arm weight alone; consider a higher load next time while maintaining lat control.",
+    "target_muscles": ["Latissimus Dorsi"],
+    "sets": [{"set_number":1,"weight_kg":9.07,"reps":100,"volume_kg":907}]
+  },
+  {
+    "date": "2026-09-22",
+    "session_id": "2026-09-22-evening",
+    "type": "strength",
+    "exercise": "Dumbbell Curl",
+    "started_at": "2026-09-22T22:53:28+09:00",
+    "ended_at": "2026-09-22T22:54:31+09:00",
+    "duration_min": 1.1,
+    "note": "Dumbbell curl performed as the final exercise. Load and repetitions were not reported; 1 kg is used only to record that the exercise was performed.",
+    "target_muscles": ["Biceps"],
+    "sets": [{"set_number":1,"weight_kg":1}]
+  }
+]
