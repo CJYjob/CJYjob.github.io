@@ -57,6 +57,6 @@
     "duration_min": 1.1,
     "note": "Dumbbell curl performed as the final exercise. Load and repetitions were not reported; 1 kg is used only to record that the exercise was performed.",
     "target_muscles": ["Biceps"],
-    "sets": [{"set_number":1,"weight_kg":1}]
+    "sets": [{"set_number":1,"reps":1,"weight_kg":1}]
   }
 ]
