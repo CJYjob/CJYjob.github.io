@@ -13,7 +13,8 @@
       {
         "set_number": 1,
         "reps": 1,
-        "weight_kg": 1
+        "weight_kg": 1,
+        "volume_kg": 1
       }
     ]
   }
