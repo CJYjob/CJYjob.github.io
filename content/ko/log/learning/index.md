@@ -36,7 +36,7 @@ menu:
 
 JSON과 비슷한 데이터를 표현할 수 있지만, 사람이 읽고 편집하기 쉽도록 작성된 형식입니다.
 특히, **들여쓰기가 문법의 일부**이므로 주의해야 합니다. 일반적으로 공백을 사용하고 탭은 사용하지 않습니다.
-YAML은 파일의 형식일 뿐입니다. `hugo.yaml`은 Hugo가 해석하는 설정이고, `.github/workflows/hugo.uaml`은 Github Actions가 해석하는 설정입니다.
+YAML은 파일의 형식일 뿐입니다. `hugo.yaml`은 Hugo가 해석하는 설정이고, `.github/workflows/hugo.yaml`은 Github Actions가 해석하는 설정입니다.
 
 ### 현재 블로그의 hugo.yaml 해석
 핵심은 `hugo.yaml`이 프로그램의 실행 코드가 아니라 Hugo에게 웹사이트를 어떻게 만들지 알려주는 설정이라는 점입니다. 
@@ -141,7 +141,7 @@ on:
 
 ``` yaml
 jobs:
- merge_workous:
+ merge_workout:
   runs-on: ubuntu-latest
 
  build:
@@ -162,8 +162,8 @@ jobs:
 참고로 on, jobs, steps, runs-on, uses, run 등은 Github Actions가 정의한 설정 키워드입니다. YAML 자체에 이런실행 기능이 있는 것은 아닙니다.
 
 ## PaperMod
-Hugo가 웹사이트를 만드는 엔진이라면, PaperMode는 웹사이트의 기본 화면 구조와 디자인을 제공하는 테마입니다.
-예를 들어 동일한 Markdown 글이라도 어떤 테마를 적용하느냐에 다라 글 목록, 메뉴, 본문 폭, 다크 모드, 페이지 디자인 등이 달라집니다.
+Hugo가 웹사이트를 만드는 엔진이라면, PaperMod는 웹사이트의 기본 화면 구조와 디자인을 제공하는 테마입니다.
+예를 들어 동일한 Markdown 글이라도 어떤 테마를 적용하느냐에 따라 글 목록, 메뉴, 본문 폭, 다크 모드, 페이지 디자인 등이 달라집니다.
 
 현재 저장소에서는 다음 위치에 있습니다. `themes/PaperMod/`
 
