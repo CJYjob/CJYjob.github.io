@@ -1,7 +1,7 @@
 ---
 title: "Hugo 블로그 운영 구조와 AI Agent·Harness 기술 기초"
 date: 2026-11-05
-draft: true
+draft: false
 description: "Hugo·GitHub Actions의 정적 사이트 생성 및 배포 구조와 LLM, Agent, Harness, Workflow, SDK, MCP의 개념 및 실제 AI 서비스 설계 원리를 정리한 학습 기록"
 categories:
   - development
