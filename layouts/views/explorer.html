@@ -1,0 +1,103 @@
+{{ define "main" }}
+<header class="page-header">
+  {{ partial "breadcrumbs.html" . }}
+  <h1>{{ .Title }}</h1>
+  {{ with .Description }}
+  <div class="post-description">{{ . }}</div>
+  {{ end }}
+</header>
+
+<div class="post-content">{{ .Content }}</div>
+
+<form action="/views/explore/" method="get">
+  <p>
+    <strong>자료 종류</strong><br>
+    <label><input type="checkbox" name="scope" value="portfolio"> Portfolio</label>
+    <label><input type="checkbox" name="scope" value="log"> Log</label>
+  </p>
+  <p>
+    <label for="explore-topics"><strong>주제</strong></label><br>
+    <input id="explore-topics" name="topics" type="text"
+           placeholder="예: security,ai">
+  </p>
+  <button type="submit">글 보기</button>
+</form>
+
+<p id="explore-count" role="status"></p>
+
+<div id="explore-results">
+{{ $excluded := slice
+  "/portfolio/career/"
+  "/portfolio/security/job-applications/sk-shieldus-eqst-ai-security/"
+  "/portfolio/ai-security/"
+}}
+{{ range site.RegularPages.ByDate.Reverse }}
+  {{ if and
+      (in (slice "log" "portfolio") .Section)
+      (not (in $excluded .RelPermalink))
+  }}
+  <article class="post-entry explore-entry"
+           data-scope="{{ .Section }}"
+           data-topics="{{ delimit (.Params.categories | default (slice)) "," | lower }}">
+    <header class="entry-header">
+      <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+    </header>
+    {{ with .Description }}
+    <div class="entry-content"><p>{{ . }}</p></div>
+    {{ end }}
+    <footer class="entry-footer">
+      {{ if eq .Section "log" }}Log{{ else }}Portfolio{{ end }}
+      · {{ .Date.Format "2006-01-02" }}
+    </footer>
+  </article>
+  {{ end }}
+{{ end }}
+</div>
+
+<style>
+  .explore-entry[hidden] { display: none !important; }
+  #explore-topics { width: min(100%, 32rem); }
+</style>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+
+  // 링크의 scope=log,portfolio와 체크박스의 scope=log&scope=portfolio를 모두 처리
+  const requestedScopes = params.getAll("scope")
+    .flatMap(value => value.split(","))
+    .map(value => value.trim().toLowerCase())
+    .filter(value => value === "log" || value === "portfolio");
+
+  const scopes = requestedScopes.length
+    ? new Set(requestedScopes)
+    : new Set(["log", "portfolio"]);
+
+  const topics = (params.get("topics") || "")
+    .split(",")
+    .map(value => value.trim().toLowerCase())
+    .filter(Boolean);
+
+  document.querySelectorAll('input[name="scope"]').forEach(input => {
+    input.checked = scopes.has(input.value);
+  });
+  document.getElementById("explore-topics").value = topics.join(",");
+
+  let count = 0;
+  document.querySelectorAll(".explore-entry").forEach(item => {
+    const itemTopics = item.dataset.topics
+      .split(",")
+      .map(value => value.trim())
+      .filter(Boolean);
+
+    const matchesScope = scopes.has(item.dataset.scope);
+    const matchesTopic = topics.length === 0
+      || topics.some(topic => itemTopics.includes(topic));
+
+    item.hidden = !(matchesScope && matchesTopic);
+    if (!item.hidden) count++;
+  });
+
+  document.getElementById("explore-count").textContent =
+    `${count}개의 글을 찾았습니다.`;
+</script>
+{{ end }}
