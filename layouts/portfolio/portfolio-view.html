@@ -12,7 +12,7 @@
 </div>
 
 <h2>대표 작업</h2>
-{{ range .Params.featured }}
+{{ range sort .Params.featured "rank" "asc" }}
 <article class="post-entry">
   <header class="entry-header">
     <h3>{{ .title }}</h3>
