@@ -27,51 +27,16 @@
 </article>
 {{ end }}
 
-<h2>관련 공개 글</h2>
-{{ $count := 0 }}
-{{ range site.RegularPages.ByDate.Reverse }}
-  {{ $page := . }}
-  {{ $include := false }}
-
-  {{ if eq $page.Section "portfolio" }}
-    {{ range ($page.Params.categories | default (slice)) }}
-      {{ $category := lower . }}
-      {{ if or (eq $category "security") (eq $category "ai") }}
-        {{ $include = true }}
-      {{ end }}
-    {{ end }}
-  {{ end }}
-
-  {{ if ne $page.Params.portfolio_view true }}
-    {{ $include = false }}
-  {{ end }}
-
-  {{/* 기존 안내 페이지와 이 뷰 자체는 자동 목록에서 제외 */}}
-  {{ if in (slice
-      "/portfolio/career/"
-      "/portfolio/security/job-applications/sk-shieldus-eqst-ai-security/"
-      "/portfolio/ai-security/"
-    ) $page.RelPermalink }}
-    {{ $include = false }}
-  {{ end }}
-
-  {{ if $include }}
-    {{ $count = add $count 1 }}
-    <article class="post-entry">
-      <header class="entry-header">
-        <h3><a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a></h3>
-      </header>
-      {{ with $page.Description }}
-      <div class="entry-content"><p>{{ . }}</p></div>
-      {{ end }}
-      <footer class="entry-footer">
-        {{ $page.Date.Format "2006-01-02" }}
-      </footer>
-    </article>
-  {{ end }}
-{{ end }}
-
-{{ if eq $count 0 }}
-<p>아직 이 뷰에 연결된 Portfolio 글이 없습니다.</p>
-{{ end }}
+<div class="post-content">
+  <p>
+    <a href="/views/explore/?scope=portfolio&amp;topics=security,ai">
+      AI·Security 포트폴리오 글 모두 보기 →
+    </a>
+  </p>
+  <p>
+    <a href="/views/explore/?scope=log&amp;topics=security,ai">
+      관련 학습·업무 기록 보기 →
+    </a>
+  </p>
+</div>
 {{ end }}
