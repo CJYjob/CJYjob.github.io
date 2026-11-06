@@ -42,6 +42,10 @@
     {{ end }}
   {{ end }}
 
+  {{ if ne $page.Params.portfolio_view true }}
+    {{ $include = false }}
+  {{ end }}
+
   {{/* 기존 안내 페이지와 이 뷰 자체는 자동 목록에서 제외 */}}
   {{ if in (slice
       "/portfolio/career/"
