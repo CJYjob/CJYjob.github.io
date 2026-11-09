@@ -9,36 +9,56 @@
 
 <div class="post-content">{{ .Content }}</div>
 
-<form action="/views/explore/" method="get">
-  <p>
-    <strong>자료 종류</strong><br>
-    <label><input type="checkbox" name="scope" value="portfolio"> Portfolio</label>
-    <label><input type="checkbox" name="scope" value="log"> Log</label>
-  </p>
-  <p>
-    <label for="explore-topics"><strong>주제</strong></label><br>
-    <input id="explore-topics" name="topics" type="text"
-           placeholder="예: security,ai">
-  </p>
-  <button type="submit">글 보기</button>
-</form>
+<section class="career-filters" aria-label="직무 자료 필터">
+  <fieldset>
+    <legend>자료 종류</legend>
+    <div class="career-options">
+      <label><input type="checkbox" name="scope" value="portfolio"> Portfolio</label>
+      <label><input type="checkbox" name="scope" value="log"> Log</label>
+    </div>
+  </fieldset>
 
-<p id="explore-count" role="status"></p>
+  <fieldset>
+    <legend>분야</legend>
+    <div class="career-options">
+      <label><input type="checkbox" name="topics" value="security"> 보안</label>
+      <label><input type="checkbox" name="topics" value="ai"> AI</label>
+      <label><input type="checkbox" name="topics" value="development"> 개발</label>
+    </div>
+    <p class="career-help">선택하지 않으면 세 분야의 자료를 모두 보여줍니다.</p>
+  </fieldset>
 
-<div id="explore-results">
+  <form id="career-title-search" role="search">
+    <label for="career-title-query">제목에서 찾기</label>
+    <div class="career-search-row">
+      <input id="career-title-query" type="search" placeholder="글 제목 입력">
+      <button type="submit">검색</button>
+    </div>
+  </form>
+</section>
+
+<p id="career-count" role="status" aria-live="polite"></p>
+<p id="career-empty" hidden>조건에 맞는 자료가 없습니다.</p>
+
+<div id="career-results" class="career-results">
 {{ $excluded := slice
   "/portfolio/career/"
   "/portfolio/security/job-applications/sk-shieldus-eqst-ai-security/"
   "/portfolio/ai-security/"
 }}
+{{ $fields := slice "security" "ai" "development" }}
+
 {{ range site.RegularPages.ByDate.Reverse }}
+  {{ $categories := .Params.categories | default (slice) }}
   {{ if and
       (in (slice "log" "portfolio") .Section)
       (not (in $excluded .RelPermalink))
+      (gt (len (intersect $categories $fields)) 0)
   }}
-  <article class="post-entry explore-entry"
+  <article class="post-entry career-entry"
            data-scope="{{ .Section }}"
-           data-topics="{{ delimit (.Params.categories | default (slice)) "," | lower }}">
+           data-topics="{{ delimit $categories "," | lower }}"
+           data-title="{{ .Title | lower }}">
     <header class="entry-header">
       <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
     </header>
@@ -55,49 +75,181 @@
 </div>
 
 <style>
-  .explore-entry[hidden] { display: none !important; }
-  #explore-topics { width: min(100%, 32rem); }
+  .career-filters {
+    display: grid;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .career-filters fieldset,
+  #career-title-search {
+    margin: 0;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--entry);
+  }
+  .career-filters legend,
+  #career-title-search > label {
+    padding: 0 .3rem;
+    font-weight: 700;
+  }
+  .career-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .6rem;
+    margin-top: .4rem;
+  }
+  .career-options label {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    padding: .55rem .8rem;
+    border: 1px solid var(--border);
+    border-radius: .6rem;
+    cursor: pointer;
+  }
+  .career-options label:has(input:checked) {
+    border-color: var(--primary);
+    font-weight: 700;
+  }
+  .career-help {
+    margin: .7rem 0 0;
+    color: var(--secondary);
+    font-size: .9rem;
+  }
+  .career-search-row {
+    display: flex;
+    gap: .5rem;
+    margin-top: .7rem;
+  }
+  #career-title-query {
+    flex: 1;
+    min-width: 0;
+    padding: .65rem .8rem;
+    border: 1px solid var(--border);
+    border-radius: .5rem;
+    background: var(--theme);
+    color: var(--primary);
+  }
+  .career-search-row button {
+    padding: .65rem 1rem;
+    border-radius: .5rem;
+    background: var(--primary);
+    color: var(--theme);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  #career-count {
+    margin: 1.5rem 0 1rem;
+    font-weight: 700;
+  }
+  .career-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    gap: 1rem;
+  }
+  .career-entry { margin: 0; }
+  .career-entry[hidden],
+  #career-empty[hidden] { display: none !important; }
+
+  @media (max-width: 600px) {
+    .career-filters fieldset,
+    #career-title-search { padding: 1rem; }
+    .career-results { grid-template-columns: 1fr; }
+  }
 </style>
 
 <script>
-  const params = new URLSearchParams(window.location.search);
+(() => {
+  const scopeInputs = [...document.querySelectorAll('input[name="scope"]')];
+  const fieldInputs = [...document.querySelectorAll('input[name="topics"]')];
+  const searchForm = document.getElementById("career-title-search");
+  const searchInput = document.getElementById("career-title-query");
+  const items = [...document.querySelectorAll(".career-entry")];
+  const count = document.getElementById("career-count");
+  const empty = document.getElementById("career-empty");
+  let appliedTitle = "";
 
-  // 링크의 scope=log,portfolio와 체크박스의 scope=log&scope=portfolio를 모두 처리
-  const requestedScopes = params.getAll("scope")
-    .flatMap(value => value.split(","))
-    .map(value => value.trim().toLowerCase())
-    .filter(value => value === "log" || value === "portfolio");
-
-  const scopes = requestedScopes.length
-    ? new Set(requestedScopes)
-    : new Set(["log", "portfolio"]);
-
-  const topics = (params.get("topics") || "")
-    .split(",")
-    .map(value => value.trim().toLowerCase())
-    .filter(Boolean);
-
-  document.querySelectorAll('input[name="scope"]').forEach(input => {
-    input.checked = scopes.has(input.value);
-  });
-  document.getElementById("explore-topics").value = topics.join(",");
-
-  let count = 0;
-  document.querySelectorAll(".explore-entry").forEach(item => {
-    const itemTopics = item.dataset.topics
-      .split(",")
-      .map(value => value.trim())
+  function valuesFromUrl(params, name) {
+    return params.getAll(name)
+      .flatMap(value => value.split(","))
+      .map(value => value.trim().toLowerCase())
       .filter(Boolean);
+  }
 
-    const matchesScope = scopes.has(item.dataset.scope);
-    const matchesTopic = topics.length === 0
-      || topics.some(topic => itemTopics.includes(topic));
+  function readUrl() {
+    const params = new URLSearchParams(location.search);
+    const scopes = valuesFromUrl(params, "scope");
+    const fields = valuesFromUrl(params, "topics");
 
-    item.hidden = !(matchesScope && matchesTopic);
-    if (!item.hidden) count++;
+    // URL에 scope가 없으면 Portfolio만 선택합니다.
+    const activeScopes = scopes.length ? scopes : ["portfolio"];
+    scopeInputs.forEach(input => {
+      input.checked = activeScopes.includes(input.value);
+    });
+    fieldInputs.forEach(input => {
+      input.checked = fields.includes(input.value);
+    });
+
+    appliedTitle = (params.get("q") || "").trim().toLowerCase();
+    searchInput.value = params.get("q") || "";
+  }
+
+  function render(updateUrl) {
+    const scopes = scopeInputs.filter(input => input.checked)
+      .map(input => input.value);
+    const fields = fieldInputs.filter(input => input.checked)
+      .map(input => input.value);
+    let visible = 0;
+
+    items.forEach(item => {
+      const itemFields = item.dataset.topics.split(",")
+        .map(value => value.trim().toLowerCase());
+      const matchesScope = scopes.includes(item.dataset.scope);
+      const matchesField = fields.length === 0
+        || fields.some(field => itemFields.includes(field));
+      const matchesTitle = !appliedTitle
+        || item.dataset.title.includes(appliedTitle);
+
+      item.hidden = !(matchesScope && matchesField && matchesTitle);
+      if (!item.hidden) visible++;
+    });
+
+    count.textContent = `조건에 맞는 자료 ${visible}개`;
+    empty.hidden = visible !== 0;
+
+    if (updateUrl) {
+      const url = new URL(location.href);
+      url.searchParams.delete("scope");
+      url.searchParams.delete("topics");
+      url.searchParams.delete("q");
+
+      if (!(scopes.length === 1 && scopes[0] === "portfolio")) {
+        url.searchParams.set("scope", scopes.join(","));
+      }
+      if (fields.length) url.searchParams.set("topics", fields.join(","));
+      if (appliedTitle) url.searchParams.set("q", appliedTitle);
+      history.replaceState(null, "", url);
+    }
+  }
+
+  readUrl();
+  render(false);
+
+  [...scopeInputs, ...fieldInputs].forEach(input => {
+    input.addEventListener("change", () => render(true));
   });
 
-  document.getElementById("explore-count").textContent =
-    `${count}개의 글을 찾았습니다.`;
+  searchForm.addEventListener("submit", event => {
+    event.preventDefault();
+    appliedTitle = searchInput.value.trim().toLowerCase();
+    render(true);
+  });
+
+  window.addEventListener("popstate", () => {
+    readUrl();
+    render(false);
+  });
+})();
 </script>
 {{ end }}
