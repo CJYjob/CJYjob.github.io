@@ -1,5 +1,5 @@
 ---
-title: "글 탐색"
+title: "직무 자료 모아보기"
 date: 2026-11-06
 draft: false
 layout: explorer
