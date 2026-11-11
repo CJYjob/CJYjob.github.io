@@ -1,0 +1,8 @@
+# Defined BEFORE the first run. All 5 files hold the same text,
+# so a correct checker reports hsts=present for every file.
+# Only the hsts field is compared; the decoder field is informational.
+utf8	hsts=present
+utf8_bom	hsts=present
+utf16le_bom	hsts=present
+utf16be_bom	hsts=present
+utf16le_nobom	hsts=present

@@ -1,0 +1,60 @@
+{
+ "A_sequential.txt": {
+  "sha256": "4d51b1b00cff5551",
+  "rows_in_prompt": [
+   "R1",
+   "R2",
+   "R3",
+   "R4",
+   "R5"
+  ]
+ },
+ "B_R1.txt": {
+  "sha256": "eea012322cbfbd48",
+  "rows_in_prompt": [
+   "R1"
+  ]
+ },
+ "B_R2.txt": {
+  "sha256": "8f89ced7fe7ab9e3",
+  "rows_in_prompt": [
+   "R2"
+  ]
+ },
+ "B_R3.txt": {
+  "sha256": "1ddaa29af8db00e3",
+  "rows_in_prompt": [
+   "R3"
+  ]
+ },
+ "B_R4.txt": {
+  "sha256": "4f575ec6e82ebfb5",
+  "rows_in_prompt": [
+   "R4"
+  ]
+ },
+ "B_R5.txt": {
+  "sha256": "ed28001a5aa155d8",
+  "rows_in_prompt": [
+   "R5"
+  ]
+ },
+ "A2_sequential_noXrule.txt": {
+  "sha256": "8f20b02f09bd985a",
+  "rows_in_prompt": [
+   "R1",
+   "R2",
+   "R3",
+   "R4",
+   "R5"
+  ],
+  "variant": "공통 규칙의 교차 참조 금지 문장 제거"
+ },
+ "B2_R5_noXrule.txt": {
+  "sha256": "c48fc728ba6bfb52",
+  "rows_in_prompt": [
+   "R5"
+  ],
+  "variant": "공통 규칙의 교차 참조 금지 문장 제거"
+ }
+}

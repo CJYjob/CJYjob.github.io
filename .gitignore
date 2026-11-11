@@ -17,3 +17,7 @@ desktop.ini
 .env.local
 migrate_investing_stock.sh
 *:Zone.Identifier
+
+# Python example caches
+__pycache__/
+*.pyc

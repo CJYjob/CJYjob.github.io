@@ -1,0 +1,1 @@
+{"row_id": "R2", "verdict": "취약", "basis": "수집 결과상 /etc/profile에 TMOUT=3600이 설정되어 있어 기준(600초 이하)을 초과함.", "referenced_rows": []}

@@ -1,0 +1,7 @@
+# Defined BEFORE the first run. Expected output of a correct checker.
+# case	expected (whole output line)
+good	hsts=present	status=ok
+bad	hsts=absent	status=ok
+empty	hsts=-	status=nodata
+blank	hsts=-	status=nodata
+missing	hsts=-	status=nodata

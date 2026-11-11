@@ -1,0 +1,44 @@
+{{ define "main" }}
+{{ $profile := site.Data.portfolio.profile }}
+<link rel="stylesheet" href="{{ "css/portfolio.css" | relURL }}">
+<header class="portfolio-hero">
+  <p class="portfolio-eyebrow">{{ $profile.name }} · PORTFOLIO</p>
+  <h1>{{ $profile.title }}</h1>
+  <p class="portfolio-intro">{{ $profile.intro }}</p>
+  <nav class="portfolio-links" aria-label="포트폴리오 연결">
+    <a href="{{ $profile.contact }}">GitHub ↗</a>
+    <a href="{{ "portfolio/career/" | relURL }}">경력·교육·프로젝트 전체 이력 →</a>
+    <a id="all-materials" href="{{ "views/explore/" | relURL }}">공개 자료 모아보기 →</a>
+  </nav>
+</header>
+<section class="portfolio-section" aria-labelledby="experience-heading">
+  <h2 id="experience-heading">경력</h2>
+  <div class="experience-grid">{{ range $profile.experience }}
+    <article class="experience-card"><p class="portfolio-date">{{ .period }}</p><h3>{{ .role }}</h3><p>{{ .detail }}</p></article>
+  {{ end }}</div>
+</section>
+<section class="portfolio-section" aria-labelledby="work-heading">
+  <div class="portfolio-section-title"><h2 id="work-heading">대표 작업</h2><span id="work-count" role="status" aria-live="polite"></span></div>
+  <fieldset class="portfolio-fieldset"><legend>분야</legend><div class="portfolio-options">
+    <label><input type="checkbox" name="showcase-topic" value="security"> 보안</label>
+    <label><input type="checkbox" name="showcase-topic" value="ai"> AI</label>
+    <label><input type="checkbox" name="showcase-topic" value="development"> 개발</label>
+  </div><p class="portfolio-help">선택한 분야 중 하나라도 해당하는 작업을 보여줍니다. 미선택 시 전체 분야를 보여줍니다.</p></fieldset>
+  <p id="field-description" class="portfolio-help"></p>
+  <div id="featured-work" class="project-grid"></div>
+  <p id="featured-empty" hidden>선택한 분야의 대표 작업을 준비하고 있습니다. 공개 자료에서 관련 기록을 확인할 수 있습니다.</p>
+  <noscript><p>분야 선택에는 JavaScript가 필요합니다. 대표 작업은 아래에서 바로 확인할 수 있습니다.</p><ul>
+  {{ range site.Pages }}{{ if and (eq .Section "portfolio") .Params.featured }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}{{ end }}
+  </ul></noscript>
+</section>
+<section class="portfolio-section portfolio-proof"><h2>자료를 읽는 방법</h2>
+  <p>실무 경험은 수행 범위와 확인된 결과를 설명합니다. 공개 재현 자료는 합성 입력으로 만든 별도 예제이며, 과거 고객 환경의 수치와 구분해 표시합니다.</p>
+  <a id="more-materials" href="{{ "views/explore/" | relURL }}">선택한 분야의 Portfolio 더 보기 →</a>
+</section>
+{{ $projects := slice }}
+{{ range site.Pages }}{{ if and (eq .Section "portfolio") .Params.featured }}
+  {{ $projects = $projects | append (dict "title" .Title "url" .RelPermalink "summary" .Description "categories" (.Params.categories | default (slice)) "rank" .Params.featured.rank "kind" .Params.featured.kind "evidence" .Params.featured.evidence) }}
+{{ end }}{{ end }}
+<script type="application/json" id="portfolio-data">{{ (dict "projects" $projects "fields" $profile.fields "explore" ("views/explore/" | relURL)) | jsonify | safeJS }}</script>
+<script src="{{ "js/portfolio.js" | relURL }}" defer></script>
+{{ end }}

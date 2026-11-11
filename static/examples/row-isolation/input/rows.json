@@ -1,0 +1,47 @@
+[
+  {
+    "row_id": "R1",
+    "host": "demo-web-01 (가상)",
+    "code": "X-01",
+    "item": "쉘 세션 타임아웃",
+    "collected": "$ grep -n TMOUT /etc/profile\n12:TMOUT=600\n13:export TMOUT",
+    "answer": "",
+    "evidence_note": ""
+  },
+  {
+    "row_id": "R2",
+    "host": "demo-web-02 (가상)",
+    "code": "X-01",
+    "item": "쉘 세션 타임아웃",
+    "collected": "$ grep -n TMOUT /etc/profile\n12:TMOUT=3600\n13:export TMOUT",
+    "answer": "",
+    "evidence_note": ""
+  },
+  {
+    "row_id": "R3",
+    "host": "demo-web-03 (가상)",
+    "code": "X-01",
+    "item": "쉘 세션 타임아웃",
+    "collected": "$ grep -n TMOUT /etc/profile\ngrep: /etc/profile: Permission denied",
+    "answer": "",
+    "evidence_note": ""
+  },
+  {
+    "row_id": "R4",
+    "host": "demo-fw-01 (가상)",
+    "code": "X-02",
+    "item": "불필요 계정 관리",
+    "collected": "로컬 계정 목록: admin, ops01, backup01, temp02",
+    "answer": "temp02, backup01은 미사용이라 잠금 처리했습니다.",
+    "evidence_note": "계정 관리 화면 캡처: temp02·backup01 상태가 '잠김'으로 표시됨"
+  },
+  {
+    "row_id": "R5",
+    "host": "demo-fw-02 (가상)",
+    "code": "X-02",
+    "item": "불필요 계정 관리",
+    "collected": "로컬 계정 목록: admin, ops01, backup01, temp02",
+    "answer": "앞 장비와 동일합니다.",
+    "evidence_note": ""
+  }
+]

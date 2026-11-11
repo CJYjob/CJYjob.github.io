@@ -1,0 +1,18 @@
+# ex2_encoding - actual run output
+# time=2026-11-11T17:44:11
+# python=3.11.0 os=Windows-10-10.0.26200-SP0
+# make_fixtures exit=0
+#   utf8.txt 90 bytes head=48545450
+#   utf8_bom.txt 93 bytes head=efbbbf48
+#   utf16le_bom.txt 182 bytes head=fffe4800
+#   utf16be_bom.txt 182 bytes head=feff0048
+#   utf16le_nobom.txt 180 bytes head=48005400
+
+case	expected	buggy_out	buggy_exit	buggy_vs_expected	fixed_out	fixed_exit	fixed_vs_expected
+utf8	hsts=present	hsts=present	0	MATCH	hsts=present	decoder=utf-8	0	MATCH
+utf8_bom	hsts=present	hsts=present	0	MATCH	hsts=present	decoder=utf-8-sig	0	MATCH
+utf16le_bom	hsts=present	hsts=absent	0	DIFF	hsts=present	decoder=utf-16-le(bom)	0	MATCH
+utf16be_bom	hsts=present	hsts=absent	0	DIFF	hsts=present	decoder=utf-16-be(bom)	0	MATCH
+utf16le_nobom	hsts=present	hsts=absent	0	DIFF	hsts=present	decoder=utf-16-le(guess)	0	MATCH
+
+SUMMARY buggy_mismatch=3/5 fixed_mismatch=0/5

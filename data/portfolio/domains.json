@@ -1,0 +1,27 @@
+[
+  {
+    "title": "보안",
+    "url": "/portfolio/security/",
+    "description": "취약점 진단·AI 활용 보안 자동화·공개 재현 자료"
+  },
+  {
+    "title": "개발",
+    "url": "/portfolio/development/",
+    "description": "문서 처리와 반복 업무 자동화 도구"
+  },
+  {
+    "title": "투자",
+    "url": "/portfolio/investment/",
+    "description": "투자 이론·전략·구현 학습 산출물"
+  },
+  {
+    "title": "영어",
+    "url": "/portfolio/english/",
+    "description": "영문법 학습 정리"
+  },
+  {
+    "title": "개인 학습·기록",
+    "url": "/portfolio/personal/",
+    "description": "학습법·운동·회고에서 정리한 자산"
+  }
+]

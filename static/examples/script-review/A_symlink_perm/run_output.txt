@@ -1,0 +1,14 @@
+### 현 환경(Windows/Git Bash, MSYS) 실제 실행 ###
+[bad ] samples/link.cnf:
+취약: 권한 644 - 그룹/기타 접근 과다 (mode=bad)
+exit=1
+[fixed] samples/link.cnf:
+취약: 권한 644 - 그룹/기타 접근 과다 (mode=fixed)
+exit=1
+[fixed] samples/none.cnf:
+수동진단: 대상 파일 없음(수집 실패)
+exit=2
+
+환경한계: MSYS 가 'ln -s' 를 복사로 처리하고 NTFS 가 640/777 권한을 구분 반영하지 않아,
+          링크 자체권한(777)과 대상권한(640)의 발산이 이 환경에서는 재현되지 않음(둘 다 644).
+          심볼릭 발산 재현은 POSIX 파일시스템(Linux) 필요 — expected_linux.txt 참조.

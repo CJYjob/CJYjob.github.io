@@ -1,0 +1,1 @@
+{"row_id": "R1", "verdict": "양호", "basis": "수집 결과에서 /etc/profile 12행에 TMOUT=600이 설정되고 13행에서 export되어, 기준인 600초 이하를 충족한다.", "referenced_rows": []}

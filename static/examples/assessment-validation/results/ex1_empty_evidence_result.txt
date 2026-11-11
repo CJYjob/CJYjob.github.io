@@ -1,0 +1,14 @@
+# ex1_empty_evidence - actual run output
+# time=2026-11-11T17:44:10
+# python=3.11.0 os=Windows-10-10.0.26200-SP0
+# make_fixtures exit=0
+#   fixtures written: good, bad, empty, blank, missing
+
+case	expected	buggy_out	buggy_exit	buggy_vs_expected	fixed_out	fixed_exit	fixed_vs_expected
+good	hsts=present	status=ok	hsts=present	status=ok	0	MATCH	hsts=present	status=ok	0	MATCH
+bad	hsts=absent	status=ok	hsts=absent	status=ok	0	MATCH	hsts=absent	status=ok	0	MATCH
+empty	hsts=-	status=nodata	hsts=absent	status=ok	0	DIFF	hsts=-	status=nodata	0	MATCH
+blank	hsts=-	status=nodata	hsts=absent	status=ok	0	DIFF	hsts=-	status=nodata	0	MATCH
+missing	hsts=-	status=nodata	hsts=-	status=nodata	0	MATCH	hsts=-	status=nodata	0	MATCH
+
+SUMMARY buggy_mismatch=2/5 fixed_mismatch=0/5

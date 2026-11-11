@@ -1,0 +1,20 @@
+{
+  "tests": "PASS",
+  "month_documents": 2,
+  "all_documents": 3,
+  "people": {
+    "Researcher-A": {
+      "reports": 2,
+      "projects": [
+        "Project-Example"
+      ]
+    },
+    "Researcher-B": {
+      "reports": 1,
+      "projects": [
+        "Project-Example"
+      ]
+    }
+  },
+  "invalid_metadata": "reported"
+}

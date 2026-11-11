@@ -1,0 +1,5 @@
+{{ define "main" }}
+<header class="page-header">{{ partial "breadcrumbs.html" . }}<h1>{{ .Title }}</h1><div class="post-description">{{ .Description }}</div></header>
+<div class="post-content">{{ .Content }}</div>
+{{ range site.Data.portfolio.domains }}<article class="post-entry"><header class="entry-header"><h2><a href="{{ .url }}">{{ .title }}</a></h2></header><div class="entry-content"><p>{{ .description }}</p></div><a class="entry-link" href="{{ .url }}" aria-label="{{ .title }} 자료 보기"></a></article>{{ end }}
+{{ end }}

@@ -1,0 +1,1 @@
+{"row_id": "R3", "verdict": "수동진단", "basis": "grep 명령이 /etc/profile에서 Permission denied로 실패해 TMOUT 값을 확인할 수 없습니다. 담당자 답변이나 증적 설명도 없으므로, 조회 실패를 양호로 두지 않는 규칙에 따라 수동진단으로 판정합니다.", "referenced_rows": []}

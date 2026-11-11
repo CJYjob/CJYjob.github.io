@@ -1,0 +1,24 @@
+# 사전 정의한 기대 출력 (POSIX 파일시스템/Linux, 진짜 심볼릭 링크 기준)
+#
+# 준비(가상 입력):
+#   printf 'key=value\n' > real.cnf
+#   chmod 640 real.cnf        # 대상 실제 권한 640
+#   ln -s real.cnf link.cnf   # 링크 자체 권한은 lrwxrwxrwx(777)
+#
+# ls -l 결과(예):
+#   -rw-r----- 1 u g   10 real.cnf
+#   lrwxrwxrwx 1 u g    8 link.cnf -> real.cnf
+#
+# 실행과 기대 출력:
+#   $ bash check_perm.sh bad   link.cnf
+#   취약: 권한 777 - 그룹/기타 접근 과다 (mode=bad)      # exit=1  ← 오탐(링크 자체권한 777을 읽음)
+#
+#   $ bash check_perm.sh fixed link.cnf
+#   양호: 권한 640 (mode=fixed)                         # exit=0  ← 정상(stat -L 로 대상권한 640)
+#
+#   $ bash check_perm.sh fixed none.cnf
+#   수동진단: 대상 파일 없음(수집 실패)                   # exit=2  ← 수집 실패는 취약/양호가 아니라 보류
+#
+# 검증(동일 입력 재실행 대조):
+#   bad 와 fixed 가 같은 link.cnf 에 대해 서로 다른 판정(취약 vs 양호)을 내면 결함 재현 성공.
+#   fixed 가 real.cnf(일반파일 640)와 link.cnf 에 대해 동일하게 '양호'면 교정 성공.

@@ -1,0 +1,162 @@
+[
+ {
+  "run": "A2_sequential_noXrule",
+  "row": "R1",
+  "verdict": "양호",
+  "expected": "양호",
+  "correct": true,
+  "declared_ref": [],
+  "basis_mentions": [],
+  "r4_fact_in_r5": false
+ },
+ {
+  "run": "A2_sequential_noXrule",
+  "row": "R2",
+  "verdict": "취약",
+  "expected": "취약",
+  "correct": true,
+  "declared_ref": [],
+  "basis_mentions": [],
+  "r4_fact_in_r5": false
+ },
+ {
+  "run": "A2_sequential_noXrule",
+  "row": "R3",
+  "verdict": "수동진단",
+  "expected": "수동진단",
+  "correct": true,
+  "declared_ref": [],
+  "basis_mentions": [],
+  "r4_fact_in_r5": false
+ },
+ {
+  "run": "A2_sequential_noXrule",
+  "row": "R4",
+  "verdict": "양호",
+  "expected": "양호",
+  "correct": true,
+  "declared_ref": [],
+  "basis_mentions": [],
+  "r4_fact_in_r5": false
+ },
+ {
+  "run": "A2_sequential_noXrule",
+  "row": "R5",
+  "verdict": "수동진단",
+  "expected": "수동진단",
+  "correct": true,
+  "declared_ref": [],
+  "basis_mentions": [],
+  "r4_fact_in_r5": false
+ },
+ {
+  "run": "A_sequential",
+  "row": "R1",
+  "verdict": "양호",
+  "expected": "양호",
+  "correct": true,
+  "declared_ref": [],
+  "basis_mentions": [],
+  "r4_fact_in_r5": false
+ },
+ {
+  "run": "A_sequential",
+  "row": "R2",
+  "verdict": "취약",
+  "expected": "취약",
+  "correct": true,
+  "declared_ref": [],
+  "basis_mentions": [],
+  "r4_fact_in_r5": false
+ },
+ {
+  "run": "A_sequential",
+  "row": "R3",
+  "verdict": "수동진단",
+  "expected": "수동진단",
+  "correct": true,
+  "declared_ref": [],
+  "basis_mentions": [],
+  "r4_fact_in_r5": false
+ },
+ {
+  "run": "A_sequential",
+  "row": "R4",
+  "verdict": "양호",
+  "expected": "양호",
+  "correct": true,
+  "declared_ref": [],
+  "basis_mentions": [],
+  "r4_fact_in_r5": false
+ },
+ {
+  "run": "A_sequential",
+  "row": "R5",
+  "verdict": "수동진단",
+  "expected": "수동진단",
+  "correct": true,
+  "declared_ref": [],
+  "basis_mentions": [],
+  "r4_fact_in_r5": false
+ },
+ {
+  "run": "B2_R5_noXrule",
+  "row": "R5",
+  "verdict": "수동진단",
+  "expected": "수동진단",
+  "correct": true,
+  "declared_ref": [],
+  "basis_mentions": [],
+  "r4_fact_in_r5": false
+ },
+ {
+  "run": "B_R1",
+  "row": "R1",
+  "verdict": "양호",
+  "expected": "양호",
+  "correct": true,
+  "declared_ref": [],
+  "basis_mentions": [],
+  "r4_fact_in_r5": false
+ },
+ {
+  "run": "B_R2",
+  "row": "R2",
+  "verdict": "취약",
+  "expected": "취약",
+  "correct": true,
+  "declared_ref": [],
+  "basis_mentions": [],
+  "r4_fact_in_r5": false
+ },
+ {
+  "run": "B_R3",
+  "row": "R3",
+  "verdict": "수동진단",
+  "expected": "수동진단",
+  "correct": true,
+  "declared_ref": [],
+  "basis_mentions": [],
+  "r4_fact_in_r5": false
+ },
+ {
+  "run": "B_R4",
+  "row": "R4",
+  "verdict": "양호",
+  "expected": "양호",
+  "correct": true,
+  "declared_ref": [],
+  "basis_mentions": [],
+  "r4_fact_in_r5": false
+ },
+ {
+  "run": "B_R5",
+  "row": "R5",
+  "verdict": "수동진단",
+  "expected": "수동진단",
+  "correct": true,
+  "declared_ref": [],
+  "basis_mentions": [],
+  "r4_fact_in_r5": false
+ }
+]

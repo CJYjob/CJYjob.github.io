@@ -1,0 +1,6 @@
+Independent recheck on Linux (WSL Ubuntu-20.04), synthetic temporary files only.
+bad: 취약: 권한 777 - 그룹/기타 접근 과다 (mode=bad)
+fixed: 양호: 권한 640 (mode=fixed)
+missing: 수동진단: 대상 파일 없음(수집 실패)
+EXIT bad=1 fixed=0 missing=2
+Verification exit=0

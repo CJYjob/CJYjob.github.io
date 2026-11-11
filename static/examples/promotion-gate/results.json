@@ -1,0 +1,26 @@
+[
+  {
+    "case": "condition_mismatch",
+    "expected": "REJECT_CONDITIONS",
+    "actual": "REJECT_CONDITIONS",
+    "passed": true
+  },
+  {
+    "case": "missing",
+    "expected": "HOLD_MISSING_DATA",
+    "actual": "HOLD_MISSING_DATA",
+    "passed": true
+  },
+  {
+    "case": "regression",
+    "expected": "BLOCK",
+    "actual": "BLOCK",
+    "passed": true
+  },
+  {
+    "case": "improvement",
+    "expected": "PASS",
+    "actual": "PASS",
+    "passed": true
+  }
+]

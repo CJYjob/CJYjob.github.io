@@ -1,10 +1,7 @@
 ---
 title: "Portfolio"
-description: "완결된 자산을 외부 공개용 산출물로 전시하는 공간"
-date: 2026-03-18
-draft: false
+layout: portfolio-root
+description: "분야별로 정리한 프로젝트와 완성된 기술 자료"
+date: 2026-11-11
 ---
-
-## 포트폴리오
-
-- [최준영 | 경력·프로젝트 포트폴리오](/portfolio/career/): 실무 경력, 보안 실습, AI·자동화·개발 프로젝트와 공개 분석 글을 한곳에서 살펴볼 수 있습니다.
+실무 경험과 대표 작업은 [포트폴리오](/views/portfolio/)에서, 개별 산출물은 아래 분야별 목록에서 확인할 수 있습니다.

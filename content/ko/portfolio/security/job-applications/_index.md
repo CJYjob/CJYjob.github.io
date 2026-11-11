@@ -1,4 +1,5 @@
 ---
+hide_in_materials: true
 title: "Job Application Portfolios"
 draft: false
 description: "지원 직무별 공개 포트폴리오 안내"

@@ -37,6 +37,7 @@
   </form>
 </section>
 
+<noscript><p>아래에 공개 자료 전체를 표시합니다. 필터 기능은 JavaScript를 켜면 사용할 수 있습니다.</p></noscript>
 <p id="career-count" role="status" aria-live="polite"></p>
 <p id="career-empty" hidden>조건에 맞는 자료가 없습니다.</p>
 
@@ -48,11 +49,13 @@
 }}
 {{ $fields := slice "security" "ai" "development" }}
 
-{{ range site.RegularPages.ByDate.Reverse }}
+{{ range site.Pages.ByDate.Reverse }}
   {{ $categories := .Params.categories | default (slice) }}
   {{ if and
       (in (slice "log" "portfolio") .Section)
       (not (in $excluded .RelPermalink))
+      (not .Params.hide_in_materials)
+      (or .IsPage .Params.project)
       (gt (len (intersect $categories $fields)) 0)
   }}
   <article class="post-entry career-entry"
@@ -169,6 +172,7 @@
   const count = document.getElementById("career-count");
   const empty = document.getElementById("career-empty");
   let appliedTitle = "";
+  const careerFields = ["security", "ai", "development"];
 
   function valuesFromUrl(params, name) {
     return params.getAll(name)
@@ -183,7 +187,7 @@
     const fields = valuesFromUrl(params, "topics");
 
     // URL에 scope가 없으면 Portfolio만 선택합니다.
-    const activeScopes = scopes.length ? scopes : ["portfolio"];
+    const activeScopes = params.has("scope") ? scopes : ["portfolio"];
     scopeInputs.forEach(input => {
       input.checked = activeScopes.includes(input.value);
     });
@@ -207,7 +211,8 @@
         .map(value => value.trim().toLowerCase());
       const matchesScope = scopes.includes(item.dataset.scope);
       const matchesField = fields.length === 0
-        || fields.some(field => itemFields.includes(field));
+        ? careerFields.some(field => itemFields.includes(field))
+        : fields.some(field => itemFields.includes(field));
       const matchesTitle = !appliedTitle
         || item.dataset.title.includes(appliedTitle);
 

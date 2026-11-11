@@ -1,0 +1,9 @@
+{{ define "main" }}
+<header class="page-header">{{ partial "breadcrumbs.html" . }}<h1>{{ .Title }}</h1></header>
+<div class="post-content">{{ .Content }}</div>
+{{ $wanted := .Params.domain_categories }}
+{{ range site.RegularPages.ByDate.Reverse }}
+{{ $cats := slice }}{{ range .Params.categories }}{{ $cats = $cats | append (lower .) }}{{ end }}
+{{ if and (eq .Section "portfolio") (gt (len (intersect $cats $wanted)) 0) }}
+<article class="post-entry"><header class="entry-header"><h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2></header><div class="entry-content"><p>{{ .Description }}</p></div><footer class="entry-footer">{{ .Date.Format "2006-01-02" }}{{ with .Params.series }} · {{ delimit . " · " }}{{ end }}</footer><a class="entry-link" href="{{ .RelPermalink }}" aria-label="{{ .Title }}"></a></article>
+{{ end }}{{ end }}{{ end }}

@@ -1,9 +1,6 @@
 ---
-title: "Security Portfolio"
-draft: false
-description: "보안 연구 및 분석 산출물"
+title: "보안"
+date: 2026-11-11
+description: "취약점 진단, AI 활용 보안 자동화와 공개 재현 자료"
 ---
-
-[공용 경력·프로젝트 포트폴리오](/portfolio/career/)
-
-[EQST Lab AI 보안 연구원 지원용 포트폴리오](/portfolio/security/job-applications/sk-shieldus-eqst-ai-security/)
+[보안·AI 대표 작업](/views/portfolio/?topics=security,ai) · [보안 Portfolio 자료 전체](/views/explore/?scope=portfolio&topics=security)
