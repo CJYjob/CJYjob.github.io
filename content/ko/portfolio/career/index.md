@@ -98,6 +98,18 @@ UiPath 교육 과정에서 이메일의 정보를 추출하고 웹 연계 데이
 - [증적 기반 보안 점검](/log/security/web-assessment/evidence-based-assessment-01/) — 관찰 사실과 판정을 구분하는 학습 기록.
 - [웹 서비스 제공 형태별 점검 관점](/log/security/web-assessment/service-delivery-models-01/) — 제공 형태에 따른 공격면 분류.
 
+### 인증·신뢰 경계와 클라이언트 보안 학습
+
+시스템 구조와 입력·권한의 신뢰 경계를 파악하고, 검증 조건과 관찰 사실을 구분하는 관점으로 정리한 학습 기록이다. 아래 글은 실무 취약점 발견이나 AI 시스템 공격 실적과 구분한다.
+
+- [HMAC 요청 인증과 Replay 방어](/log/security/application-architecture/service-design-foundations/hmac-request-authentication-01/)
+- [LAN P2P 동기화 앱의 신뢰 경계와 페어링 보안](/log/security/web-assessment/lan-p2p-trust-boundaries-01/)
+- [클라이언트 기기 비밀정보와 키 보관 경계](/log/security/web-assessment/device-secret-storage-01/)
+- [WAF와 IPS의 차이로 이해하는 웹 방어 구조](/log/security/web-assessment/waf-vs-ips-architecture-01/)
+- [로컬 파일 파싱·렌더링 보안 점검](/log/security/web-assessment/desktop-file-preview-security-01/)
+- [설치형 클라이언트 무결성·로컬 실행 경계](/log/security/web-assessment/desktop-client-integrity-boundaries-01/)
+- [메모리 안전 언어와 네이티브 파서의 신뢰 경계](/log/security/web-assessment/memory-safe-native-parsers-01/)
+
 ## 학력·자격
 
 - 한양대학교 ERICA 컴퓨터전공 학사, 2022년 졸업
