@@ -5,10 +5,10 @@ draft: false
 layout: portfolio-view
 description: "취약점 진단 · 보안 점검 자동화 · AI 활용 연구"
 featured:
-  - title: "AI 작업 흐름을 활용한 인프라 점검"
-    summary: "서버·DBMS·네트워크 장비 등 대상별 점검을 위해 기준 해석, 스크립트 작성, 결과 검토의 작업 흐름을 설계했습니다. 실제 적용 중 컨테이너 내부 프로그램의 설정을 기존 방식으로 확인하기 어려운 문제를 발견하고 수집 방법을 조정했습니다."
-    status: "실무 수행 · 점검 방법을 일반화한 글 공개"
-    url: "/log/security/infrastructure-assessment/isms-assessment-scope-evidence-01/"
+  - title: "AI 점검 결과물 검증 워크플로"
+    summary: "기존 점검 도구와 AI 생성 스크립트의 오류를 확인하고, 코드 검증·증적 분석·독립 재판정을 분리한 작업 흐름을 기획했습니다. 실제 실행에서 증적 처리 오류를 발견해 재작업으로 연결한 과정과, 구현되지 못한 판정 격리의 한계도 기록했습니다."
+    status: "실무 수행 · 워크플로 설계 및 적용 기록"
+    url: "/portfolio/security/ai-assessment-workflow/"
     rank: 10
   - title: "AI 오케스트레이션을 활용한 오픈소스 퍼징"
     summary: "2026년 10월 시작한 자율 스터디에서 AI 서비스를 오케스트레이터로 활용해 libConfuse 크래시를 검토했습니다. 관리자에게 보안 보고 채널 개설을 요청한 뒤 크래시 3건을 보고했습니다."
